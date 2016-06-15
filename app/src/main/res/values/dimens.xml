@@ -1,19 +1,16 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
     <!--自定义字体大小-->
     <dimen name="ct_44sp">44sp</dimen>
     <dimen name="ct_33sp">33sp</dimen>
     <dimen name="ct_22sp">22sp</dimen>
     <!--首页-->
-    <dimen name="preschoolbtn_margin_left">243dp</dimen>
-    <dimen name="primaryschoolbtn_margin_right">243dp</dimen>
-    <dimen name="btn_width">200dp</dimen>
-    <dimen name="btn_heiht">100dp</dimen>
+    <dimen name="preschoolbtn_margin_left">240dp</dimen>
+    <dimen name="primaryschoolbtn_margin_right">240dp</dimen>
     <!--答题界面-->
+    <dimen name="board_width">999dp</dimen>
+    <dimen name="board_height">617dp</dimen>
     <dimen name="margin_title">20dp</dimen>
     <dimen name="margin_layout_left">50dp</dimen>
+    <dimen name="margin_layout_right">50dp</dimen>
     <dimen name="table_hight">48dp</dimen>
 </resources>

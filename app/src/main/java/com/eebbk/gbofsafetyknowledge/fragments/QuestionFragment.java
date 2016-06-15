@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
+import com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView;
+import com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup;
 import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
 
 /**
@@ -22,7 +23,7 @@ import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
  */
 public class QuestionFragment extends Fragment {
 
-    private RadioGroup mRadioGroup = null;
+    private MyRadioGroup mRadioGroup = null;
     private BitmapUtils mBitmapUtils = null;
     private Chose mChose;
 
@@ -38,7 +39,6 @@ public class QuestionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = null;
         Bundle data = getArguments();//获得从activity中传递过来的值
 
@@ -58,17 +58,17 @@ public class QuestionFragment extends Fragment {
     //初始化组件
     public void initViewOne(View view, QuestionVO questionVO) {
 
-        RadioButton radioButtonA = (RadioButton) view.findViewById(R.id.RadioButton_A);
-        RadioButton radioButtonB = (RadioButton) view.findViewById(R.id.RadioButton_B);
-        RadioButton radioButtonC = (RadioButton) view.findViewById(R.id.RadioButton_C);
-        RadioButton radioButtonD = (RadioButton) view.findViewById(R.id.RadioButton_D);
+        MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
+        MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
+        MarqueeTextView optionC = (MarqueeTextView) view.findViewById(R.id.TextView_optionC);
+        MarqueeTextView optionD = (MarqueeTextView) view.findViewById(R.id.TextView_optionD);
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
-        mRadioGroup = (RadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
+        mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            public void onCheckedChanged(MyRadioGroup radioGroup, int i) {
                 if (i == R.id.RadioButton_A) {
                     mChose.chose("A");
                 } else if (i == R.id.RadioButton_B) {
@@ -82,10 +82,10 @@ public class QuestionFragment extends Fragment {
         });
 
         title.setText(questionVO.getmTitle());
-        radioButtonA.setText("A." + questionVO.getmOptionA());
-        radioButtonB.setText("B." + questionVO.getmOptionB());
-        radioButtonC.setText("C." + questionVO.getmOptionC());
-        radioButtonD.setText("D." + questionVO.getmOptionD());
+        optionA.setText(questionVO.getmOptionA());
+        optionB.setText(questionVO.getmOptionB());
+        optionC.setText(questionVO.getmOptionC());
+        optionD.setText(questionVO.getmOptionD());
 
         if (questionVO.getmPicID() != null) {
             Bitmap bmp = mBitmapUtils.getDrawableBitmap(questionVO.getmPicID());
@@ -103,11 +103,16 @@ public class QuestionFragment extends Fragment {
         ImageView picB = (ImageView) view.findViewById(R.id.ImageView_picB);
         ImageView picC = (ImageView) view.findViewById(R.id.ImageView_picC);
         ImageView picD = (ImageView) view.findViewById(R.id.ImageView_picD);
-        mRadioGroup = (RadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        RadioButton radioButtonA = (RadioButton) view.findViewById(R.id.RadioButton_A);
+        RadioButton radioButtonB = (RadioButton) view.findViewById(R.id.RadioButton_B);
+        RadioButton radioButtonC = (RadioButton) view.findViewById(R.id.RadioButton_C);
+        RadioButton radioButtonD = (RadioButton) view.findViewById(R.id.RadioButton_D);
+        mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
+
+        mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            public void onCheckedChanged(MyRadioGroup radioGroup, int i) {
                 if (i == R.id.RadioButton_A) {
                     mChose.chose("A");
                 } else if (i == R.id.RadioButton_B) {

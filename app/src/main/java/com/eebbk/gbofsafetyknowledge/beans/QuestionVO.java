@@ -23,6 +23,32 @@ public class QuestionVO implements Serializable {
     //对应图片的ID
     public String mPicID;
     //对应音频的ID
+    public String mVoiceID;
+    //题目类型   1  纯粹   2  产品
+    public int mQuestionType;
+    //扩展字段
+    public String mExtend;
+
+    public QuestionVO(){
+        mAnswer = null;
+        mTitle = null;
+        mOptionA = null;
+        mOptionB = null;
+        mOptionC = null;
+        mOptionD = null;
+        mPicID = null;
+        mVoiceID = null;
+        mExtend = null;
+        mQuestionType = -1;
+        mQuestionFormat = -1;
+    }
+    public String getmExtend() {
+        return mExtend;
+    }
+
+    public void setmExtend(String mExtend) {
+        this.mExtend = mExtend;
+    }
 
     public void setmAnswer(String mAnswer) {
         this.mAnswer = mAnswer;
@@ -63,10 +89,6 @@ public class QuestionVO implements Serializable {
     public void setmQuestionType(int mQuestionType) {
         this.mQuestionType = mQuestionType;
     }
-
-    public String mVoiceID;
-    //题目类型   1  纯粹   2  产品
-    public int mQuestionType;
 
     public String getmAnswer() {
         return mAnswer;

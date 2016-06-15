@@ -81,5 +81,4 @@ public class QuestionFragmentPagerAdapter extends FragmentPagerAdapter {
         }
         notifyDataSetChanged();
     }
-
 }

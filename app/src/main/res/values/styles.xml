@@ -20,9 +20,8 @@
     </style>
 
     <style name="RadioBtn">
-        <item name="android:drawableLeft">@drawable/search_radio</item>
+        <item name="android:drawableStart">@drawable/search_radio</item>
         <item name="android:button">@null</item>
-        <item name="android:gravity">center_vertical</item>
     </style>
 
 

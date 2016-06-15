@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/search_radio" android:state_checked="false" android:state_focused="false" android:state_pressed="false"></item>
-    <item android:drawable="@mipmap/search_radio_sel" android:state_checked="true" android:state_focused="false" android:state_pressed="false"></item>
-    <item android:drawable="@mipmap/search_radio_onfocus" android:state_checked="false" android:state_focused="true" android:state_pressed="false"></item>
-    <item android:drawable="@mipmap/search_radio_onfocus_sel" android:state_checked="true" android:state_focused="true" android:state_pressed="false"></item>
+    <item android:drawable="@mipmap/radio_btn_normal" android:state_checked="false" ></item>
+    <item android:drawable="@mipmap/radio_btn_select" android:state_checked="true" ></item>
 </selector>

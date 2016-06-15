@@ -2,12 +2,14 @@ package com.eebbk.gbofsafetyknowledge.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
+import com.eebbk.gbofsafetyknowledge.dao.QuestionDAO;
 import com.eebbk.gbofsafetyknowledge.fragments.QuestionFragment;
 import com.eebbk.gbofsafetyknowledge.fragments.QuestionFragmentPagerAdapter;
 import com.eebbk.gbofsafetyknowledge.utils.ToastUtils;
@@ -26,6 +28,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private HashMap<Integer, String> mAnswers;
     private ArrayList<Fragment> mFragments;
     private QuestionFragmentPagerAdapter mQuestionFragmentPagerAdapter;
+    private QuestionDAO mQuestionDAO;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +44,21 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
      * 初始化
      */
     public void initView() {
+        int grade = getIntent().getIntExtra("grade",-1);
+
         mAnswers = new HashMap<Integer, String>();
         mFragments = new ArrayList<Fragment>();
         mQuestionsVOs = new ArrayList<QuestionVO>();
         mViewPager = (ViewPager) findViewById(R.id.ViewPager_Question);
 
-        for (int i = 0; i < 10; i++) {
+        mQuestionDAO = new QuestionDAO(getApplicationContext());
+        mQuestionDAO.copyDatabase();
+
+        if (mQuestionDAO != null) {
+            mQuestionsVOs = mQuestionDAO.getQuestions(grade);
+        }
+
+        /*for (int i = 0; i < 10; i++) {
             QuestionVO questionVO = new QuestionVO();
             questionVO.setmTitle("1+1=?");
             questionVO.setmOptionA("normal8.png");
@@ -56,7 +70,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 //            questionVO.setmPicID("normal8.png");
 
             mQuestionsVOs.add(i, questionVO);
-        }
+        }*/
 
         for (int i = 0; i < mQuestionsVOs.size(); i++) {
             QuestionFragment questionFragment = new QuestionFragment();
