@@ -30,6 +30,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/LinearLayout_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
@@ -41,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:text="A."
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp" />
+                android:textSize="@dimen/ct_33sp"
+                android:checked="false" />
 
             <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionA"
@@ -59,6 +61,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayout_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_title"
@@ -89,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayout_C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_title"
@@ -119,6 +123,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayout_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_title"

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
 import com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView;
@@ -19,13 +20,16 @@ import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
 /**
  * decription ：答题 fragment
  * author ： zhua
- * Created at 2016/6/14.
  */
-public class QuestionFragment extends Fragment {
+public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     private MyRadioGroup mRadioGroup = null;
     private BitmapUtils mBitmapUtils = null;
     private Chose mChose;
+    private RadioButton mRadioButton_A;
+    private RadioButton mRadioButton_B;
+    private RadioButton mRadioButton_C;
+    private RadioButton mRadioButton_D;
 
     public QuestionFragment() {
     }
@@ -57,13 +61,21 @@ public class QuestionFragment extends Fragment {
 
     //初始化组件
     public void initViewOne(View view, QuestionVO questionVO) {
-
         MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
+        optionA.setOnClickListener(this);
         MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
+        optionB.setOnClickListener(this);
         MarqueeTextView optionC = (MarqueeTextView) view.findViewById(R.id.TextView_optionC);
+        optionC.setOnClickListener(this);
         MarqueeTextView optionD = (MarqueeTextView) view.findViewById(R.id.TextView_optionD);
+        optionD.setOnClickListener(this);
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
+
+        mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
+        mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
+        mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
+        mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
         mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
@@ -100,14 +112,18 @@ public class QuestionFragment extends Fragment {
 
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         ImageView picA = (ImageView) view.findViewById(R.id.ImageView_picA);
+        picA.setOnClickListener(this);
         ImageView picB = (ImageView) view.findViewById(R.id.ImageView_picB);
+        picB.setOnClickListener(this);
         ImageView picC = (ImageView) view.findViewById(R.id.ImageView_picC);
+        picC.setOnClickListener(this);
         ImageView picD = (ImageView) view.findViewById(R.id.ImageView_picD);
+        picD.setOnClickListener(this);
 
-        RadioButton radioButtonA = (RadioButton) view.findViewById(R.id.RadioButton_A);
-        RadioButton radioButtonB = (RadioButton) view.findViewById(R.id.RadioButton_B);
-        RadioButton radioButtonC = (RadioButton) view.findViewById(R.id.RadioButton_C);
-        RadioButton radioButtonD = (RadioButton) view.findViewById(R.id.RadioButton_D);
+        mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
+        mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
+        mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
+        mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
         mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
@@ -141,6 +157,30 @@ public class QuestionFragment extends Fragment {
         }
         if (bmpD != null) {
             picD.setImageBitmap(bmpD);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ImageView_picA:
+            case R.id.TextView_optionA:
+                mRadioButton_A.setChecked(true);
+                break;
+            case R.id.ImageView_picB:
+            case R.id.TextView_optionB:
+                mRadioButton_B.setChecked(true);
+                break;
+            case R.id.ImageView_picC:
+            case R.id.TextView_optionC:
+                mRadioButton_C.setChecked(true);
+                break;
+            case R.id.TextView_optionD:
+            case R.id.ImageView_picD:
+                mRadioButton_D.setChecked(true);
+                break;
+            default:
+                break;
         }
     }
 

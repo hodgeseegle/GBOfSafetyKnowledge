@@ -8,7 +8,6 @@ import android.widget.TextView;
 /**
  * decription ：
  * author ： zhua
- * Created at 2016/4/6.
  */
 public class MarqueeTextView extends TextView {
 

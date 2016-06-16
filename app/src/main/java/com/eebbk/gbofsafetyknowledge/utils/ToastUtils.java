@@ -13,7 +13,7 @@ import com.eebbk.gbofsafetyknowledge.R;
 
 /** 
  * Toast工具类 
- * @author lling
+ * @author zhua
  * 
  */ 
 public class ToastUtils {  

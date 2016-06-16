@@ -1,4 +1,4 @@
-package com.eebbk.gbofsafetyknowledge.fragments;
+package com.eebbk.gbofsafetyknowledge.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 /**
  * decription ：
  * author ： zhua
- * Created at 2016/6/14.
  */
 public class QuestionFragmentPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments = new ArrayList<Fragment>();;

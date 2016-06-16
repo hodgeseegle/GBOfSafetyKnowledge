@@ -153,8 +153,12 @@ public class QuestionDAO {
         }
         closeDatabase();
 
-        listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 4));
-        listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 6));
+        if(!listQuestionVOProduct.isEmpty()){
+            listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 4));
+        }
+        if(!listQuestionVOPure.isEmpty()){
+            listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 6));
+        }
        // randomSortList(listQuestionVOFinally);
 
         return listQuestionVOFinally;

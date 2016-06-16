@@ -13,4 +13,7 @@
     <string name="optionB_two">B</string>
     <string name="optionC_two">C</string>
     <string name="optionD_two">D</string>
+    <string name="result_default">闯关完成！答对了XX道题</string>
+    <string name="qrcode_text">扫二维码分享</string>
+    <string name="proposal">建议：为了你的孩子能够健康成长，请购买小天才手表！！</string>
 </resources>

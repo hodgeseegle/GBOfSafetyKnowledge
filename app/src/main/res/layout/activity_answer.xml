@@ -6,7 +6,7 @@
     android:background="@mipmap/bg"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="@dimen/board_width"
         android:layout_height="@dimen/board_height"
         android:layout_centerInParent="true"
@@ -17,6 +17,76 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true" />
-    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_indicator"
+            android:layout_width="@dimen/horizontal_width"
+            android:layout_height="@dimen/horizontal_hight"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/horizontal_margin_bottom">
+
+            <com.eebbk.gbofsafetyknowledge.controls.HorizontalListView
+                android:id="@+id/HorizontalListView_listview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TextView_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/result_default"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/ct_44sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_proposal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/TextView_result"
+            android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/TextView_proposal"
+                android:layout_width="@dimen/proposal_width"
+                android:layout_height="@dimen/proposal_height"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/proposal_margin_top"
+                android:background="@drawable/rounded_edittext"
+                android:text="@string/proposal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ct_33sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_qrCode"
+            android:layout_width="@dimen/qrcode_layout_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/TextView_result"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ImageView_qrCode"
+                android:layout_width="@dimen/qrcode_width"
+                android:layout_height="@dimen/qrcode_height"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/qr_code" />
+
+            <TextView
+                android:layout_width="@dimen/qrcode_text"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ImageView_qrCode"
+                android:gravity="center"
+                android:text="@string/qrcode_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ct_22sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

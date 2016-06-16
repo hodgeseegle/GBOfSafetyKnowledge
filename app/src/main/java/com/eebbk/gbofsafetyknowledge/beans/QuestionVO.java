@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * decription ：答题信息类
  * author ： zhua
- * Created at 2016/6/14.
  */
 public class QuestionVO implements Serializable {
 
