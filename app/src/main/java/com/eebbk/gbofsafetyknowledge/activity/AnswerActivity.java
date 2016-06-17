@@ -3,15 +3,12 @@ package com.eebbk.gbofsafetyknowledge.activity;
 import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -32,7 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * description:答题界面
@@ -137,10 +133,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
         mQuestionFragmentPagerAdapter = new QuestionFragmentPagerAdapter(getSupportFragmentManager());
         mQuestionFragmentPagerAdapter.setFragments(mFragments);
-        mViewPager.setOffscreenPageLimit(10);
         mViewPager.setAdapter(mQuestionFragmentPagerAdapter);
 
-       playSound(mCurPageNum);
+        playSound(mCurPageNum);
     }
 
     /**
@@ -273,9 +268,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
     /**
      * 播放声音
-     *
-     * @param sound
-     * @param loop
      */
     public void playSound(int curPageNum) {
         AssetFileDescriptor fileDescriptor = null;
@@ -295,5 +287,34 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+
+        if(mPlayer != null && mPlayer.isPlaying()){
+            mPlayer.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        /*if(mPlayer != null){
+            mPlayer.start();
+        }*/
     }
 }
