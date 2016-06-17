@@ -30,6 +30,15 @@
     <dimen name="qrcode_height">200dp</dimen>
 
 
+    <dimen name="progress_loading_layout_width">300dp</dimen>
+    <dimen name="progress_loading_layout_height">110dp</dimen>
+
+    <dimen name="progress_loading_width">55dp</dimen>
+    <dimen name="progress_loading_height">55dp</dimen>
+    <dimen name="progress_loading_start">55dp</dimen>
+    <dimen name="progress_loading_text_margin_left">22dp</dimen>
+
+
 
 
 </resources>

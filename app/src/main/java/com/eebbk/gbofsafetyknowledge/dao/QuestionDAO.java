@@ -4,9 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+
+import com.eebbk.gbofsafetyknowledge.activity.AnswerActivity;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
 import com.eebbk.gbofsafetyknowledge.contants.Contants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -153,13 +158,13 @@ public class QuestionDAO {
         }
         closeDatabase();
 
-        if(!listQuestionVOProduct.isEmpty()){
+        if (!listQuestionVOProduct.isEmpty()) {
             listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 4));
         }
-        if(!listQuestionVOPure.isEmpty()){
+        if (!listQuestionVOPure.isEmpty()) {
             listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 6));
         }
-       // randomSortList(listQuestionVOFinally);
+        // randomSortList(listQuestionVOFinally);
 
         return listQuestionVOFinally;
     }
@@ -215,5 +220,15 @@ public class QuestionDAO {
 
         listT.clear();
         listT.addAll(newList);
+    }
+
+    public void selectQuestion(int grade, Handler handler) {
+        copyDatabase();
+        List<QuestionVO> questionVOs = getQuestions(grade);
+
+        Message msg = handler.obtainMessage();
+        msg.obj = questionVOs;
+        msg.what = AnswerActivity.SELECT_OVER;
+        msg.sendToTarget();
     }
 }

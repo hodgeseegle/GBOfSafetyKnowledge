@@ -32,7 +32,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
 
             Indicator indicator = new Indicator();
             indicator.setV(mInflater.inflate(R.layout.horizontal_list_item, null));
-            if(i == 0){
+            if (i == 0) {
                 indicator.setIsSelected(1);
             }
             mListView.add(indicator);
@@ -67,12 +67,12 @@ public class HorizontalListViewAdapter extends BaseAdapter {
                     R.color.red));
             mListView.get(position).getV().setSelected(true);
         } else {
-            if(isQuestioned == 0){
+            if (isQuestioned == 0) {
 
                 view.setBackgroundColor(mContext.getResources().getColor(
                         R.color.black));
                 mListView.get(position).getV().setSelected(false);
-            }else if(isQuestioned == 1){
+            } else if (isQuestioned == 1) {
 
                 view.setBackgroundColor(mContext.getResources().getColor(
                         R.color.green));
@@ -84,10 +84,10 @@ public class HorizontalListViewAdapter extends BaseAdapter {
 
     public void setSelectIndex(int i) {
 
-        for(int j = 0;j<mListView.size();j++){
+        for (int j = 0; j < mListView.size(); j++) {
             mListView.get(j).setIsSelected(0);
         }
-        if(i != -1){
+        if (i != -1) {
             mListView.get(i).setIsSelected(1);
         }
         notifyDataSetChanged();
@@ -95,5 +95,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
 
     public void setFlag(int i) {
         mListView.get(i).setIsQuestioned(1);
+
+        notifyDataSetChanged();
     }
 }

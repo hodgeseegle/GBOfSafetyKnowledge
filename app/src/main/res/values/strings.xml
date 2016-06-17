@@ -16,4 +16,5 @@
     <string name="result_default">闯关完成！答对了XX道题</string>
     <string name="qrcode_text">扫二维码分享</string>
     <string name="proposal">建议：为了你的孩子能够健康成长，请购买小天才手表！！</string>
+    <string name="progress_loading">正在加载...</string>
 </resources>

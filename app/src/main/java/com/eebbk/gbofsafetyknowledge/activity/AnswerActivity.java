@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -20,12 +23,14 @@ import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.adapter.HorizontalListViewAdapter;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
 import com.eebbk.gbofsafetyknowledge.controls.HorizontalListView;
+import com.eebbk.gbofsafetyknowledge.controls.MyLoadingView;
 import com.eebbk.gbofsafetyknowledge.dao.QuestionDAO;
 import com.eebbk.gbofsafetyknowledge.fragments.QuestionFragment;
 import com.eebbk.gbofsafetyknowledge.adapter.QuestionFragmentPagerAdapter;
 import com.eebbk.gbofsafetyknowledge.utils.ToastUtils;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +42,10 @@ import java.util.List;
 public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
     //题目数
     private static final int QUESTION_NUM = 10;
+    //筛选题目结束
+    public static final int SELECT_OVER = 0;
+    //筛选题目结束
+    public static final int SLEEP = 1;
     private ViewPager mViewPager;
     private QuestionFragmentPagerAdapter mQuestionFragmentPagerAdapter;
     private QuestionDAO mQuestionDAO;
@@ -67,7 +76,11 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     //播放声音mediaplayer
     private MediaPlayer mPlayer;
     //获得该应用的AssetManager
-    AssetManager mAssetManager;
+    private AssetManager mAssetManager;
+    //自定义消息处理
+    private MyHandler mMyHandler;
+    //缓冲提示
+    private MyLoadingView mMyLoadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +110,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
         mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
         mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
+        mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
-
+        mMyHandler = new MyHandler(this);
 
         mHorizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -112,16 +126,15 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         });
 
         mQuestionDAO = new QuestionDAO(getApplicationContext());
-        mQuestionDAO.copyDatabase();
 
-        if (mQuestionDAO != null) {
-            mQuestionsVOs = mQuestionDAO.getQuestions(grade);
-        }
+        showProgress();
+        new ReadDAOsyncTask().execute(grade);
+    }
 
-        if (mQuestionsVOs.isEmpty()) {
-            ToastUtils.showMessageLong(AnswerActivity.this, "暂时没有题目");
-            finish();
-        }
+    /**
+     * 初始化数据
+     */
+    public void initData() {
 
         for (int i = 0; i < mQuestionsVOs.size(); i++) {
             QuestionFragment questionFragment = new QuestionFragment();
@@ -147,7 +160,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mHorizontalListViewAdapter.setFlag(mViewPager.getCurrentItem());
 
         if (mViewPager.getCurrentItem() < mFragments.size() - 1 && mAnswers.size() != mFragments.size()) {
-            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+            mMyHandler.sendEmptyMessageDelayed(SLEEP,1000);
         } else {
             //当点击最后一个选项或者全都选上时，弹出对话框
             if (mAnswers.size() == mFragments.size() || mViewPager.getCurrentItem() == mFragments.size() - 1) {
@@ -231,6 +244,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             playSound(mCurPageNum);
 
             mHorizontalListViewAdapter.setSelectIndex(position);
+            mMyHandler.removeMessages(SLEEP);
         }
 
         @Override
@@ -292,7 +306,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     @Override
     protected void onDestroy() {
 
-        if (mPlayer != null && mPlayer.isPlaying()) {
+        if (mPlayer != null && mPlayer.isPlaying()) {//停止声音，并销毁
             mPlayer.stop();
             mPlayer.release();
             mPlayer = null;
@@ -301,9 +315,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause() {//暂停声音
 
-        if(mPlayer != null && mPlayer.isPlaying()){
+        if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.pause();
         }
         super.onPause();
@@ -317,4 +331,79 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             mPlayer.start();
         }*/
     }
+
+    /**
+     * 消息处理
+     */
+    public static class MyHandler extends Handler {
+
+        WeakReference<AnswerActivity> mActivity;
+
+        MyHandler(AnswerActivity activity) {
+            mActivity = new WeakReference(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            AnswerActivity activity = mActivity.get();
+            switch (msg.what) {
+                case SELECT_OVER:
+                    activity.hideProgress();
+                    activity.mQuestionsVOs = (List<QuestionVO>) msg.obj;
+                    if (!activity.mQuestionsVOs.isEmpty()) {
+                        activity.initData();
+                    } else {
+                        ToastUtils.showMessageLong(activity, "暂时没有题目");
+                        activity.finish();
+                    }
+                    break;
+                case SLEEP:
+                    activity.mViewPager.setCurrentItem(activity.mViewPager.getCurrentItem() + 1, true);
+                    break;
+
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 读取数据库线程
+     */
+    public class ReadDAOsyncTask extends AsyncTask<Integer, Integer, String> {
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+            mQuestionDAO.selectQuestion(integers[0].intValue(), mMyHandler);
+            return null;
+        }
+    }
+
+    /**
+     * 显示缓冲
+     */
+    public void showProgress() {
+
+        mViewPager.setVisibility(View.GONE);
+        mLayoutIndicator.setVisibility(View.GONE);
+        mTxtResult.setVisibility(View.GONE);
+        mlayoutProposal.setVisibility(View.GONE);
+        mlayoutqrCode.setVisibility(View.GONE);
+
+        mMyLoadingView.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 隐藏缓冲
+     */
+    public void hideProgress() {
+
+        mMyLoadingView.setVisibility(View.GONE);
+        mViewPager.setVisibility(View.VISIBLE);
+        mLayoutIndicator.setVisibility(View.VISIBLE);
+    }
+
+
 }
