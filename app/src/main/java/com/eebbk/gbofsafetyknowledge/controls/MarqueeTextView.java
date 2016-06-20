@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * decription ：
+ * decription ：跑马灯效果
  * author ： zhua
  */
 public class MarqueeTextView extends TextView {

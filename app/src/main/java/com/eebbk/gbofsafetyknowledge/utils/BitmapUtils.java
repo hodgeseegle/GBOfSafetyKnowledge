@@ -6,14 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 /**
  * decription ：bitmap工具类
@@ -21,7 +15,7 @@ import java.util.Arrays;
  */
 public class BitmapUtils {
 
-    private Context mContext;
+    private final Context mContext;
     private static BitmapUtils mBitmapUtils = null;
 
     private BitmapUtils(Context context) {
@@ -42,7 +36,7 @@ public class BitmapUtils {
         Bitmap bm = null;
         AssetManager assetManager = mContext.getAssets();
         if (assetManager != null) {
-            InputStream assetFile = null;
+            InputStream assetFile;
 
             try {
                 assetFile = assetManager.open(name);
@@ -65,7 +59,7 @@ public class BitmapUtils {
             try {
                 assetFile = assetManager.open(name);
                 Bitmap e = BitmapFactory.decodeStream(assetFile);
-                da = new BitmapDrawable(e);
+                da = new BitmapDrawable(mContext.getResources(),e);
                 assetFile.close();
             } catch (IOException var5) {
                 var5.printStackTrace();

@@ -1,5 +1,7 @@
 package com.eebbk.gbofsafetyknowledge.adapter;
 
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.widget.BaseAdapter;
 
 /**
@@ -9,7 +11,6 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,20 +19,17 @@ import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.Indicator;
 
 public class HorizontalListViewAdapter extends BaseAdapter {
-    private int mCount;
-    private Context mContext;
-    private LayoutInflater mInflater;
-    private ArrayList<Indicator> mListView = new ArrayList<Indicator>();
+    private final int mCount;
+    private final Context mContext;
+    private final ArrayList<Indicator> mListView = new ArrayList<>();
 
     public HorizontalListViewAdapter(Context context, int num) {
         this.mContext = context;
         this.mCount = num;
-        mInflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for (int i = 0; i < num; i++) {
 
             Indicator indicator = new Indicator();
-            indicator.setV(mInflater.inflate(R.layout.horizontal_list_item, null));
+            indicator.setV(View.inflate(context, R.layout.horizontal_list_item, null));
             if (i == 0) {
                 indicator.setIsSelected(1);
             }
@@ -63,19 +61,16 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         int isQuestioned = mListView.get(position).getIsQuestioned();
         if (isSelected == 1) {
 
-            view.setBackgroundColor(mContext.getResources().getColor(
-                    R.color.red));
+            view.setBackgroundColor(getColor(mContext,R.color.red));
             mListView.get(position).getV().setSelected(true);
         } else {
             if (isQuestioned == 0) {
 
-                view.setBackgroundColor(mContext.getResources().getColor(
-                        R.color.black));
+                view.setBackgroundColor(getColor(mContext,R.color.black));
                 mListView.get(position).getV().setSelected(false);
             } else if (isQuestioned == 1) {
 
-                view.setBackgroundColor(mContext.getResources().getColor(
-                        R.color.green));
+                view.setBackgroundColor(getColor(mContext,R.color.green));
                 mListView.get(position).getV().setSelected(false);
             }
         }
@@ -97,5 +92,14 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         mListView.get(i).setIsQuestioned(1);
 
         notifyDataSetChanged();
+    }
+
+    public  int getColor(Context context, int id) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, id);
+        } else {
+            return context.getResources().getColor(id);
+        }
     }
 }

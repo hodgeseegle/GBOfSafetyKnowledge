@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/margin_layout_left"
+    android:paddingStart="@dimen/margin_layout_left"
     android:paddingRight="@dimen/margin_layout_right"
+    android:paddingEnd="@dimen/margin_layout_right"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
     <TextView
@@ -40,7 +42,7 @@
                 style="@style/RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A."
+                android:text="@string/radiobtn_A"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"
                 android:checked="false" />
@@ -72,7 +74,7 @@
                 style="@style/RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="B."
+                android:text="@string/radiobtn_B"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 
@@ -103,7 +105,7 @@
                 style="@style/RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="C."
+                android:text="@string/radiobtn_C"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 
@@ -134,7 +136,7 @@
                 style="@style/RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="D."
+                android:text="@string/radiobtn_D"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 

@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/TextView_result"
             android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
-            android:visibility="gone">
+            android:layout_toStartOf="@+id/RelativeLayout_qrCode">
 
             <TextView
                 android:id="@+id/TextView_proposal"
@@ -67,6 +67,7 @@
             android:layout_width="@dimen/qrcode_layout_width"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@+id/TextView_result"
             android:visibility="gone">
 

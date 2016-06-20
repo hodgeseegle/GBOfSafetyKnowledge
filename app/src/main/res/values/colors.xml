@@ -9,4 +9,7 @@
     <color name="green">#70f206</color>
     <color name="grey">#cac6c6</color>
     <color name="progress_text_color">#585858</color>
+    <color name="video_controller_bgOne">#99000000</color>
+    <color name="guidance_text_color">#ffbdbdbd</color>
+    <color name="main_color">#52ce90</color>
 </resources>

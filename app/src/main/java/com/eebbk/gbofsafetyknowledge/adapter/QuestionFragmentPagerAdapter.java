@@ -2,7 +2,6 @@ package com.eebbk.gbofsafetyknowledge.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  * author ： zhua
  */
 public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
-    private ArrayList<Fragment> fragments = new ArrayList<Fragment>();;
+    private ArrayList<Fragment> fragments = new ArrayList<>();
     private FragmentManager fm;
 
     public QuestionFragmentPagerAdapter(FragmentManager fm) {
@@ -58,7 +57,6 @@ public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 ft.remove(f);
             }
             ft.commit();
-            ft = null;
             fm.executePendingTransactions();
         }
         this.fragments = fragment;
@@ -72,7 +70,6 @@ public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 ft.remove(f);
             }
             ft.commit();
-            ft = null;
             fm.executePendingTransactions();
         }
         this.fragments = fragments;

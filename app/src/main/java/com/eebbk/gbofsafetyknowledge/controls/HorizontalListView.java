@@ -19,16 +19,16 @@ import android.widget.Scroller;
  */
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
-    protected ListAdapter mAdapter;
+    private ListAdapter mAdapter;
     private int mLeftViewIndex = -1;
     private int mRightViewIndex = 0;
-    protected int mCurrentX;
-    protected int mNextX;
+    private int mCurrentX;
+    private int mNextX;
     private int mMaxX = Integer.MAX_VALUE;
     private int mDisplayOffset = 0;
-    protected Scroller mScroller;
+    private Scroller mScroller;
     private GestureDetector mGesture;
-    private Queue<View> mRemovedViewQueue = new LinkedList<View>();
+    private final Queue<View> mRemovedViewQueue = new LinkedList<>();
     private OnItemSelectedListener mOnItemSelected;
     private OnItemClickListener mOnItemClicked;
     private OnItemLongClickListener mOnItemLongClicked;
@@ -67,7 +67,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         mOnItemLongClicked = listener;
     }
 
-    private DataSetObserver mDataObserver = new DataSetObserver() {
+    private final DataSetObserver mDataObserver = new DataSetObserver() {
 
         @Override
         public void onChanged() {
@@ -122,8 +122,8 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     private void addAndMeasureChild(final View child, int viewPos) {
         LayoutParams params = child.getLayoutParams();
         if (params == null) {
-            params = new LayoutParams(LayoutParams.FILL_PARENT,
-                    LayoutParams.FILL_PARENT);
+            params = new LayoutParams(LayoutParams.MATCH_PARENT,
+                    LayoutParams.MATCH_PARENT);
         }
 
         addViewInLayout(child, viewPos, params, true);
@@ -150,8 +150,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         }
 
         if (mScroller.computeScrollOffset()) {
-            int scrollx = mScroller.getCurrX();
-            mNextX = scrollx;
+            mNextX = mScroller.getCurrX();
         }
 
         if (mNextX <= 0) {
@@ -277,7 +276,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return handled;
     }
 
-    protected boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+    private boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                               float velocityY) {
         synchronized (HorizontalListView.this) {
             mScroller.fling(mNextX, 0, (int) -velocityX, 0, 0, mMaxX, 0, 0);
@@ -287,12 +286,12 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return true;
     }
 
-    protected boolean onDown(MotionEvent e) {
+    private boolean onDown(MotionEvent e) {
         mScroller.forceFinished(true);
         return true;
     }
 
-    private OnGestureListener mOnGesture = new GestureDetector.SimpleOnGestureListener() {
+    private final OnGestureListener mOnGesture = new GestureDetector.SimpleOnGestureListener() {
 
         @Override
         public boolean onDown(MotionEvent e) {

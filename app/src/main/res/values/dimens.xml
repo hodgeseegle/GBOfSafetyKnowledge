@@ -3,6 +3,7 @@
     <dimen name="ct_44sp">44sp</dimen>
     <dimen name="ct_33sp">33sp</dimen>
     <dimen name="ct_22sp">22sp</dimen>
+    <dimen name="ct_12sp">12sp</dimen>
     <!--首页-->
     <dimen name="preschoolbtn_margin_left">240dp</dimen>
     <dimen name="primaryschoolbtn_margin_right">240dp</dimen>
@@ -29,7 +30,6 @@
     <dimen name="qrcode_text">200dp</dimen>
     <dimen name="qrcode_height">200dp</dimen>
 
-
     <dimen name="progress_loading_layout_width">300dp</dimen>
     <dimen name="progress_loading_layout_height">110dp</dimen>
 
@@ -38,7 +38,12 @@
     <dimen name="progress_loading_start">55dp</dimen>
     <dimen name="progress_loading_text_margin_left">22dp</dimen>
 
+    <!--VideoPlayerActivity-->
 
-
+    <dimen name="ct_48_dp">48dp</dimen>
+    <dimen name="ct_12_dp">12dp</dimen>
+    <dimen name="ct_4_dp">4dp</dimen>
+    <dimen name="ct_5_dp">5dp</dimen>
+    <dimen name="ct_2_dp">2dp</dimen>
 
 </resources>

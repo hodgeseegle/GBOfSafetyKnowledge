@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ct_48_dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/video_controller_bgOne"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ImageView_play_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/ct_12_dp"
+            android:paddingRight="@dimen/ct_12_dp"
+            android:src="@drawable/play_btn_fullpause" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ct_12_dp"
+            android:layout_marginEnd="@dimen/ct_12_dp"
+            android:layout_toRightOf="@id/ImageView_play_pause"
+            android:layout_toEndOf="@id/ImageView_play_pause" >
+
+            <TextView
+                android:id="@+id/TextView_play_time"
+                style="@style/VideoTimeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/ct_4_dp"
+                android:layout_marginStart="@dimen/ct_4_dp"
+                android:layout_marginRight="@dimen/ct_5_dp"
+                android:layout_marginEnd="@dimen/ct_5_dp"
+                android:gravity="center_vertical"
+                android:text="@string/time" />
+
+            <SeekBar
+                android:id="@+id/SeekBar_scroll"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/TextView_play_time"
+                android:layout_toStartOf="@id/TextView_play_time"
+                android:max="100"
+                android:maxHeight="@dimen/ct_2_dp"
+                android:minHeight="@dimen/ct_2_dp"
+                android:progressDrawable="@drawable/play_seekbar_style"
+                android:thumb="@drawable/play_seekbar_humb"
+                android:thumbOffset="0dip" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

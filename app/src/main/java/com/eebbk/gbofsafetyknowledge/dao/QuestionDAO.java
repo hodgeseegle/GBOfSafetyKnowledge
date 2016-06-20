@@ -28,10 +28,10 @@ public class QuestionDAO {
 
     private static final String TAG = "QuestionDAO";
     private final String DB_NAME = "questions.db";
-    private Context mContext;
+    private final Context mContext;
     private String mDatabasePath;
     private SQLiteDatabase mQuestionsDb;
-    private SharedPreferences mSharedPreferences; //私有数据
+    private final SharedPreferences mSharedPreferences; //私有数据
 
     public QuestionDAO(Context context) {
         mContext = context;
@@ -42,7 +42,7 @@ public class QuestionDAO {
      * description:将数据库从assets 文件夹复制到手机自身的存储当中去
      * author:zhua
      */
-    public void copyDatabase() {
+    private void copyDatabase() {
         String databasePath = mContext.getFilesDir().getAbsolutePath();
         databasePath = databasePath.substring(0, databasePath.lastIndexOf("/")) + "/databases";
         mDatabasePath = databasePath + "/" + DB_NAME;
@@ -65,12 +65,15 @@ public class QuestionDAO {
                 InputStream is = null;
                 try {
                     is = mContext.getAssets().open("database/" + DB_NAME);
+                    if(is != null){
+                        return;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 FileOutputStream fos = new FileOutputStream(mDatabasePath);
                 byte[] buffer = new byte[1024];
-                int count = 0;
+                int count;
                 while ((count = is.read(buffer)) > 0) {
                     fos.write(buffer, 0, count);
                 }
@@ -80,7 +83,7 @@ public class QuestionDAO {
                 SharedPreferences.Editor editor = mSharedPreferences.edit();
                 editor.putBoolean("isFirst", true);
                 //提交修改
-                editor.commit();
+                editor.apply();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -109,15 +112,15 @@ public class QuestionDAO {
      * description:获取对应的题目
      * author:zhua
      */
-    public List<QuestionVO> getQuestions(int grade) {//  0  学前   1  小学
+    private List<QuestionVO> getQuestions(int grade) {//  0  学前   1  小学
 
         String sql = "select * from QUESTIONS where GRADE = ?";
         openDatabase();
 
         String str_grade = grade + "";
-        List<QuestionVO> listQuestionVOFinally = new ArrayList<QuestionVO>();
-        List<QuestionVO> listQuestionVOProduct = new ArrayList<QuestionVO>();
-        List<QuestionVO> listQuestionVOPure = new ArrayList<QuestionVO>();
+        List<QuestionVO> listQuestionVOFinally = new ArrayList<>();
+        List<QuestionVO> listQuestionVOProduct = new ArrayList<>();
+        List<QuestionVO> listQuestionVOPure = new ArrayList<>();
 
         Cursor cursor = mQuestionsDb.rawQuery(sql, new String[]{str_grade});
         if (cursor == null) {
@@ -156,13 +159,17 @@ public class QuestionDAO {
                 }
             }
         }
+
+        if(cursor != null){
+            cursor.close();
+        }
         closeDatabase();
 
         if (!listQuestionVOProduct.isEmpty()) {
-            listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 4));
+            listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 2));
         }
         if (!listQuestionVOPure.isEmpty()) {
-            listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 6));
+            listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 4));
         }
         // randomSortList(listQuestionVOFinally);
 
@@ -171,10 +178,6 @@ public class QuestionDAO {
 
     /**
      * 从List中随机出count个对象
-     *
-     * @param list
-     * @param count
-     * @return
      */
     private List<QuestionVO> randomTopic(List<QuestionVO> list, int count) {
         // 创建一个长度为count(count<=list)的数组,用于存随机数
@@ -199,9 +202,9 @@ public class QuestionDAO {
             size = size - 1;
         }
         // a填满后 将数据加载到rslist
-        List<QuestionVO> rslist = new ArrayList<QuestionVO>();
+        List<QuestionVO> rslist = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            QuestionVO df = (QuestionVO) list.get(a[i]);
+            QuestionVO df = list.get(a[i]);
             rslist.add(df);
         }
         return rslist;
@@ -212,7 +215,7 @@ public class QuestionDAO {
      */
     public void randomSortList(List<QuestionVO> listT) {
         Random random = new Random();
-        List<QuestionVO> newList = new ArrayList<QuestionVO>();
+        List<QuestionVO> newList = new ArrayList<>();
 
         for (QuestionVO item : listT) {
             newList.add(random.nextInt(newList.size()), item);

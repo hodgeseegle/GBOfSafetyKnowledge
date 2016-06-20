@@ -15,13 +15,15 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="Default.NoTitleBar" parent="@style/AppTheme_Activity">
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
     <style name="RadioBtn">
         <item name="android:drawableStart">@drawable/search_radio</item>
         <item name="android:button">@null</item>
+    </style>
+
+    <!-- 播放界面 -->
+    <style name="VideoTimeTextStyle">
+        <item name="android:textSize">@dimen/ct_12sp</item>
+        <item name="android:textColor">@color/guidance_text_color</item>
     </style>
 
 

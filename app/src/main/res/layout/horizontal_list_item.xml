@@ -7,6 +7,7 @@
         android:layout_width="@dimen/split_line_width"
         android:layout_height="@dimen/split_line_height"
         android:layout_toLeftOf="@+id/TextView_img"
+        android:layout_toStartOf="@+id/TextView_img"
         android:background="@color/grey" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_width="@dimen/split_line_width"
         android:layout_height="@dimen/split_line_height"
         android:layout_toRightOf="@+id/TextView_img"
+        android:layout_toEndOf="@+id/TextView_img"
         android:background="@color/grey" />
 
 </RelativeLayout>

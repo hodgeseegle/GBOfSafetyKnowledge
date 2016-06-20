@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">安全知识大闯关</string>
-    <string name="preschool">学前题</string>
-    <string name="primaryschool">小学题</string>
 
     <!--答题界面-->
     <string name="title">1+1=?</string>
@@ -16,5 +14,15 @@
     <string name="result_default">闯关完成！答对了XX道题</string>
     <string name="qrcode_text">扫二维码分享</string>
     <string name="proposal">建议：为了你的孩子能够健康成长，请购买小天才手表！！</string>
-    <string name="progress_loading">正在加载...</string>
+    <string name="progress_loading">正在加载…</string>
+    <string name="radiobtn_A">A.</string>
+    <string name="radiobtn_B">B.</string>
+    <string name="radiobtn_C">C.</string>
+    <string name="radiobtn_D">D.</string>
+    <string name="result">闯关完成！答对了 %1$d 道题</string>
+
+    <!--VideoPlayerActivity-->
+    <string name="time">00:00/00:00</string>
+    <string name="time_separator">%1$s/%2$s</string>
+
 </resources>

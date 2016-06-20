@@ -47,6 +47,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         Bundle data = getArguments();//获得从activity中传递过来的值
 
         QuestionVO questionVO = (QuestionVO) data.getSerializable("QuestionVO");
+        if(questionVO == null){
+            return null;
+        }
         mBitmapUtils = BitmapUtils.getInstance(getActivity().getApplicationContext());
         if (questionVO.getmQuestionFormat() == 2) {
             view = inflater.inflate(R.layout.layout_question_one, container, false);
@@ -60,7 +63,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     }
 
     //初始化组件
-    public void initViewOne(View view, QuestionVO questionVO) {
+    private void initViewOne(View view, QuestionVO questionVO) {
         MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
         optionA.setOnClickListener(this);
         MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
@@ -108,7 +111,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     }
 
     //初始化组件
-    public void initViewTwo(View view, QuestionVO questionVO) {
+    private void initViewTwo(View view, QuestionVO questionVO) {
 
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         ImageView picA = (ImageView) view.findViewById(R.id.ImageView_picA);
@@ -186,6 +189,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     //选择答案接口
     public interface Chose {
-        public void chose(String answer);
+        void chose(String answer);
     }
 }

@@ -9,24 +9,24 @@ import java.io.Serializable;
 public class QuestionVO implements Serializable {
 
     //答案
-    public String mAnswer;
+    private String mAnswer;
     //标题
-    public String mTitle;
+    private String mTitle;
     //选项内容
-    public String mOptionA;
-    public String mOptionB;
-    public String mOptionC;
-    public String mOptionD;
+    private String mOptionA;
+    private String mOptionB;
+    private String mOptionC;
+    private String mOptionD;
     //题目格式   1  选项都为图片  2 选项都为文字
-    public int mQuestionFormat;
+    private int mQuestionFormat;
     //对应图片的ID
-    public String mPicID;
+    private String mPicID;
     //对应音频的ID
-    public String mVoiceID;
+    private String mVoiceID;
     //题目类型   1  纯粹   2  产品
-    public int mQuestionType;
+    private int mQuestionType;
     //扩展字段
-    public String mExtend;
+    private String mExtend;
 
     public QuestionVO(){
         mAnswer = null;

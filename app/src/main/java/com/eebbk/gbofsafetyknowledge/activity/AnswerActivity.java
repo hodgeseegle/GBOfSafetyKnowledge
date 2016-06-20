@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -32,7 +33,6 @@ import com.eebbk.gbofsafetyknowledge.utils.ToastUtils;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,18 +45,15 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     //筛选题目结束
     public static final int SELECT_OVER = 0;
     //筛选题目结束
-    public static final int SLEEP = 1;
+    private static final int SLEEP = 1;
     private ViewPager mViewPager;
-    private QuestionFragmentPagerAdapter mQuestionFragmentPagerAdapter;
     private QuestionDAO mQuestionDAO;
     //试题内容列表
     private List<QuestionVO> mQuestionsVOs;
     //用户选择的答案
-    private HashMap<Integer, String> mAnswers;
+    private SparseArray<String> mAnswers;
     //显示题目Fragment
     private ArrayList<Fragment> mFragments;
-    //试题指示器适配器
-    private HorizontalListView mHorizontalListView;
     //试题指示器适配器
     private HorizontalListViewAdapter mHorizontalListViewAdapter;
     // 记录当前显示的页码
@@ -93,17 +90,17 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 初始化
      */
-    public void initView() {
+    private void initView() {
         int grade = getIntent().getIntExtra("grade", -1);
 
-        mAnswers = new HashMap<Integer, String>();
-        mFragments = new ArrayList<Fragment>();
-        mQuestionsVOs = new ArrayList<QuestionVO>();
+        mAnswers = new SparseArray<>();
+        mFragments = new ArrayList<>();
+        mQuestionsVOs = new ArrayList<>();
         mViewPager = (ViewPager) findViewById(R.id.ViewPager_Question);
         mViewPager.addOnPageChangeListener(new PageChange());
-        mHorizontalListView = (HorizontalListView) findViewById(R.id.HorizontalListView_listview);
+        HorizontalListView horizontalListView = (HorizontalListView) findViewById(R.id.HorizontalListView_listview);
         mHorizontalListViewAdapter = new HorizontalListViewAdapter(AnswerActivity.this, QUESTION_NUM);
-        mHorizontalListView.setAdapter(mHorizontalListViewAdapter);
+        horizontalListView.setAdapter(mHorizontalListViewAdapter);
         mLayoutIndicator = (LinearLayout) findViewById(R.id.LinearLayout_indicator);
         mTxtResult = (TextView) findViewById(R.id.TextView_result);
         mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
@@ -115,7 +112,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mAssetManager = getAssets();
         mMyHandler = new MyHandler(this);
 
-        mHorizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        horizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -134,7 +131,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 初始化数据
      */
-    public void initData() {
+    private void initData() {
 
         for (int i = 0; i < mQuestionsVOs.size(); i++) {
             QuestionFragment questionFragment = new QuestionFragment();
@@ -144,9 +141,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             mFragments.add(questionFragment);
         }
 
-        mQuestionFragmentPagerAdapter = new QuestionFragmentPagerAdapter(getSupportFragmentManager());
-        mQuestionFragmentPagerAdapter.setFragments(mFragments);
-        mViewPager.setAdapter(mQuestionFragmentPagerAdapter);
+        QuestionFragmentPagerAdapter questionFragmentPagerAdapter = new QuestionFragmentPagerAdapter(getSupportFragmentManager());
+        questionFragmentPagerAdapter.setFragments(mFragments);
+        mViewPager.setAdapter(questionFragmentPagerAdapter);
 
         playSound(mCurPageNum);
     }
@@ -178,7 +175,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 弹出对话框
      */
-    protected void showDialog() {
+    private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AnswerActivity.this);
         builder.setMessage("确认提交吗？");
         builder.setTitle("提示");
@@ -201,7 +198,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 提交
      */
-    public void commit() {
+    private void commit() {
 
         mPlayer.stop();
 
@@ -211,8 +208,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             return;
         }
         //计算检验错误
-        ArrayList<String> corrects = new ArrayList<String>();
-        ArrayList<String> worngs = new ArrayList<String>();
+        ArrayList<String> corrects = new ArrayList<>();
+        ArrayList<String> worngs = new ArrayList<>();
         for (int i = 0; i < mQuestionsVOs.size(); i++) {
             QuestionVO questionVO = mQuestionsVOs.get(i);
             if (questionVO.getmAnswer().trim().equalsIgnoreCase(mAnswers.get(i))) {
@@ -270,21 +267,21 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 显示建议
      */
-    public void showProposal(int corrctNum) {
+    private void showProposal(int corrctNum) {
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
 
         mTxtResult.setVisibility(View.VISIBLE);
         mlayoutProposal.setVisibility(View.VISIBLE);
         mlayoutqrCode.setVisibility(View.VISIBLE);
-        mTxtResult.setText("闯关完成！答对了" + corrctNum + "道题");
+        mTxtResult.setText(getString(R.string.result,corrctNum));
     }
 
     /**
      * 播放声音
      */
-    public void playSound(int curPageNum) {
-        AssetFileDescriptor fileDescriptor = null;
+    private void playSound(int curPageNum) {
+        AssetFileDescriptor fileDescriptor;
         mPlayer.reset();
         try {
             fileDescriptor = mAssetManager.openFd("kanong" + curPageNum + ".mp3");
@@ -323,27 +320,20 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        /*if(mPlayer != null){
-            mPlayer.start();
-        }*/
-    }
-
     /**
      * 消息处理
      */
     public static class MyHandler extends Handler {
 
-        WeakReference<AnswerActivity> mActivity;
+        final WeakReference<AnswerActivity> mActivity;
 
+        @SuppressWarnings("unchecked")
         MyHandler(AnswerActivity activity) {
             mActivity = new WeakReference(activity);
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             AnswerActivity activity = mActivity.get();
@@ -372,11 +362,11 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 读取数据库线程
      */
-    public class ReadDAOsyncTask extends AsyncTask<Integer, Integer, String> {
+    private class ReadDAOsyncTask extends AsyncTask<Integer, Integer, String> {
 
         @Override
         protected String doInBackground(Integer... integers) {
-            mQuestionDAO.selectQuestion(integers[0].intValue(), mMyHandler);
+            mQuestionDAO.selectQuestion(integers[0], mMyHandler);
             return null;
         }
     }
@@ -384,7 +374,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 显示缓冲
      */
-    public void showProgress() {
+    private void showProgress() {
 
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
@@ -398,12 +388,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 隐藏缓冲
      */
-    public void hideProgress() {
+    private void hideProgress() {
 
         mMyLoadingView.setVisibility(View.GONE);
         mViewPager.setVisibility(View.VISIBLE);
         mLayoutIndicator.setVisibility(View.VISIBLE);
     }
-
-
 }
