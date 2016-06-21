@@ -78,6 +78,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private MyHandler mMyHandler;
     //缓冲提示
     private MyLoadingView mMyLoadingView;
+    //播放任务
+    private PlaysyncTask mPlaysyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +147,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         questionFragmentPagerAdapter.setFragments(mFragments);
         mViewPager.setAdapter(questionFragmentPagerAdapter);
 
-        playSound(mCurPageNum);
+        mPlaysyncTask = new PlaysyncTask();
+        mPlaysyncTask.execute(mCurPageNum);
     }
 
     /**
@@ -238,7 +241,13 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         public void onPageSelected(int position) {
 
             mCurPageNum = position + 1;
-            playSound(mCurPageNum);
+            if(mPlaysyncTask != null){
+                mPlaysyncTask.cancel(true);
+                mPlaysyncTask = null;
+            }
+
+            mPlaysyncTask = new PlaysyncTask();
+            mPlaysyncTask.execute(mCurPageNum);
 
             mHorizontalListViewAdapter.setSelectIndex(position);
             mMyHandler.removeMessages(SLEEP);
@@ -281,23 +290,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
      * 播放声音
      */
     private void playSound(int curPageNum) {
-        AssetFileDescriptor fileDescriptor;
-        mPlayer.reset();
-        try {
-            fileDescriptor = mAssetManager.openFd("kanong" + curPageNum + ".mp3");
-            mPlayer.setDataSource(fileDescriptor.getFileDescriptor(),
-                    fileDescriptor.getStartOffset(),
-                    fileDescriptor.getLength());
-            mPlayer.prepareAsync();
-            mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mPlayer.start();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -393,5 +386,31 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mMyLoadingView.setVisibility(View.GONE);
         mViewPager.setVisibility(View.VISIBLE);
         mLayoutIndicator.setVisibility(View.VISIBLE);
+    }
+
+    public class PlaysyncTask extends AsyncTask<Integer, Integer, String> {
+        @Override
+        protected String doInBackground(Integer... params) {
+            AssetFileDescriptor fileDescriptor;
+            mPlayer.reset();
+            try {
+                fileDescriptor = mAssetManager.openFd("kanong" +  params[0].intValue() + ".mp3");
+                mPlayer.setDataSource(fileDescriptor.getFileDescriptor(),
+                        fileDescriptor.getStartOffset(),
+                        fileDescriptor.getLength());
+                mPlayer.prepareAsync();
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        if(!isCancelled()){
+                            mPlayer.start();
+                        }
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
