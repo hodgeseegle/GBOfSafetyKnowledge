@@ -15,11 +15,11 @@
     <dimen name="margin_layout_right">50dp</dimen>
     <dimen name="table_hight">48dp</dimen>
     <dimen name="horizontal_hight">40dp</dimen>
-    <dimen name="horizontal_width">820dp</dimen>
+    <dimen name="horizontal_width">792dp</dimen>
     <dimen name="horizontal_margin_bottom">50dp</dimen>
     <dimen name="split_line_width">1dp</dimen>
     <dimen name="split_line_height">30dp</dimen>
-    <dimen name="indicator_width">80dp</dimen>
+    <dimen name="indicator_width">130dp</dimen>
     <dimen name="indicator_height">30dp</dimen>
     <dimen name="radius">15dp</dimen>
     <dimen name="proposal_width">500dp</dimen>

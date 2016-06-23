@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
     //题目数
-    private static final int QUESTION_NUM = 10;
+    private static final int QUESTION_NUM = 6;
     //筛选题目结束
     public static final int SELECT_OVER = 0;
     //筛选题目结束
