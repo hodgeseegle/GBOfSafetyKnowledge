@@ -148,7 +148,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mViewPager.setAdapter(questionFragmentPagerAdapter);
 
         mPlaysyncTask = new PlaysyncTask();
-        mPlaysyncTask.execute(mCurPageNum);
+        mPlaysyncTask.execute(mQuestionsVOs.get(mCurPageNum - 1).getmVoiceID());
     }
 
     /**
@@ -160,7 +160,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mHorizontalListViewAdapter.setFlag(mViewPager.getCurrentItem());
 
         if (mViewPager.getCurrentItem() < mFragments.size() - 1 && mAnswers.size() != mFragments.size()) {
-            mMyHandler.sendEmptyMessageDelayed(SLEEP,1000);
+            mMyHandler.sendEmptyMessageDelayed(SLEEP, 1000);
         } else {
             //当点击最后一个选项或者全都选上时，弹出对话框
             if (mAnswers.size() == mFragments.size() || mViewPager.getCurrentItem() == mFragments.size() - 1) {
@@ -241,13 +241,13 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         public void onPageSelected(int position) {
 
             mCurPageNum = position + 1;
-            if(mPlaysyncTask != null){
+            if (mPlaysyncTask != null) {
                 mPlaysyncTask.cancel(true);
                 mPlaysyncTask = null;
             }
 
             mPlaysyncTask = new PlaysyncTask();
-            mPlaysyncTask.execute(mCurPageNum);
+            mPlaysyncTask.execute(mQuestionsVOs.get(mCurPageNum - 1).getmVoiceID());
 
             mHorizontalListViewAdapter.setSelectIndex(position);
             mMyHandler.removeMessages(SLEEP);
@@ -283,7 +283,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mTxtResult.setVisibility(View.VISIBLE);
         mlayoutProposal.setVisibility(View.VISIBLE);
         mlayoutqrCode.setVisibility(View.VISIBLE);
-        mTxtResult.setText(getString(R.string.result,corrctNum));
+        mTxtResult.setText(getString(R.string.result, corrctNum));
     }
 
     /**
@@ -388,13 +388,13 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mLayoutIndicator.setVisibility(View.VISIBLE);
     }
 
-    public class PlaysyncTask extends AsyncTask<Integer, Integer, String> {
+    public class PlaysyncTask extends AsyncTask<String, Integer, String> {
         @Override
-        protected String doInBackground(Integer... params) {
+        protected String doInBackground(String... params) {
             AssetFileDescriptor fileDescriptor;
             mPlayer.reset();
             try {
-                fileDescriptor = mAssetManager.openFd("kanong" +  params[0].intValue() + ".mp3");
+                fileDescriptor = mAssetManager.openFd(params[0] + ".ogg");
                 mPlayer.setDataSource(fileDescriptor.getFileDescriptor(),
                         fileDescriptor.getStartOffset(),
                         fileDescriptor.getLength());
@@ -402,7 +402,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
-                        if(!isCancelled()){
+                        if (!isCancelled()) {
                             mPlayer.start();
                         }
                     }

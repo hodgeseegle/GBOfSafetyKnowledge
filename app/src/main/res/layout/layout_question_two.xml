@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin_layout_left"
-    android:paddingStart="@dimen/margin_layout_left"
-    android:paddingRight="@dimen/margin_layout_right"
     android:paddingEnd="@dimen/margin_layout_right"
+    android:paddingLeft="@dimen/margin_layout_left"
+    android:paddingRight="@dimen/margin_layout_right"
+    android:paddingStart="@dimen/margin_layout_left"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
     <TextView
         android:id="@+id/TextView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_title"
         android:singleLine="false"
         android:text="@string/title"
         android:textColor="@color/yellow"
@@ -39,27 +40,15 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/RadioButton_A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageView_picA"
-                android:layout_centerHorizontal="true">
-
-                <RadioButton
-                    android:id="@+id/RadioButton_A"
-                    style="@style/RadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/ct_33sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/optionA_two"
-                    android:textSize="@dimen/ct_33sp" />
-
-            </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_a"
+                android:drawableStart="@drawable/radio_a" />
 
         </RelativeLayout>
 
@@ -77,28 +66,15 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/RadioButton_B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageView_picB"
-                android:layout_centerHorizontal="true">
-
-                <RadioButton
-                    android:id="@+id/RadioButton_B"
-                    style="@style/RadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/ct_33sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/optionB_two"
-                    android:textSize="@dimen/ct_33sp" />
-
-            </LinearLayout>
-
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_b"
+                android:drawableStart="@drawable/radio_b" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -115,27 +91,15 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/RadioButton_C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageView_picC"
-                android:layout_centerHorizontal="true">
-
-                <RadioButton
-                    android:id="@+id/RadioButton_C"
-                    style="@style/RadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/ct_33sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/optionC_two"
-                    android:textSize="@dimen/ct_33sp" />
-
-            </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_c"
+                android:drawableStart="@drawable/radio_c" />
 
         </RelativeLayout>
 
@@ -153,27 +117,15 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/RadioButton_D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageView_picD"
-                android:layout_centerHorizontal="true">
-
-                <RadioButton
-                    android:id="@+id/RadioButton_D"
-                    style="@style/RadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/ct_33sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/optionD_two"
-                    android:textSize="@dimen/ct_33sp" />
-
-            </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_d"
+                android:drawableStart="@drawable/radio_d" />
 
         </RelativeLayout>
     </com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup>

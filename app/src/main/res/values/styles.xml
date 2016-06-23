@@ -15,11 +15,6 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="RadioBtn">
-        <item name="android:drawableStart">@drawable/search_radio</item>
-        <item name="android:button">@null</item>
-    </style>
-
     <!-- 播放界面 -->
     <style name="VideoTimeTextStyle">
         <item name="android:textSize">@dimen/ct_12sp</item>

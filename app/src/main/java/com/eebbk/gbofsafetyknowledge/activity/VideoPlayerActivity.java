@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -73,7 +74,7 @@ public class VideoPlayerActivity extends Activity {
      * description:初始化
      */
     private void init() {
-        (findViewById(R.id.RelativeLayout_player))
+        ((RelativeLayout) findViewById(R.id.RelativeLayout_player))
                 .setDrawingCacheEnabled(false);
 
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
@@ -133,7 +134,7 @@ public class VideoPlayerActivity extends Activity {
     /**
      * 缓冲改变监听器
      */
-    private final MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener = new MediaPlayer.OnBufferingUpdateListener() {
+    private MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener = new MediaPlayer.OnBufferingUpdateListener() {
         @Override
         public void onBufferingUpdate(MediaPlayer mediaPlayer,
                                       int bufferingProgress) {
@@ -144,7 +145,7 @@ public class VideoPlayerActivity extends Activity {
     /**
      * 播放完毕监听
      */
-    private final MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
             finish();
@@ -181,7 +182,7 @@ public class VideoPlayerActivity extends Activity {
         }
     }
 
-    private final SeekBar.OnSeekBarChangeListener barChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private SeekBar.OnSeekBarChangeListener barChangeListener = new SeekBar.OnSeekBarChangeListener() {
         int progress;
         int lastProgress;
 
@@ -201,6 +202,7 @@ public class VideoPlayerActivity extends Activity {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            int max = seekBar.getMax();
             this.progress = i * mPlayer.getDuration() / seekBar.getMax();
 
             String strTime = Util.formatTime(this.progress) + "/"

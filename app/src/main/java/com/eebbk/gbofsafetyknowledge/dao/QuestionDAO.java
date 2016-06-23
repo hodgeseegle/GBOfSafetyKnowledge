@@ -65,7 +65,7 @@ public class QuestionDAO {
                 InputStream is = null;
                 try {
                     is = mContext.getAssets().open("database/" + DB_NAME);
-                    if(is != null){
+                    if(is == null){
                         return;
                     }
                 } catch (IOException e) {
@@ -114,7 +114,13 @@ public class QuestionDAO {
      */
     private List<QuestionVO> getQuestions(int grade) {//  0  学前   1  小学
 
-        String sql = "select * from QUESTIONS where GRADE = ?";
+        String sql = null;
+        if(grade == 0){
+            sql = "select * from PRESCHOOL_QUESTION";
+        }else if(grade == 1){
+            sql = "select * from PRIMARYSCHOOL_QUESTION";
+        }
+
         openDatabase();
 
         String str_grade = grade + "";
@@ -122,7 +128,7 @@ public class QuestionDAO {
         List<QuestionVO> listQuestionVOProduct = new ArrayList<>();
         List<QuestionVO> listQuestionVOPure = new ArrayList<>();
 
-        Cursor cursor = mQuestionsDb.rawQuery(sql, new String[]{str_grade});
+        Cursor cursor = mQuestionsDb.rawQuery(sql,null);
         if (cursor == null) {
             Log.e(TAG, "Cursor is null.");
         } else {

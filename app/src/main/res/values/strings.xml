@@ -7,18 +7,10 @@
     <string name="optionB_one">3</string>
     <string name="optionC_one">4</string>
     <string name="optionD_one">5</string>
-    <string name="optionA_two">A</string>
-    <string name="optionB_two">B</string>
-    <string name="optionC_two">C</string>
-    <string name="optionD_two">D</string>
     <string name="result_default">闯关完成！答对了XX道题</string>
     <string name="qrcode_text">扫二维码分享</string>
     <string name="proposal">建议：为了你的孩子能够健康成长，请购买小天才手表！！</string>
     <string name="progress_loading">正在加载…</string>
-    <string name="radiobtn_A">A.</string>
-    <string name="radiobtn_B">B.</string>
-    <string name="radiobtn_C">C.</string>
-    <string name="radiobtn_D">D.</string>
     <string name="result">闯关完成！答对了 %1$d 道题</string>
 
     <!--VideoPlayerActivity-->

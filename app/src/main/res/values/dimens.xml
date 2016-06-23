@@ -5,8 +5,8 @@
     <dimen name="ct_22sp">22sp</dimen>
     <dimen name="ct_12sp">12sp</dimen>
     <!--首页-->
-    <dimen name="preschoolbtn_margin_left">240dp</dimen>
-    <dimen name="primaryschoolbtn_margin_right">240dp</dimen>
+    <dimen name="preschoolbtn_margin_left">180dp</dimen>
+    <dimen name="margin_bottom">50dp</dimen>
     <!--答题界面-->
     <dimen name="board_width">999dp</dimen>
     <dimen name="board_height">617dp</dimen>

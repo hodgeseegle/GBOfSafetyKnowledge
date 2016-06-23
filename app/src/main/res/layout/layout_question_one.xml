@@ -39,10 +39,11 @@
 
             <RadioButton
                 android:id="@+id/RadioButton_A"
-                style="@style/RadioBtn"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_a"
+                android:drawableLeft="@drawable/radio_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radiobtn_A"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"
                 android:checked="false" />
@@ -71,10 +72,11 @@
 
             <RadioButton
                 android:id="@+id/RadioButton_B"
-                style="@style/RadioBtn"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_b"
+                android:drawableLeft="@drawable/radio_b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radiobtn_B"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 
@@ -102,10 +104,11 @@
 
             <RadioButton
                 android:id="@+id/RadioButton_C"
-                style="@style/RadioBtn"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_c"
+                android:drawableLeft="@drawable/radio_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radiobtn_C"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 
@@ -133,10 +136,11 @@
 
             <RadioButton
                 android:id="@+id/RadioButton_D"
-                style="@style/RadioBtn"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_d"
+                android:drawableLeft="@drawable/radio_d"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radiobtn_D"
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp"/>
 

@@ -7,20 +7,14 @@
     tools:context=".activity.MainActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/title"/>
-
-    <ImageView
         android:id="@+id/Button_preschool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/preshchool"
+        android:src="@drawable/preshchool_btn"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/preschoolbtn_margin_left"
-        android:layout_marginStart="@dimen/preschoolbtn_margin_left"
+        android:layout_marginBottom="@dimen/margin_bottom"
         android:onClick="onClick"/>
 
     <ImageView
@@ -29,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/primaryschoolbtn_margin_right"
-        android:layout_marginEnd="@dimen/primaryschoolbtn_margin_right"
-        android:src="@mipmap/primaryschool"
+        android:layout_marginRight="@dimen/preschoolbtn_margin_left"
+        android:src="@drawable/primaryschool_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_bottom"
         android:onClick="onClick"/>
 
 </RelativeLayout>
