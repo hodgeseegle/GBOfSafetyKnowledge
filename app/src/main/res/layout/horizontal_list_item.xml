@@ -3,24 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_width="@dimen/split_line_width"
-        android:layout_height="@dimen/split_line_height"
-        android:layout_toLeftOf="@+id/TextView_img"
-        android:layout_toStartOf="@+id/TextView_img"
-        android:background="@color/grey" />
-
-    <TextView
-        android:id="@+id/TextView_img"
+    <ImageView
+        android:id="@+id/ImageView_img"
         android:layout_width="@dimen/indicator_width"
         android:layout_height="@dimen/indicator_height"
-        android:background="@color/black" />
-
-    <View
-        android:layout_width="@dimen/split_line_width"
-        android:layout_height="@dimen/split_line_height"
-        android:layout_toRightOf="@+id/TextView_img"
-        android:layout_toEndOf="@+id/TextView_img"
-        android:background="@color/grey" />
+        android:src="@mipmap/indicator_normal" />
 
 </RelativeLayout>

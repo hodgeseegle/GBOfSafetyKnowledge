@@ -17,8 +17,6 @@
     <dimen name="horizontal_hight">40dp</dimen>
     <dimen name="horizontal_width">792dp</dimen>
     <dimen name="horizontal_margin_bottom">50dp</dimen>
-    <dimen name="split_line_width">1dp</dimen>
-    <dimen name="split_line_height">30dp</dimen>
     <dimen name="indicator_width">130dp</dimen>
     <dimen name="indicator_height">30dp</dimen>
     <dimen name="radius">15dp</dimen>

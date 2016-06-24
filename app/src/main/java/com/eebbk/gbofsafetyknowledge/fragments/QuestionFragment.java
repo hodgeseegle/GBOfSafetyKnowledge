@@ -2,9 +2,11 @@ package com.eebbk.gbofsafetyknowledge.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,6 +32,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private RadioButton mRadioButton_B;
     private RadioButton mRadioButton_C;
     private RadioButton mRadioButton_D;
+    private Typeface mFontFace;
 
     public QuestionFragment() {
     }
@@ -51,6 +54,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
             return null;
         }
         mBitmapUtils = BitmapUtils.getInstance(getActivity().getApplicationContext());
+        mFontFace = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/FZSEJW.TTF");
         if (questionVO.getmQuestionFormat() == 2) {
             view = inflater.inflate(R.layout.layout_question_one, container, false);
             initViewOne(view, questionVO);
@@ -66,13 +71,18 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private void initViewOne(View view, QuestionVO questionVO) {
         MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
         optionA.setOnClickListener(this);
+        optionA.setOnTouchListener(new TouchListener());
         MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
         optionB.setOnClickListener(this);
+        optionB.setOnTouchListener(new TouchListener());
         MarqueeTextView optionC = (MarqueeTextView) view.findViewById(R.id.TextView_optionC);
         optionC.setOnClickListener(this);
+        optionC.setOnTouchListener(new TouchListener());
         MarqueeTextView optionD = (MarqueeTextView) view.findViewById(R.id.TextView_optionD);
         optionD.setOnClickListener(this);
+        optionD.setOnTouchListener(new TouchListener());
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
+        title.setTypeface(mFontFace);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
@@ -114,6 +124,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private void initViewTwo(View view, QuestionVO questionVO) {
 
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
+        title.setTypeface(mFontFace);
         ImageView picA = (ImageView) view.findViewById(R.id.ImageView_picA);
         picA.setOnClickListener(this);
         ImageView picB = (ImageView) view.findViewById(R.id.ImageView_picB);
@@ -184,6 +195,24 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                 break;
             default:
                 break;
+        }
+    }
+
+    public class TouchListener implements View.OnTouchListener{
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+            switch (motionEvent.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    view.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                case MotionEvent.ACTION_OUTSIDE:
+                case MotionEvent.ACTION_UP:
+                    view.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    break;
+            }
+            return false;
         }
     }
 

@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
+    android:background="@mipmap/bg_answer"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
     <RelativeLayout
         android:layout_width="@dimen/board_width"
         android:layout_height="@dimen/board_height"
-        android:layout_centerInParent="true"
-        android:background="@mipmap/board">
+        android:layout_centerInParent="true">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/ViewPager_Question"
@@ -30,7 +29,7 @@
                 android:id="@+id/HorizontalListView_listview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <TextView
@@ -39,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/result_default"
-            android:textColor="@color/yellow"
+            android:textColor="@color/white"
             android:textSize="@dimen/ct_44sp"
             android:visibility="gone" />
 
@@ -51,24 +50,40 @@
             android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
             android:layout_toStartOf="@+id/RelativeLayout_qrCode">
 
-            <TextView
-                android:id="@+id/TextView_proposal"
+            <RelativeLayout
                 android:layout_width="@dimen/proposal_width"
                 android:layout_height="@dimen/proposal_height"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/proposal_margin_top"
-                android:background="@drawable/rounded_edittext"
-                android:text="@string/proposal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp" />
+                android:background="@drawable/rounded_edittext">
+
+                <TextView
+                    android:id="@+id/TextView_proposal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/proposal"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/ct_22sp" />
+
+                <TextView
+                    android:id="@+id/TextView_proposal_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/TextView_proposal"
+                    android:text="@string/proposal_oneortwo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ct_22sp" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_qrCode"
             android:layout_width="@dimen/qrcode_layout_width"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/TextView_result"
             android:visibility="gone">
 

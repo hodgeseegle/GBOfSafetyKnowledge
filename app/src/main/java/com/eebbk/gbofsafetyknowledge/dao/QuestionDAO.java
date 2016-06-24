@@ -171,15 +171,34 @@ public class QuestionDAO {
         }
         closeDatabase();
 
-        if (!listQuestionVOProduct.isEmpty()) {
-            listQuestionVOFinally.addAll(randomTopic(listQuestionVOProduct, 2));
+        if (!listQuestionVOProduct.isEmpty()) {//至少有一个产品，先选出一个
+            List<QuestionVO> productRandomOne = randomTopic(listQuestionVOProduct, 1);
+            listQuestionVOFinally.addAll(productRandomOne);
+            listQuestionVOProduct.remove(productRandomOne.get(0));
         }
-        if (!listQuestionVOPure.isEmpty()) {
-            listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 4));
+
+        if (!listQuestionVOPure.isEmpty()) {//从剩余部分选出5个
+            listQuestionVOPure.addAll(listQuestionVOProduct);
+            listQuestionVOFinally.addAll(randomTopic(listQuestionVOPure, 5));
+        }
+
+        List<QuestionVO> listQuestionVOSortFinally = new ArrayList<>();
+
+        for(int i = 0;i < 2;i++){
+            for(int j = 0;j< listQuestionVOFinally.size();j++){
+                QuestionVO questionVO = listQuestionVOFinally.get(j);
+                if( i == 0 && questionVO.getmQuestionType() == 1){//第一次循环筛选出纯粹题型
+                    listQuestionVOSortFinally.add(questionVO);
+                }
+
+                if( i == 1 && questionVO.getmQuestionType() == 2){//第二次循环筛选出产品题型
+                    listQuestionVOSortFinally.add(questionVO);
+                }
+            }
         }
         // randomSortList(listQuestionVOFinally);
 
-        return listQuestionVOFinally;
+        return listQuestionVOSortFinally;
     }
 
     /**

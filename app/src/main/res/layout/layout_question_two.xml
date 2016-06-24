@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/margin_title"
         android:singleLine="false"
         android:text="@string/title"
-        android:textColor="@color/yellow"
+        android:textColor="@color/white"
         android:textSize="@dimen/ct_44sp" />
 
     <com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup

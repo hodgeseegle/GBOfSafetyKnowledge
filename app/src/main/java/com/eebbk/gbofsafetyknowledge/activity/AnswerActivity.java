@@ -3,6 +3,7 @@ package com.eebbk.gbofsafetyknowledge.activity;
 import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -62,6 +64,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private LinearLayout mLayoutIndicator;
     //答题结果
     private TextView mTxtResult;
+    //建议内容
+    private TextView mTxtProposal_content;
     //建议
     private TextView mTxtProposal;
     //建议布局
@@ -105,7 +109,11 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         horizontalListView.setAdapter(mHorizontalListViewAdapter);
         mLayoutIndicator = (LinearLayout) findViewById(R.id.LinearLayout_indicator);
         mTxtResult = (TextView) findViewById(R.id.TextView_result);
+        Typeface fontFace = Typeface.createFromAsset(getAssets(),
+                "fonts/FZSEJW.TTF");
+        mTxtResult.setTypeface(fontFace);
         mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
+        mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
         mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
         mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
@@ -168,7 +176,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                     mHorizontalListViewAdapter.setSelectIndex(-1);
                     mHorizontalListViewAdapter.notifyDataSetChanged();
                 }
-                showDialog();
+                showDlg(2);
             }
         }
 
@@ -178,32 +186,53 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 弹出对话框
      */
-    private void showDialog() {
+    private void showDlg(int flag) {//1  退出  2  提交
+        mPlayer.stop();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(AnswerActivity.this);
-        builder.setMessage("确认提交吗？");
-        builder.setTitle("提示");
-        builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                commit();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        if (flag == 1) {
+            builder.setMessage("确认要退出吗？");
+            builder.setTitle("提示");
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        } else if (flag == 2) {
+            builder.setMessage("确认提交吗？");
+            builder.setTitle("提示");
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    commit();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
         builder.create().show();
+
     }
 
     /**
      * 提交
      */
     private void commit() {
-
-        mPlayer.stop();
 
         //检验是否还有题目未做
         if (mAnswers == null || mAnswers.size() < mQuestionsVOs.size()) {
@@ -283,7 +312,28 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mTxtResult.setVisibility(View.VISIBLE);
         mlayoutProposal.setVisibility(View.VISIBLE);
         mlayoutqrCode.setVisibility(View.VISIBLE);
-        mTxtResult.setText(getString(R.string.result, corrctNum));
+
+        switch (corrctNum) {
+            case 1:
+            case 2:
+                mTxtResult.setText(getString(R.string.result_oneortwo, corrctNum));
+                mTxtProposal_content.setText(getString(R.string.proposal_oneortwo));
+                break;
+            case 3:
+            case 4:
+                mTxtResult.setText(getString(R.string.result_threeorfour, corrctNum));
+                mTxtProposal_content.setText(getString(R.string.proposal_threeorfour));
+                break;
+            case 5:
+                mTxtResult.setText(getString(R.string.result_five));
+                mTxtProposal_content.setText(getString(R.string.proposal_five));
+                break;
+            case 6:
+                mTxtResult.setText(getString(R.string.result_six));
+                mTxtProposal_content.setText(getString(R.string.proposal_six));
+                break;
+        }
+
     }
 
     /**
@@ -412,5 +462,14 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             }
             return null;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            showDlg(1);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

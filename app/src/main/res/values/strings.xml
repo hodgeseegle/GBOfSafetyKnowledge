@@ -9,9 +9,19 @@
     <string name="optionD_one">5</string>
     <string name="result_default">闯关完成！答对了XX道题</string>
     <string name="qrcode_text">扫二维码分享</string>
-    <string name="proposal">建议：为了你的孩子能够健康成长，请购买小天才手表！！</string>
+
     <string name="progress_loading">正在加载…</string>
-    <string name="result">闯关完成！答对了 %1$d 道题</string>
+
+    <string name="result_oneortwo">答对了 %1$d 题，击败了全国17%%小朋友，安全意识弱！</string>
+    <string name="result_threeorfour">答对了%1$d题，击败了全国50%%小朋友，安全意识偏低！</string>
+    <string name="result_five">答对了5题，击败了全国83%%小朋友，安全意识合格！</string>
+    <string name="result_six">答对了6题，击败了全国100%%小朋友，安全意识较强！</string>
+    <string name="proposal"> 小天才电话手表提醒您：</string>
+    <string name="proposal_oneortwo">急需提升孩子安全知识，培养孩子的安全意识，要做到对孩子安全守护。建议体验儿童平板情商里面的安全APP，通过情景模拟，提高孩子的安全意识！</string>
+    <string name="proposal_threeorfour">需提高孩子安全意识教育，增强孩子安全守护。小天才电话手表帮助您时时掌握孩子动态，让您更放心。</string>
+    <string name="proposal_five">需增强孩子自我保护意识，进一步提高孩子对于安全问题的处理能力。小天才电话手表给您孩子一个方便联系取得帮助的工具。</string>
+    <string name="proposal_six">可以多让孩子参加社会实践活动，提高孩子的社会交往能力。戴上电话手表，一个电话随时找到你，更有助于培养孩子的独立性！
+</string>
 
     <!--VideoPlayerActivity-->
     <string name="time">00:00/00:00</string>

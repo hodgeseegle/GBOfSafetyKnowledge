@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eebbk.gbofsafetyknowledge.R;
@@ -55,22 +56,20 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {// 在这里没有直接使用convertView和holder的形式，因为convertView会复用造成小按钮上index不精确
 
-        TextView view = (TextView) (mListView
-                .get(position).getV().findViewById(R.id.TextView_img));
+        ImageView view = (ImageView) (mListView
+                .get(position).getV().findViewById(R.id.ImageView_img));
         int isSelected = mListView.get(position).getIsSelected();
         int isQuestioned = mListView.get(position).getIsQuestioned();
         if (isSelected == 1) {
 
-            view.setBackgroundColor(getColor(mContext,R.color.red));
+            view.setImageResource(R.mipmap.indicator_selected);
             mListView.get(position).getV().setSelected(true);
         } else {
             if (isQuestioned == 0) {
-
-                view.setBackgroundColor(getColor(mContext,R.color.black));
+                view.setImageResource(R.mipmap.indicator_normal);
                 mListView.get(position).getV().setSelected(false);
             } else if (isQuestioned == 1) {
-
-                view.setBackgroundColor(getColor(mContext,R.color.green));
+                view.setImageResource(R.mipmap.indicator_answered);
                 mListView.get(position).getV().setSelected(false);
             }
         }
@@ -94,7 +93,7 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public  int getColor(Context context, int id) {
+    public int getColor(Context context, int id) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 23) {
             return ContextCompat.getColor(context, id);
