@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -27,8 +27,6 @@ public class VideoPlayerActivity extends Activity {
     private SeekBar mSeekBarScroll;
     private TextView mTxvPlayTime;
     private Player mPlayer;
-    private final String mVideoUrl = Environment.getExternalStorageDirectory()
-            .getAbsolutePath() + "/123.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class VideoPlayerActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-
+        mPlayer.setmIsCanTime(false);
         mPlayer.stop();
         super.onDestroy();
     }
@@ -84,12 +82,10 @@ public class VideoPlayerActivity extends Activity {
         mImgBtnPlay.setOnClickListener(new ClickListener());
         mSeekBarScroll.setOnSeekBarChangeListener(barChangeListener);
 
-        // mVideoUrl = getIntent().getStringExtra("url");
-
-        mPlayer = new Player(surfaceView, mVideoUrl, mSeekBarScroll, mTxvPlayTime);
+        mPlayer = new Player(surfaceView, mSeekBarScroll, mTxvPlayTime);
+        mPlayer.setmContext(this);
         mPlayer.setmErrorListener(mErrorListener);
         mPlayer.setmInfoListener(mInfoListener);
-        mPlayer.setmContext(this);
         mPlayer.setmBufferingUpdateListener(mBufferingUpdateListener);
         mPlayer.setmCompletionListener(mCompletionListener);
     }
@@ -102,10 +98,8 @@ public class VideoPlayerActivity extends Activity {
         @Override
         public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
             // TODO Auto-generated method stub
-        /*    mPlayer.setBufferToVisible();
-            mIsOver = false;
 
-            startTimer();*/
+            Log.i("OnErrorListener","----------------------->OnErrorListener");
             return false;
         }
     };
@@ -118,13 +112,10 @@ public class VideoPlayerActivity extends Activity {
         public boolean onInfo(MediaPlayer mp, int what, int extra) {
             switch (what) {
                 case MediaPlayer.MEDIA_INFO_BUFFERING_START:
-                    /*if (mLayoutBuffer.getVisibility() == View.GONE) {
-                        mPlayer.setBufferToVisible();
-                    }*/
+                    Log.i("OnInfoListener","----------------------->MEDIA_INFO_BUFFERING_START");
                     break;
                 case MediaPlayer.MEDIA_INFO_BUFFERING_END:
-                    /*mLayoutBuffer.setVisibility(View.GONE);
-                    mPlayer.hideBuffer();*/
+                    Log.i("OnInfoListener","----------------------->MEDIA_INFO_BUFFERING_END");
                     break;
             }
             return true;
@@ -148,6 +139,7 @@ public class VideoPlayerActivity extends Activity {
     private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
+            Log.i("OnCompletionListener","----------------------->OnCompletionListener");
             finish();
         }
     };

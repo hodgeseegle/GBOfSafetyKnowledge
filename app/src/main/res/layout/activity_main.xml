@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/preshchool_btn"
+        android:src="@mipmap/preshchool_normal"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/preschoolbtn_margin_left"
         android:layout_marginBottom="@dimen/margin_bottom"
@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="@dimen/preschoolbtn_margin_left"
-        android:src="@drawable/primaryschool_btn"
+        android:src="@mipmap/primaryschool_normal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_bottom"
         android:onClick="onClick"/>

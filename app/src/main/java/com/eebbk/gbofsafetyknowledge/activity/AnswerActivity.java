@@ -1,6 +1,7 @@
 package com.eebbk.gbofsafetyknowledge.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -24,12 +25,12 @@ import android.widget.TextView;
 
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.adapter.HorizontalListViewAdapter;
+import com.eebbk.gbofsafetyknowledge.adapter.QuestionFragmentPagerAdapter;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
 import com.eebbk.gbofsafetyknowledge.controls.HorizontalListView;
 import com.eebbk.gbofsafetyknowledge.controls.MyLoadingView;
 import com.eebbk.gbofsafetyknowledge.dao.QuestionDAO;
 import com.eebbk.gbofsafetyknowledge.fragments.QuestionFragment;
-import com.eebbk.gbofsafetyknowledge.adapter.QuestionFragmentPagerAdapter;
 import com.eebbk.gbofsafetyknowledge.utils.ToastUtils;
 
 import java.io.IOException;
@@ -42,6 +43,9 @@ import java.util.List;
  * author:zhua
  */
 public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
+
+    private static final String TAG = "AnswerActivity";
+    
     //题目数
     private static final int QUESTION_NUM = 6;
     //筛选题目结束
@@ -62,8 +66,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private int mCurPageNum = 1;
     //指示器布局
     private LinearLayout mLayoutIndicator;
-    //答题结果
-    private TextView mTxtResult;
+    //答题结果One
+    private TextView mTxtResultOne;
+    //答题结果Two
+    private TextView mTxtResulTwo;
     //建议内容
     private TextView mTxtProposal_content;
     //建议
@@ -84,6 +90,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private MyLoadingView mMyLoadingView;
     //播放任务
     private PlaysyncTask mPlaysyncTask;
+    //播放按钮
+    private ImageView mImgVideoPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +116,19 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mHorizontalListViewAdapter = new HorizontalListViewAdapter(AnswerActivity.this, QUESTION_NUM);
         horizontalListView.setAdapter(mHorizontalListViewAdapter);
         mLayoutIndicator = (LinearLayout) findViewById(R.id.LinearLayout_indicator);
-        mTxtResult = (TextView) findViewById(R.id.TextView_result);
+        mTxtResultOne = (TextView) findViewById(R.id.TextView_resultOne);
+        mTxtResulTwo = (TextView) findViewById(R.id.TextView_resultTwo);
         Typeface fontFace = Typeface.createFromAsset(getAssets(),
                 "fonts/FZSEJW.TTF");
-        mTxtResult.setTypeface(fontFace);
+        mTxtResultOne.setTypeface(fontFace);
         mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
         mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
         mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
         mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
         mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
+        mImgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
+        mImgVideoPlay.setOnClickListener(new ClickListener());
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
         mMyHandler = new MyHandler(this);
@@ -309,31 +320,36 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
 
-        mTxtResult.setVisibility(View.VISIBLE);
+        mTxtResultOne.setVisibility(View.VISIBLE);
+        mTxtResulTwo.setVisibility(View.VISIBLE);
         mlayoutProposal.setVisibility(View.VISIBLE);
         mlayoutqrCode.setVisibility(View.VISIBLE);
 
         switch (corrctNum) {
+            case 0:
             case 1:
             case 2:
-                mTxtResult.setText(getString(R.string.result_oneortwo, corrctNum));
+                mTxtResultOne.setText(getString(R.string.resultOne_oneortwo, corrctNum));
+                mTxtResulTwo.setText(getString(R.string.resultTwo_oneortwo));
                 mTxtProposal_content.setText(getString(R.string.proposal_oneortwo));
                 break;
             case 3:
             case 4:
-                mTxtResult.setText(getString(R.string.result_threeorfour, corrctNum));
+                mTxtResultOne.setText(getString(R.string.resultOne_threeorfour, corrctNum));
+                mTxtResulTwo.setText(getString(R.string.resultTwo_threeorfour));
                 mTxtProposal_content.setText(getString(R.string.proposal_threeorfour));
                 break;
             case 5:
-                mTxtResult.setText(getString(R.string.result_five));
+                mTxtResultOne.setText(getString(R.string.resultOne_five));
+                mTxtResulTwo.setText(getString(R.string.resultTwo_five));
                 mTxtProposal_content.setText(getString(R.string.proposal_five));
                 break;
             case 6:
-                mTxtResult.setText(getString(R.string.result_six));
+                mTxtResultOne.setText(getString(R.string.resultOne_six));
+                mTxtResulTwo.setText(getString(R.string.resultTwo_six));
                 mTxtProposal_content.setText(getString(R.string.proposal_six));
                 break;
         }
-
     }
 
     /**
@@ -421,7 +437,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
-        mTxtResult.setVisibility(View.GONE);
+        mTxtResultOne.setVisibility(View.GONE);
+        mTxtResulTwo.setVisibility(View.GONE);
         mlayoutProposal.setVisibility(View.GONE);
         mlayoutqrCode.setVisibility(View.GONE);
 
@@ -471,5 +488,15 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             showDlg(1);
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public class ClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.ImageView_video) {
+                Intent intent = new Intent(AnswerActivity.this, VideoPlayerActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 }

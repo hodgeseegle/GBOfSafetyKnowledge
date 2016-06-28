@@ -18,19 +18,19 @@
         android:theme="@style/AppTheme_Activity">
         <meta-data
             android:name="ApkType"
-            android:value="Preschool, baby1, lowpri, junior" />
+            android:value="Preschool" />
 
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape">
 
-            <meta-data
-                android:name="AppIcon"
-                android:value="nur:ic_launcher,pre:ic_launcher" />
-            <meta-data
-                android:name="AppTab"
-                android:value="Preschool/baibaoxiang" />
+             <!--<meta-data
+                  android:name="AppIcon"
+                  android:value="nur:ic_launcher,pre:ic_launcher" />-->
+              <meta-data
+                  android:name="AppTab"
+                  android:value="Preschool/YuWen"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

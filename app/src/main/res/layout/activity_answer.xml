@@ -6,56 +6,74 @@
     android:background="@mipmap/bg_answer"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
-    <RelativeLayout
-        android:layout_width="@dimen/board_width"
-        android:layout_height="@dimen/board_height"
-        android:layout_centerInParent="true">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ViewPager_Question"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/padding_top_bottom"
+        android:paddingLeft="@dimen/padding_left_right"
+        android:paddingRight="@dimen/padding_left_right"
+        android:paddingTop="@dimen/padding_top_bottom" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/ViewPager_Question"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/LinearLayout_indicator"
+        android:layout_width="@dimen/horizontal_width"
+        android:layout_height="@dimen/horizontal_hight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/horizontal_margin_bottom">
+
+        <com.eebbk.gbofsafetyknowledge.controls.HorizontalListView
+            android:id="@+id/HorizontalListView_listview"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearLayout_indicator"
-            android:layout_width="@dimen/horizontal_width"
-            android:layout_height="@dimen/horizontal_hight"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/horizontal_margin_bottom">
-
-            <com.eebbk.gbofsafetyknowledge.controls.HorizontalListView
-                android:id="@+id/HorizontalListView_listview"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/padding_top_bottom"
+        android:paddingLeft="@dimen/padding_left_right"
+        android:paddingRight="@dimen/padding_left_right"
+        android:paddingTop="@dimen/padding_top_bottom">
 
         <TextView
-            android:id="@+id/TextView_result"
+            android:id="@+id/TextView_resultOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/result_default"
+            android:text="@string/result_default_one"
             android:textColor="@color/white"
-            android:textSize="@dimen/ct_44sp"
-            android:visibility="gone" />
+            android:textSize="@dimen/ct_44sp" />
+
+        <TextView
+            android:id="@+id/TextView_resultTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextView_resultOne"
+            android:layout_centerHorizontal="true"
+            android:text="@string/result_default_two"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ct_44sp" />
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_proposal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/TextView_result"
+            android:layout_below="@+id/TextView_resultTwo"
             android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
             android:layout_toStartOf="@+id/RelativeLayout_qrCode">
 
             <RelativeLayout
-                android:layout_width="@dimen/proposal_width"
-                android:layout_height="@dimen/proposal_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/proposal_margin_top"
-                android:background="@drawable/rounded_edittext">
+                android:background="@mipmap/proposal_bg"
+                android:padding="@dimen/proposal_pidding">
 
                 <TextView
                     android:id="@+id/TextView_proposal"
@@ -63,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/proposal"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/ct_22sp" />
+                    android:textSize="@dimen/ct_indexsp" />
 
                 <TextView
                     android:id="@+id/TextView_proposal_content"
@@ -71,8 +89,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/TextView_proposal"
                     android:text="@string/proposal_oneortwo"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/ct_22sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/ct_indexsp" />
 
             </RelativeLayout>
 
@@ -84,24 +102,35 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/TextView_result"
+            android:layout_below="@+id/TextView_resultTwo"
+            android:layout_marginTop="@dimen/proposal_margin_top"
             android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ImageView_qrCode"
                 android:layout_width="@dimen/qrcode_width"
                 android:layout_height="@dimen/qrcode_height"
-                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:background="@mipmap/qr_code" />
 
             <TextView
+                android:id="@+id/qrcode_text"
                 android:layout_width="@dimen/qrcode_text"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ImageView_qrCode"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="@string/qrcode_text"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/ct_22sp" />
+
+            <ImageView
+                android:id="@+id/ImageView_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qrcode_text"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/video_play" />
         </RelativeLayout>
 
         <com.eebbk.gbofsafetyknowledge.controls.MyLoadingView

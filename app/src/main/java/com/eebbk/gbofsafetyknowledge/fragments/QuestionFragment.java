@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
  */
 public class QuestionFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "QuestionFragment";
     private MyRadioGroup mRadioGroup = null;
     private BitmapUtils mBitmapUtils = null;
     private Chose mChose;
@@ -32,6 +35,10 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private RadioButton mRadioButton_B;
     private RadioButton mRadioButton_C;
     private RadioButton mRadioButton_D;
+    private LinearLayout mLayout_A = null;
+    private LinearLayout mLayout_B = null;
+    private LinearLayout mLayout_C = null;
+    private LinearLayout mLayout_D = null;
     private Typeface mFontFace;
 
     public QuestionFragment() {
@@ -50,7 +57,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         Bundle data = getArguments();//获得从activity中传递过来的值
 
         QuestionVO questionVO = (QuestionVO) data.getSerializable("QuestionVO");
-        if(questionVO == null){
+        if (questionVO == null) {
             return null;
         }
         mBitmapUtils = BitmapUtils.getInstance(getActivity().getApplicationContext());
@@ -86,10 +93,19 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
+        mRadioButton_A.setOnTouchListener(new TouchListener());
         mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
+        mRadioButton_B.setOnTouchListener(new TouchListener());
         mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
+        mRadioButton_C.setOnTouchListener(new TouchListener());
         mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
+        mRadioButton_D.setOnTouchListener(new TouchListener());
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
+
+        mLayout_A = (LinearLayout) view.findViewById(R.id.LinearLayout_A);
+        mLayout_B = (LinearLayout) view.findViewById(R.id.LinearLayout_B);
+        mLayout_C = (LinearLayout) view.findViewById(R.id.LinearLayout_C);
+        mLayout_D = (LinearLayout) view.findViewById(R.id.LinearLayout_D);
 
         mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
@@ -156,10 +172,12 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         });
 
         title.setText(questionVO.getmTitle());
-        Bitmap bmpA = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionA());
-        Bitmap bmpB = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionB());
-        Bitmap bmpC = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionC());
-        Bitmap bmpD = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionD());
+        Bitmap bmpA = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionA().toLowerCase() + ".png");
+        Bitmap bmpB = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionB().toLowerCase() + ".png");
+        Bitmap bmpC = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionC().toLowerCase() + ".png");
+        Bitmap bmpD = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionD().toLowerCase() + ".png");
+        Log.i(TAG, "initViewTwo: " + questionVO.getmOptionD().toLowerCase() + ".png");
+
         if (bmpA != null) {
             picA.setImageBitmap(bmpA);
         }
@@ -198,18 +216,71 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public class TouchListener implements View.OnTouchListener{
+    public class TouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            switch (motionEvent.getAction()){
+            switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    view.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                   /* if(mLayout_A != null && view.getParent() == mLayout_A){
+
+                    }*/
+                    switch (view.getId()) {
+                        case R.id.RadioButton_A:
+                        case R.id.TextView_optionA:
+                            if (mLayout_A != null) {
+                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                            }
+                            break;
+                        case R.id.RadioButton_B:
+                        case R.id.TextView_optionB:
+                            if (mLayout_B != null) {
+                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                            }
+                            break;
+                        case R.id.RadioButton_C:
+                        case R.id.TextView_optionC:
+                            if (mLayout_C != null) {
+                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                            }
+                            break;
+                        case R.id.RadioButton_D:
+                        case R.id.TextView_optionD:
+                            if (mLayout_D != null) {
+                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                            }
+                            break;
+                    }
                     break;
                 case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_OUTSIDE:
                 case MotionEvent.ACTION_UP:
-                    view.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    switch (view.getId()) {
+                        case R.id.RadioButton_A:
+                        case R.id.TextView_optionA:
+                            if (mLayout_A != null) {
+                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.transparent));
+                            }
+                            break;
+                        case R.id.RadioButton_B:
+                        case R.id.TextView_optionB:
+                            if (mLayout_B != null) {
+                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.transparent));
+                            }
+                            break;
+                        case R.id.RadioButton_C:
+                        case R.id.TextView_optionC:
+                            if (mLayout_C != null) {
+                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.transparent));
+                            }
+                            break;
+                        case R.id.RadioButton_D:
+                        case R.id.TextView_optionD:
+                            if (mLayout_D != null) {
+                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.transparent));
+                            }
+                            break;
+                    }
                     break;
             }
             return false;

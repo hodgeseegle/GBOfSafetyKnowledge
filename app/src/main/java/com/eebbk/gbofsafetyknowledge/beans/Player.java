@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.utils.Util;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
@@ -33,7 +34,6 @@ public class Player implements SurfaceHolder.Callback {
 
     private MediaPlayer mMediaPlayer;
     private final SurfaceHolder mSurfaceHolder;
-    private final String mUrl;
     private final TextView mTxvPlayTime;
     private OnInfoListener mInfoListener;
     private OnBufferingUpdateListener mBufferingUpdateListener;
@@ -50,10 +50,11 @@ public class Player implements SurfaceHolder.Callback {
     private boolean mIsCanTime = true;
     //是否是第一次进行播放
     private boolean mIsFirstPlay = true;
-    private Context mContext;
+    private SoftReference<Context> mContext;
 
     public void setmContext(Context mContext) {
-        this.mContext = mContext;
+        this.mContext = new SoftReference<Context>(mContext);
+        mMediaPlayer = MediaPlayer.create(this.mContext.get(), R.raw.video);
     }
 
     public boolean ismIsFirstPlay() {
@@ -108,8 +109,7 @@ public class Player implements SurfaceHolder.Callback {
         return mPosition;
     }
 
-    public Player(SurfaceView surfaceView, String url, SeekBar seekBar, TextView playTime) {
-        this.mUrl = url;
+    public Player(SurfaceView surfaceView,SeekBar seekBar, TextView playTime) {
         this.mSeekBar = seekBar;
         this.mTxvPlayTime = playTime;
         mSurfaceHolder = surfaceView.getHolder();
@@ -118,7 +118,6 @@ public class Player implements SurfaceHolder.Callback {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
             mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         }
-        mMediaPlayer = new MediaPlayer();
     }
 
     public void play() {
@@ -143,14 +142,16 @@ public class Player implements SurfaceHolder.Callback {
         mMediaPlayer.setDisplay(mSurfaceHolder);
         if (mIsFirstPlay) {
             try {
-                mMediaPlayer.reset();
-                mMediaPlayer.setDataSource(mUrl);
                 mMediaPlayer.setOnBufferingUpdateListener(mBufferingUpdateListener);
                 mMediaPlayer.setOnInfoListener(mInfoListener);
                 mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 mMediaPlayer.setOnErrorListener(mErrorListener);
-                mMediaPlayer.setOnPreparedListener(new PrepareListener(position));
-                mMediaPlayer.prepareAsync();// 缓冲
+                mDuration = mMediaPlayer.getDuration();
+                mMediaPlayer.start();
+                mIsFirstPlay = false;
+
+//                mMediaPlayer.setOnPreparedListener(new PrepareListener(position));
+//                mMediaPlayer.prepareAsync();// 缓冲
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -172,10 +173,8 @@ public class Player implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder arg0) {
-        if (mIsPrepared) {
-            if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-                mPosition = mMediaPlayer.getCurrentPosition();
-            }
+        if (mMediaPlayer != null) {
+            mPosition = mMediaPlayer.getCurrentPosition();
         }
     }
 
@@ -190,7 +189,7 @@ public class Player implements SurfaceHolder.Callback {
         public void onPrepared(MediaPlayer mp) {
             mDuration = mp.getDuration();
 
-            mTxvPlayTime.setText(mContext.getResources().getString(R.string.time_separator,Util.formatTime(position),Util.formatTime(mDuration)));
+            mTxvPlayTime.setText(mContext.get().getResources().getString(R.string.time_separator,Util.formatTime(position),Util.formatTime(mDuration)));
             mIsPrepared = true;
             mIsFirstPlay = false;
 
@@ -236,7 +235,7 @@ public class Player implements SurfaceHolder.Callback {
 
                     player.mSeekBar.setProgress(pos);
 
-                    player.mTxvPlayTime.setText(player.mContext.getResources().getString(R.string.time_separator,Util.formatTime(player.mPosition),Util.formatTime(player.mDuration)));
+                    player.mTxvPlayTime.setText(player.mContext.get().getResources().getString(R.string.time_separator,Util.formatTime(player.mPosition),Util.formatTime(player.mDuration)));
                     break;
                 default:
                     break;
