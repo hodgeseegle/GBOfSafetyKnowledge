@@ -10,23 +10,23 @@
         android:id="@+id/Button_preschool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:src="@mipmap/preshchool_normal"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/preschoolbtn_margin_left"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/margin_bottom"
-        android:onClick="onClick"/>
+        android:layout_marginLeft="@dimen/preschoolbtn_margin_left"
+        android:onClick="onClick"
+        android:src="@mipmap/preshchool_normal" />
 
     <ImageView
         android:id="@+id/Button_primaryschool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/preschoolbtn_margin_left"
-        android:src="@mipmap/primaryschool_normal"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/margin_bottom"
-        android:onClick="onClick"/>
+        android:layout_marginRight="@dimen/preschoolbtn_margin_right"
+        android:onClick="onClick"
+        android:src="@mipmap/primaryschool_normal" />
 
 </RelativeLayout>

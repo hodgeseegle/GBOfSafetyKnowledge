@@ -3,27 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingEnd="@dimen/margin_layout_right"
-    android:paddingLeft="@dimen/margin_layout_left"
-    android:paddingRight="@dimen/margin_layout_right"
-    android:paddingStart="@dimen/margin_layout_left"
+    android:paddingLeft="@dimen/padding_left"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
-    <TextView
-        android:id="@+id/TextView_title"
+    <LinearLayout
+        android:id="@+id/layouttitle_bg"
+        android:layout_marginRight="@dimen/padding_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_title"
-        android:singleLine="false"
-        android:text="@string/title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/ct_44sp" />
+        android:background="@mipmap/title_bg">
+
+        <TextView
+            android:id="@+id/TextView_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginBottom="@dimen/ct_5_dp"
+            android:layout_marginLeft="@dimen/ct_50_dp"
+            android:layout_marginRight="@dimen/ct_50_dp"
+            android:layout_marginTop="@dimen/ct_5_dp"
+            android:gravity="center_vertical|left"
+            android:singleLine="false"
+            android:text="@string/title"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/ct_38sp" />
+
+    </LinearLayout>
 
     <com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup
         android:id="@+id/RadioGroup_radioBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/TextView_title"
+        android:layout_below="@+id/layouttitle_bg"
+        android:layout_marginLeft="@dimen/margin_layout_left_two"
+        android:layout_marginRight="@dimen/margin_layout_right_two"
         android:layout_marginTop="@dimen/option_margin_title_two"
         android:orientation="horizontal">
 
@@ -49,7 +62,8 @@
                 android:layout_centerHorizontal="true"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_a"
-                android:drawableStart="@drawable/radio_a" />
+                android:drawableStart="@drawable/radio_a"
+                android:layout_marginTop="@dimen/radion_margin_option"/>
 
         </RelativeLayout>
 
@@ -75,7 +89,8 @@
                 android:layout_centerHorizontal="true"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_b"
-                android:drawableStart="@drawable/radio_b" />
+                android:drawableStart="@drawable/radio_b"
+                android:layout_marginTop="@dimen/radion_margin_option"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -100,7 +115,8 @@
                 android:layout_centerHorizontal="true"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_c"
-                android:drawableStart="@drawable/radio_c" />
+                android:drawableStart="@drawable/radio_c"
+                android:layout_marginTop="@dimen/radion_margin_option"/>
 
         </RelativeLayout>
 
@@ -126,7 +142,8 @@
                 android:layout_centerHorizontal="true"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_d"
-                android:drawableStart="@drawable/radio_d" />
+                android:drawableStart="@drawable/radio_d"
+                android:layout_marginTop="@dimen/radion_margin_option"/>
 
         </RelativeLayout>
     </com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup>

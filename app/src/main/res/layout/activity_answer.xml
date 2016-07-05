@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutanswer_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_answer"
@@ -10,10 +11,7 @@
         android:id="@+id/ViewPager_Question"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
         android:paddingBottom="@dimen/padding_top_bottom"
-        android:paddingLeft="@dimen/padding_left_right"
-        android:paddingRight="@dimen/padding_left_right"
         android:paddingTop="@dimen/padding_top_bottom" />
 
     <LinearLayout
@@ -31,80 +29,89 @@
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/layouttitle_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:paddingBottom="@dimen/padding_top_bottom"
-        android:paddingLeft="@dimen/padding_left_right"
-        android:paddingRight="@dimen/padding_left_right"
-        android:paddingTop="@dimen/padding_top_bottom">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:layout_marginTop="@dimen/padding_top_bottom"
+        android:background="@mipmap/title_bg"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/TextView_resultOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="@dimen/ct_50_dp"
+            android:layout_marginRight="@dimen/ct_50_dp"
+            android:layout_marginTop="@dimen/ct_10_dp"
             android:text="@string/result_default_one"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ct_44sp" />
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/ct_38sp" />
 
         <TextView
             android:id="@+id/TextView_resultTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TextView_resultOne"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="@dimen/ct_5_dp"
+            android:layout_marginLeft="@dimen/ct_50_dp"
+            android:layout_marginRight="@dimen/ct_50_dp"
             android:text="@string/result_default_two"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ct_44sp" />
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/ct_38sp" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_proposal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layouttitle_bg"
+        android:layout_marginLeft="@dimen/proposal_layout_margin_left"
+        android:layout_marginRight="@dimen/proposal_layout_margin_right"
+        android:layout_marginTop="@dimen/proposal_layout_margin_top">
 
         <RelativeLayout
-            android:id="@+id/RelativeLayout_proposal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/TextView_resultTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
-            android:layout_toStartOf="@+id/RelativeLayout_qrCode">
+            android:layout_toStartOf="@+id/RelativeLayout_qrCode"
+            android:background="@mipmap/proposal_bg"
+            android:padding="@dimen/proposal_pidding">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/TextView_proposal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/proposal_margin_top"
-                android:background="@mipmap/proposal_bg"
-                android:padding="@dimen/proposal_pidding">
+                android:text="@string/proposal"
+                android:textColor="@color/option_color"
+                android:textSize="@dimen/ct_indexsp_proposal" />
 
-                <TextView
-                    android:id="@+id/TextView_proposal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/proposal"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/ct_indexsp" />
-
-                <TextView
-                    android:id="@+id/TextView_proposal_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/TextView_proposal"
-                    android:text="@string/proposal_oneortwo"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/ct_indexsp" />
-
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/TextView_proposal_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TextView_proposal"
+                android:text="@string/proposal_oneortwo"
+                android:textColor="@color/option_color"
+                android:textSize="@dimen/ct_indexsp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_qrCode"
-            android:layout_width="@dimen/qrcode_layout_width"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/TextView_resultTwo"
-            android:layout_marginTop="@dimen/proposal_margin_top"
-            android:visibility="gone">
+            android:layout_marginLeft="@dimen/proposal_margin_qrcode">
 
             <ImageView
                 android:id="@+id/ImageView_qrCode"
@@ -121,7 +128,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="@string/qrcode_text"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/ct_22sp" />
 
             <ImageView
@@ -133,12 +140,13 @@
                 android:src="@mipmap/video_play" />
         </RelativeLayout>
 
-        <com.eebbk.gbofsafetyknowledge.controls.MyLoadingView
-            android:id="@+id/MyLoadingView_LoadingView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
     </RelativeLayout>
+
+
+    <com.eebbk.gbofsafetyknowledge.controls.MyLoadingView
+        android:id="@+id/MyLoadingView_LoadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

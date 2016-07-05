@@ -3,21 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin_layout_left"
-    android:paddingStart="@dimen/margin_layout_left"
-    android:paddingRight="@dimen/margin_layout_right"
-    android:paddingEnd="@dimen/margin_layout_right"
+    android:paddingLeft="@dimen/padding_left"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
-    <TextView
-        android:id="@+id/TextView_title"
+    <LinearLayout
+        android:id="@+id/layouttitle_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_title"
-        android:singleLine="false"
-        android:text="@string/title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/ct_44sp" />
+        android:layout_marginRight="@dimen/padding_right"
+        android:background="@mipmap/title_bg">
+
+        <TextView
+            android:id="@+id/TextView_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginBottom="@dimen/ct_5_dp"
+            android:layout_marginLeft="@dimen/ct_50_dp"
+            android:layout_marginRight="@dimen/ct_50_dp"
+            android:layout_marginTop="@dimen/ct_5_dp"
+            android:gravity="center_vertical|left"
+            android:singleLine="false"
+            android:text="@string/title"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/ct_38sp" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/ImageView_pic"
@@ -28,7 +40,9 @@
         android:id="@+id/RadioGroup_radioBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/TextView_title"
+        android:layout_below="@+id/layouttitle_bg"
+        android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginRight="@dimen/margin_layout_left"
         android:layout_marginTop="@dimen/option_margin_title"
         android:orientation="vertical">
 
@@ -40,18 +54,18 @@
 
             <RadioButton
                 android:id="@+id/RadioButton_A"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_a"
-                android:drawableLeft="@drawable/radio_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="false"
+                android:drawableLeft="@drawable/radio_a"
+                android:drawableStart="@drawable/radio_a"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"
-                android:checked="false" />
+                android:textSize="@dimen/ct_33sp" />
 
             <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionA"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/marqueetextview_width"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
@@ -60,7 +74,7 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionA_one"
-                android:textColor="@color/white"
+                android:textColor="@color/option_color"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
 
@@ -68,22 +82,22 @@
             android:id="@+id/LinearLayout_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_title"
+            android:layout_marginTop="@dimen/margin_option"
             android:gravity="center_vertical">
 
             <RadioButton
                 android:id="@+id/RadioButton_B"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_b"
-                android:drawableLeft="@drawable/radio_b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_b"
+                android:drawableStart="@drawable/radio_b"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:textSize="@dimen/ct_33sp" />
 
             <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionB"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/marqueetextview_width"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
@@ -92,7 +106,7 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionB_one"
-                android:textColor="@color/white"
+                android:textColor="@color/option_color"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
 
@@ -100,22 +114,22 @@
             android:id="@+id/LinearLayout_C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_title"
+            android:layout_marginTop="@dimen/margin_option"
             android:gravity="center_vertical">
 
             <RadioButton
                 android:id="@+id/RadioButton_C"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_c"
-                android:drawableLeft="@drawable/radio_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_c"
+                android:drawableStart="@drawable/radio_c"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:textSize="@dimen/ct_33sp" />
 
             <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionC"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/marqueetextview_width"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
@@ -124,7 +138,7 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionC_one"
-                android:textColor="@color/white"
+                android:textColor="@color/option_color"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
 
@@ -132,22 +146,22 @@
             android:id="@+id/LinearLayout_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_title"
+            android:layout_marginTop="@dimen/margin_option"
             android:gravity="center_vertical">
 
             <RadioButton
                 android:id="@+id/RadioButton_D"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_d"
-                android:drawableLeft="@drawable/radio_d"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_d"
+                android:drawableStart="@drawable/radio_d"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:textSize="@dimen/ct_33sp" />
 
             <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionD"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/marqueetextview_width"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
@@ -156,7 +170,7 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionD_one"
-                android:textColor="@color/white"
+                android:textColor="@color/option_color"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
     </com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup>

@@ -1,24 +1,31 @@
 <resources>
     <!--自定义字体大小-->
-    <dimen name="ct_44sp">38sp</dimen>
-    <dimen name="ct_33sp">33sp</dimen>
+    <dimen name="ct_44sp">44sp</dimen>
+    <dimen name="ct_33sp">26sp</dimen>
     <dimen name="ct_22sp">22sp</dimen>
     <dimen name="ct_12sp">12sp</dimen>
-    <dimen name="ct_indexsp">28sp</dimen>
+    <dimen name="ct_38sp">26sp</dimen>
+    <dimen name="ct_indexsp">22sp</dimen>
+    <dimen name="ct_indexsp_proposal">26sp</dimen>
     <!--首页-->
-    <dimen name="preschoolbtn_margin_left">180dp</dimen>
-    <dimen name="margin_bottom">50dp</dimen>
+    <dimen name="preschoolbtn_margin_left">300dp</dimen>
+    <dimen name="preschoolbtn_margin_right">124dp</dimen>
+    <dimen name="margin_bottom">125dp</dimen>
     <!--答题界面-->
-    <dimen name="padding_left_right">140dp</dimen>
-    <dimen name="padding_top_bottom">91dp</dimen>
-    <dimen name="margin_title">0dp</dimen>
-    <dimen name="margin_layout_left">50dp</dimen>
+    <dimen name="padding_left">73dp</dimen>
+    <dimen name="padding_right">202dp</dimen>
+    <dimen name="padding_top_bottom">74dp</dimen>
+    <dimen name="margin_title">20dp</dimen>
+    <dimen name="margin_option">40dp</dimen>
+    <dimen name="margin_layout_left">99dp</dimen>
     <dimen name="margin_layout_right">50dp</dimen>
+    <dimen name="margin_layout_left_two">59dp</dimen>
+    <dimen name="margin_layout_right_two">132dp</dimen>
     <dimen name="table_hight">48dp</dimen>
-    <dimen name="horizontal_hight">40dp</dimen>
-    <dimen name="horizontal_width">792dp</dimen>
-    <dimen name="horizontal_margin_bottom">70dp</dimen>
-    <dimen name="indicator_width">130dp</dimen>
+    <dimen name="horizontal_hight">50dp</dimen>
+    <dimen name="horizontal_width">936dp</dimen>
+    <dimen name="horizontal_margin_bottom">30dp</dimen>
+    <dimen name="indicator_width">156dp</dimen>
     <dimen name="indicator_height">50dp</dimen>
     <dimen name="radius">15dp</dimen>
     <dimen name="proposal_pidding">30dp</dimen>
@@ -33,8 +40,14 @@
     <dimen name="progress_loading_height">55dp</dimen>
     <dimen name="progress_loading_start">55dp</dimen>
     <dimen name="progress_loading_text_margin_left">22dp</dimen>
-    <dimen name="option_margin_title">20dp</dimen>
-    <dimen name="option_margin_title_two">0dp</dimen>
+    <dimen name="option_margin_title">50dp</dimen>
+    <dimen name="option_margin_title_two">30dp</dimen>
+    <dimen name="radion_margin_option">10dp</dimen>
+    <dimen name="proposal_margin_qrcode">84dp</dimen>
+    <dimen name="proposal_layout_margin_left">139dp</dimen>
+    <dimen name="proposal_layout_margin_right">180dp</dimen>
+    <dimen name="proposal_layout_margin_top">76dp</dimen>
+    <dimen name="marqueetextview_width">656dp</dimen>
 
 
     <!--VideoPlayerActivity-->
@@ -43,6 +56,8 @@
     <dimen name="ct_12_dp">12dp</dimen>
     <dimen name="ct_4_dp">4dp</dimen>
     <dimen name="ct_5_dp">5dp</dimen>
+    <dimen name="ct_10_dp">10dp</dimen>
     <dimen name="ct_2_dp">2dp</dimen>
+    <dimen name="ct_50_dp">50dp</dimen>
 
 </resources>

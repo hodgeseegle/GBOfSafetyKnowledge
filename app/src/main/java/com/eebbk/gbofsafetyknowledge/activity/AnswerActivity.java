@@ -45,7 +45,7 @@ import java.util.List;
 public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
 
     private static final String TAG = "AnswerActivity";
-    
+
     //题目数
     private static final int QUESTION_NUM = 6;
     //筛选题目结束
@@ -92,6 +92,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private PlaysyncTask mPlaysyncTask;
     //播放按钮
     private ImageView mImgVideoPlay;
+    //总布局
+    private RelativeLayout mlayoutAnswer;
+    //标题背景
+    private LinearLayout mlayoutTitleBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +125,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         Typeface fontFace = Typeface.createFromAsset(getAssets(),
                 "fonts/FZSEJW.TTF");
         mTxtResultOne.setTypeface(fontFace);
+        mTxtResulTwo.setTypeface(fontFace);
         mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
         mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
@@ -128,6 +133,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
         mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
         mImgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
+        mlayoutAnswer = (RelativeLayout) findViewById(R.id.layoutanswer_bg);
+        mlayoutTitleBg = (LinearLayout) findViewById(R.id.layouttitle_bg);
         mImgVideoPlay.setOnClickListener(new ClickListener());
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
@@ -323,7 +330,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mTxtResultOne.setVisibility(View.VISIBLE);
         mTxtResulTwo.setVisibility(View.VISIBLE);
         mlayoutProposal.setVisibility(View.VISIBLE);
+        mlayoutTitleBg.setVisibility(View.VISIBLE);
         mlayoutqrCode.setVisibility(View.VISIBLE);
+        mlayoutAnswer.setBackgroundResource(R.mipmap.bg_proposal);
 
         switch (corrctNum) {
             case 0:
@@ -440,6 +449,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mTxtResultOne.setVisibility(View.GONE);
         mTxtResulTwo.setVisibility(View.GONE);
         mlayoutProposal.setVisibility(View.GONE);
+        mlayoutTitleBg.setVisibility(View.GONE);
         mlayoutqrCode.setVisibility(View.GONE);
 
         mMyLoadingView.setVisibility(View.VISIBLE);
