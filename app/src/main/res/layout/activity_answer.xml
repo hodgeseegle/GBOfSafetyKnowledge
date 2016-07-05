@@ -35,7 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginStart="@dimen/padding_left"
         android:layout_marginRight="@dimen/padding_right"
+        android:layout_marginEnd="@dimen/padding_right"
         android:layout_marginTop="@dimen/padding_top_bottom"
         android:background="@mipmap/title_bg"
         android:orientation="vertical">
@@ -56,7 +58,6 @@
             android:id="@+id/TextView_resultTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/TextView_resultOne"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="@dimen/ct_5_dp"
             android:layout_marginLeft="@dimen/ct_50_dp"
@@ -74,7 +75,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/layouttitle_bg"
         android:layout_marginLeft="@dimen/proposal_layout_margin_left"
+        android:layout_marginStart="@dimen/proposal_layout_margin_left"
         android:layout_marginRight="@dimen/proposal_layout_margin_right"
+        android:layout_marginEnd="@dimen/proposal_layout_margin_right"
         android:layout_marginTop="@dimen/proposal_layout_margin_top">
 
         <RelativeLayout
@@ -111,7 +114,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/proposal_margin_qrcode">
+            android:layout_marginLeft="@dimen/proposal_margin_qrcode"
+            android:layout_marginStart="@dimen/proposal_margin_qrcode">
 
             <ImageView
                 android:id="@+id/ImageView_qrCode"

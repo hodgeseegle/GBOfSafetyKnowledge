@@ -1,7 +1,5 @@
 package com.eebbk.gbofsafetyknowledge.controls;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
@@ -13,6 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
+
+import java.util.LinkedList;
+import java.util.Queue;
 /**
  * decription ：自定义水平listView
  * author ： zhua
@@ -262,11 +263,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                 left += childWidth + child.getPaddingRight();
             }
         }
-    }
-
-    public synchronized void scrollTo(int x) {
-        mScroller.startScroll(mNextX, 0, x - mNextX, 0);
-        requestLayout();
     }
 
     @Override

@@ -31,8 +31,8 @@ public class Indicator {
         return isQuestioned;
     }
 
-    public void setIsQuestioned(int isQuestioned) {
-        this.isQuestioned = isQuestioned;
+    public void setIsQuestioned() {
+        this.isQuestioned = 1;
     }
 
     public View getV() {

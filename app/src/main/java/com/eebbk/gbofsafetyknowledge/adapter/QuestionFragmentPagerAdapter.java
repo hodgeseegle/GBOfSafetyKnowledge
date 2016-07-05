@@ -22,11 +22,6 @@ public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
         this.fm = fm;
     }
 
-    public QuestionFragmentPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
-        super(fm);
-        this.fragments = fragments;
-    }
-
     @Override
     public int getCount() {
         return fragments.size();
@@ -43,24 +38,6 @@ public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
-    }
-
-    public void appendList(ArrayList<Fragment> fragment) {
-        if (this.fragments != null) {
-            FragmentTransaction ft = fm.beginTransaction();
-            for (Fragment f : this.fragments) {
-                ft.remove(f);
-            }
-            ft.commit();
-            fm.executePendingTransactions();
-        }
-        this.fragments = fragment;
-        notifyDataSetChanged();
     }
 
     public void setFragments(ArrayList<Fragment> fragments) {

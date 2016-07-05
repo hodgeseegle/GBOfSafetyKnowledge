@@ -3,8 +3,10 @@ package com.eebbk.gbofsafetyknowledge.fragments;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,9 +42,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private LinearLayout mLayout_C = null;
     private LinearLayout mLayout_D = null;
     private Typeface mFontFace;
-
-    public QuestionFragment() {
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -216,7 +215,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public class TouchListener implements View.OnTouchListener {
+    private class TouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -229,25 +228,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                     }
@@ -259,25 +258,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                     }
@@ -290,5 +289,14 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     //选择答案接口
     public interface Chose {
         void chose(String answer);
+    }
+
+    public int getColor(Context context, int id) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, id);
+        } else {
+            return context.getResources().getColor(id);
+        }
     }
 }

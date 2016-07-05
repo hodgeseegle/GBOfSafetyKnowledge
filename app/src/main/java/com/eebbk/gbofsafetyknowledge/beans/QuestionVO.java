@@ -41,9 +41,6 @@ public class QuestionVO implements Serializable {
         mQuestionType = -1;
         mQuestionFormat = -1;
     }
-    public String getmExtend() {
-        return mExtend;
-    }
 
     public void setmExtend(String mExtend) {
         this.mExtend = mExtend;

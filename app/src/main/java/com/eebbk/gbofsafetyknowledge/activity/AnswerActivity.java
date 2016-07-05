@@ -44,8 +44,6 @@ import java.util.List;
  */
 public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
 
-    private static final String TAG = "AnswerActivity";
-
     //题目数
     private static final int QUESTION_NUM = 6;
     //筛选题目结束
@@ -72,14 +70,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private TextView mTxtResulTwo;
     //建议内容
     private TextView mTxtProposal_content;
-    //建议
-    private TextView mTxtProposal;
     //建议布局
     private RelativeLayout mlayoutProposal;
     //二维码布局
     private RelativeLayout mlayoutqrCode;
-    //二维码图片
-    private ImageView mImgqrCode;
     //播放声音mediaplayer
     private MediaPlayer mPlayer;
     //获得该应用的AssetManager
@@ -90,8 +84,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private MyLoadingView mMyLoadingView;
     //播放任务
     private PlaysyncTask mPlaysyncTask;
-    //播放按钮
-    private ImageView mImgVideoPlay;
     //总布局
     private RelativeLayout mlayoutAnswer;
     //标题背景
@@ -126,16 +118,14 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 "fonts/FZSEJW.TTF");
         mTxtResultOne.setTypeface(fontFace);
         mTxtResulTwo.setTypeface(fontFace);
-        mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
         mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
         mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
-        mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
         mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
-        mImgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
         mlayoutAnswer = (RelativeLayout) findViewById(R.id.layoutanswer_bg);
         mlayoutTitleBg = (LinearLayout) findViewById(R.id.layouttitle_bg);
-        mImgVideoPlay.setOnClickListener(new ClickListener());
+        ImageView imgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
+        imgVideoPlay.setOnClickListener(new ClickListener());
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
         mMyHandler = new MyHandler(this);
@@ -244,7 +234,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             });
         }
         builder.create().show();
-
     }
 
     /**
@@ -259,13 +248,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         }
         //计算检验错误
         ArrayList<String> corrects = new ArrayList<>();
-        ArrayList<String> worngs = new ArrayList<>();
         for (int i = 0; i < mQuestionsVOs.size(); i++) {
             QuestionVO questionVO = mQuestionsVOs.get(i);
             if (questionVO.getmAnswer().trim().equalsIgnoreCase(mAnswers.get(i))) {
                 corrects.add(String.valueOf(i));
-            } else {
-                worngs.add(String.valueOf(i));
             }
         }
 
@@ -359,13 +345,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 mTxtProposal_content.setText(getString(R.string.proposal_six));
                 break;
         }
-    }
-
-    /**
-     * 播放声音
-     */
-    private void playSound(int curPageNum) {
-
     }
 
     @Override
@@ -465,7 +444,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mLayoutIndicator.setVisibility(View.VISIBLE);
     }
 
-    public class PlaysyncTask extends AsyncTask<String, Integer, String> {
+    private class PlaysyncTask extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... params) {
             AssetFileDescriptor fileDescriptor;
@@ -500,7 +479,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         return super.onKeyDown(keyCode, event);
     }
 
-    public class ClickListener implements View.OnClickListener {
+    private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.ImageView_video) {

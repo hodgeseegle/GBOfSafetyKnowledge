@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * decription ：
@@ -27,7 +26,6 @@ import java.util.Random;
 public class QuestionDAO {
 
     private static final String TAG = "QuestionDAO";
-    private final String DB_NAME = "questions.db";
     private final Context mContext;
     private String mDatabasePath;
     private SQLiteDatabase mQuestionsDb;
@@ -43,6 +41,7 @@ public class QuestionDAO {
      * author:zhua
      */
     private void copyDatabase() {
+        String DB_NAME = "questions.db";
         String databasePath = mContext.getFilesDir().getAbsolutePath();
         databasePath = databasePath.substring(0, databasePath.lastIndexOf("/")) + "/databases";
         mDatabasePath = databasePath + "/" + DB_NAME;
@@ -65,15 +64,15 @@ public class QuestionDAO {
                 InputStream is = null;
                 try {
                     is = mContext.getAssets().open("database/" + DB_NAME);
-                    if(is == null){
-                        return;
-                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 FileOutputStream fos = new FileOutputStream(mDatabasePath);
                 byte[] buffer = new byte[1024];
                 int count;
+                if(is == null){
+                    return;
+                }
                 while ((count = is.read(buffer)) > 0) {
                     fos.write(buffer, 0, count);
                 }
@@ -123,7 +122,6 @@ public class QuestionDAO {
 
         openDatabase();
 
-        String str_grade = grade + "";
         List<QuestionVO> listQuestionVOFinally = new ArrayList<>();
         List<QuestionVO> listQuestionVOProduct = new ArrayList<>();
         List<QuestionVO> listQuestionVOPure = new ArrayList<>();
@@ -233,21 +231,6 @@ public class QuestionDAO {
             rslist.add(df);
         }
         return rslist;
-    }
-
-    /**
-     * des:对list进行随机排序
-     */
-    public void randomSortList(List<QuestionVO> listT) {
-        Random random = new Random();
-        List<QuestionVO> newList = new ArrayList<>();
-
-        for (QuestionVO item : listT) {
-            newList.add(random.nextInt(newList.size()), item);
-        }
-
-        listT.clear();
-        listT.addAll(newList);
     }
 
     public void selectQuestion(int grade, Handler handler) {

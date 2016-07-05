@@ -49,23 +49,4 @@ public class BitmapUtils {
 
         return bm;
     }
-
-    //从Assert中获取Drawable
-    public Drawable getDrawable(String name) {
-        BitmapDrawable da = null;
-        AssetManager assetManager = mContext.getAssets();
-        if (assetManager != null) {
-            InputStream assetFile = null;
-            try {
-                assetFile = assetManager.open(name);
-                Bitmap e = BitmapFactory.decodeStream(assetFile);
-                da = new BitmapDrawable(mContext.getResources(),e);
-                assetFile.close();
-            } catch (IOException var5) {
-                var5.printStackTrace();
-            }
-        }
-
-        return da;
-    }
 }

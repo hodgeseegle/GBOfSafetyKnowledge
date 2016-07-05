@@ -37,18 +37,4 @@ public class MyLoadingView extends RelativeLayout {
 		LayoutInflater.from(ctx).inflate(R.layout.comment_dlg_wait, this) ;
 		tvMessage = (TextView) findViewById(R.id.wait_hint_txt) ;
 	}
-
-	/**
-	 * set message from a string
-	 */
-	public void setMessage(String str){
-		tvMessage.setText(str);
-	}
-
-	/**
-	 * set message from resouce
-	 */
-	public void setMessage(int resouceId){
-		tvMessage.setText(resouceId);
-	}
 }

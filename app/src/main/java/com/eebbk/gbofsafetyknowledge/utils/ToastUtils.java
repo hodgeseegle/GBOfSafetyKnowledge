@@ -29,31 +29,31 @@ public class ToastUtils {
         showMessage(act, msg, Toast.LENGTH_SHORT);  
     }
     
-    /** 
-     * Toast发送消息，默认Toast.LENGTH_SHORT 
+    /**
+     * Toast发送消息，默认Toast.LENGTH_SHORT
      */
-    public static void showMessageInCenter(final Context act, final String msg) {  
-    	
+    public static void showMessageInCenter(final Context act, final String msg) {
+
     	Toast toast = Toast.makeText(act, msg, Toast.LENGTH_LONG);
-		
+
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
-    }  
-       
-    /** 
+    }
+
+    /**
      * Toast发送消息，默认Toast.LENGTH_LONG 
      */
     public static void showMessageLong(final Context act, final String msg) {  
         showMessage(act, msg, Toast.LENGTH_LONG);  
     }  
-   
-    /** 
-     * Toast发送消息，默认Toast.LENGTH_SHORT 
+
+    /**
+     * Toast发送消息，默认Toast.LENGTH_SHORT
      */
-    public static void showMessage(final Context act, final int msg) {  
-        showMessage(act, msg, Toast.LENGTH_SHORT);  
-    }  
-       
+    public static void showMessage(final Context act, final int msg) {
+        showMessage(act, msg, Toast.LENGTH_SHORT);
+    }
+
     /** 
      * Toast发送消息，默认Toast.LENGTH_LONG 
      */

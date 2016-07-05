@@ -3,12 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="yellow">#ff9940</color>
     <color name="black">#101010</color>
     <color name="title_color">#421c06</color>
     <color name="option_color">#074a71</color>
-    <color name="red">#f70303</color>
-    <color name="green">#70f206</color>
     <color name="progress_text_color">#585858</color>
     <color name="video_controller_bgOne">#99000000</color>
     <color name="guidance_text_color">#ffbdbdbd</color>

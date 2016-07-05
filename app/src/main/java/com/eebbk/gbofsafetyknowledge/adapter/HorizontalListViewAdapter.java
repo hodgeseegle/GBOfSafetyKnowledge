@@ -1,31 +1,28 @@
 package com.eebbk.gbofsafetyknowledge.adapter;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import com.eebbk.gbofsafetyknowledge.R;
+import com.eebbk.gbofsafetyknowledge.beans.Indicator;
+
+import java.util.ArrayList;
 
 /**
  * decription ：HorizontalList的适配器
  * author ： zhua
  */
-import java.util.ArrayList;
-
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.eebbk.gbofsafetyknowledge.R;
-import com.eebbk.gbofsafetyknowledge.beans.Indicator;
 
 public class HorizontalListViewAdapter extends BaseAdapter {
     private final int mCount;
-    private final Context mContext;
     private final ArrayList<Indicator> mListView = new ArrayList<>();
 
     public HorizontalListViewAdapter(Context context, int num) {
-        this.mContext = context;
         this.mCount = num;
         for (int i = 0; i < num; i++) {
 
@@ -88,17 +85,8 @@ public class HorizontalListViewAdapter extends BaseAdapter {
     }
 
     public void setFlag(int i) {
-        mListView.get(i).setIsQuestioned(1);
+        mListView.get(i).setIsQuestioned();
 
         notifyDataSetChanged();
-    }
-
-    public int getColor(Context context, int id) {
-        final int version = Build.VERSION.SDK_INT;
-        if (version >= 23) {
-            return ContextCompat.getColor(context, id);
-        } else {
-            return context.getResources().getColor(id);
-        }
     }
 }

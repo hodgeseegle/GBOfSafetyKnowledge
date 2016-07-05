@@ -2,7 +2,6 @@ package com.eebbk.gbofsafetyknowledge.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +11,6 @@ import com.eebbk.gbofsafetyknowledge.R;
 /**
  *description:首页 -- 安全知识大闯关
  *author:zhua
- *creator at:2016/6/13
  */
 public class MainActivity extends Activity {
 
@@ -53,10 +51,5 @@ public class MainActivity extends Activity {
                 break;
         }
         startActivity(intent);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 }

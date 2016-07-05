@@ -161,34 +161,6 @@ public class MyRadioGroup extends LinearLayout {
 
     /**
      * <p>
-     * Returns the identifier of the selected radio button in this group. Upon
-     * empty selection, the returned value is -1.
-     * </p>
-     *
-     * @return the unique id of the selected radio button in this group
-     * @see #check(int)
-     * @see #clearCheck()
-     */
-    public int getCheckedRadioButtonId() {
-        return mCheckedId;
-    }
-
-    /**
-     * <p>
-     * Clears the selection. When the selection is cleared, no radio button in
-     * this group is selected and {@link #getCheckedRadioButtonId()} returns
-     * null.
-     * </p>
-     *
-     * @see #check(int)
-     * @see #getCheckedRadioButtonId()
-     */
-    public void clearCheck() {
-        check(-1);
-    }
-
-    /**
-     * <p>
      * Register a callback to be invoked when the checked radio button changes
      * in this group.
      * </p>

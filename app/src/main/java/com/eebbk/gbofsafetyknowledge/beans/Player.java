@@ -6,7 +6,6 @@ import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnInfoListener;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -53,7 +52,7 @@ public class Player implements SurfaceHolder.Callback {
     private SoftReference<Context> mContext;
 
     public void setmContext(Context mContext) {
-        this.mContext = new SoftReference<Context>(mContext);
+        this.mContext = new SoftReference<>(mContext);
         mMediaPlayer = MediaPlayer.create(this.mContext.get(), R.raw.video);
     }
 
@@ -65,32 +64,16 @@ public class Player implements SurfaceHolder.Callback {
         this.mIsCanTime = mIsCanTime;
     }
 
-    public OnErrorListener getmErrorListener() {
-        return mErrorListener;
-    }
-
     public void setmErrorListener(OnErrorListener mErrorListener) {
         this.mErrorListener = mErrorListener;
-    }
-
-    public OnBufferingUpdateListener getmBufferingUpdateListener() {
-        return mBufferingUpdateListener;
     }
 
     public void setmBufferingUpdateListener(OnBufferingUpdateListener mBufferingUpdateListener) {
         this.mBufferingUpdateListener = mBufferingUpdateListener;
     }
 
-    public OnCompletionListener getmCompletionListener() {
-        return mCompletionListener;
-    }
-
     public void setmCompletionListener(OnCompletionListener mCompletionListener) {
         this.mCompletionListener = mCompletionListener;
-    }
-
-    public OnInfoListener getmInfoListener() {
-        return mInfoListener;
     }
 
     public void setmInfoListener(OnInfoListener mInfoListener) {
@@ -99,14 +82,6 @@ public class Player implements SurfaceHolder.Callback {
 
     public int getDuration() {
         return mDuration;
-    }
-
-    public boolean ismIsPrepared() {
-        return mIsPrepared;
-    }
-
-    public int getPosition() {
-        return mPosition;
     }
 
     public Player(SurfaceView surfaceView,SeekBar seekBar, TextView playTime) {
@@ -149,9 +124,6 @@ public class Player implements SurfaceHolder.Callback {
                 mDuration = mMediaPlayer.getDuration();
                 mMediaPlayer.start();
                 mIsFirstPlay = false;
-
-//                mMediaPlayer.setOnPreparedListener(new PrepareListener(position));
-//                mMediaPlayer.prepareAsync();// 缓冲
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -175,28 +147,6 @@ public class Player implements SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder arg0) {
         if (mMediaPlayer != null) {
             mPosition = mMediaPlayer.getCurrentPosition();
-        }
-    }
-
-    private final class PrepareListener implements OnPreparedListener {
-        private final int position;
-
-        public PrepareListener(int position) {
-            this.position = position;
-        }
-
-        @Override
-        public void onPrepared(MediaPlayer mp) {
-            mDuration = mp.getDuration();
-
-            mTxvPlayTime.setText(mContext.get().getResources().getString(R.string.time_separator,Util.formatTime(position),Util.formatTime(mDuration)));
-            mIsPrepared = true;
-            mIsFirstPlay = false;
-
-            if (position > 0) {
-                mMediaPlayer.seekTo(position);
-            }
-            mMediaPlayer.start();
         }
     }
 
