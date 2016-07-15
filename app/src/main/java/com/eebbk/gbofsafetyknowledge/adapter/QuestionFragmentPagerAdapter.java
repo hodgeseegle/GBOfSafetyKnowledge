@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Fragment> fragments = new ArrayList<>();
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     public QuestionFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

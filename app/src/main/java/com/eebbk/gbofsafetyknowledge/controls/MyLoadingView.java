@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.eebbk.gbofsafetyknowledge.R;
 
@@ -13,8 +12,6 @@ import com.eebbk.gbofsafetyknowledge.R;
  */
 public class MyLoadingView extends RelativeLayout {
 	
-	private TextView tvMessage ;
-
 	public MyLoadingView(Context context) {
 		super(context);
 		init(context);
@@ -35,6 +32,5 @@ public class MyLoadingView extends RelativeLayout {
 	 */
 	private void init(Context ctx){
 		LayoutInflater.from(ctx).inflate(R.layout.comment_dlg_wait, this) ;
-		tvMessage = (TextView) findViewById(R.id.wait_hint_txt) ;
 	}
 }

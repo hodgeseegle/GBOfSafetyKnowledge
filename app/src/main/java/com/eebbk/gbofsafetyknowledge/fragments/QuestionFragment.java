@@ -291,7 +291,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         void chose(String answer);
     }
 
-    public int getColor(Context context, int id) {
+    private int getColor(Context context, int id) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 23) {
             return ContextCompat.getColor(context, id);

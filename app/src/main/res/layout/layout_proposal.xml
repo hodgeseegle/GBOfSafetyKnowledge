@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_proposal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
+        android:layout_toStartOf="@+id/RelativeLayout_qrCode"
+        android:background="@mipmap/proposal_bg"
+        android:padding="@dimen/proposal_pidding">
+
+        <TextView
+            android:id="@+id/TextView_proposal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proposal"
+            android:textColor="@color/option_color"
+            android:textSize="@dimen/ct_indexsp_proposal" />
+
+        <TextView
+            android:id="@+id/TextView_proposal_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextView_proposal"
+            android:text="@string/proposal_oneortwo"
+            android:textColor="@color/option_color"
+            android:textSize="@dimen/ct_indexsp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_qrCode"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/proposal_margin_qrcode"
+        android:layout_marginStart="@dimen/proposal_margin_qrcode">
+
+        <ImageView
+            android:id="@+id/ImageView_qrCode"
+            android:layout_width="@dimen/qrcode_width"
+            android:layout_height="@dimen/qrcode_height"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/qr_code" />
+
+        <TextView
+            android:id="@+id/qrcode_text"
+            android:layout_width="@dimen/qrcode_text"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ImageView_qrCode"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/qrcode_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ct_22sp" />
+
+        <ImageView
+            android:id="@+id/ImageView_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qrcode_text"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/video_play" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -28,6 +28,6 @@ public class MarqueeTextView extends TextView {
     @Override
     protected void onFocusChanged(boolean focused, int direction,
                                   Rect previouslyFocusedRect) {
-      //super.onFocusChanged(focused,direction,previouslyFocusedRect);
+      super.onFocusChanged(focused,direction,previouslyFocusedRect);
     }
 }

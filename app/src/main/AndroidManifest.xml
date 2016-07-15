@@ -25,12 +25,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape">
 
-             <!--<meta-data
-                  android:name="AppIcon"
-                  android:value="nur:ic_launcher,pre:ic_launcher" />-->
-              <meta-data
-                  android:name="AppTab"
-                  android:value="Preschool/YuWen"/>
+            <!--<meta-data
+                 android:name="AppIcon"
+                 android:value="nur:ic_launcher,pre:ic_launcher" />-->
+            <meta-data
+                android:name="AppTab"
+                android:value="Preschool/YuWen" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,9 +41,11 @@
         <activity
             android:name=".activity.AnswerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="landscape" />
-        <activity android:name=".activity.VideoPlayerActivity"></activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.VideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>

@@ -48,14 +48,14 @@ public class QuestionDAO {
 
         File dir = new File(databasePath);
         if (!dir.exists()) {
-            dir.mkdir();
+            boolean flag = dir.mkdir();
         }
 
         File file = new File(mDatabasePath);
 
         if (file.exists()) {//如果数据库存在判断是不是重新安装apk，如果是则将旧的删掉，新的加入
             if (!mSharedPreferences.getBoolean("isFirst", false)) {
-                file.delete();
+                boolean flag = file.delete();
             }
         }
 

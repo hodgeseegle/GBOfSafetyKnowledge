@@ -1,8 +1,6 @@
 package com.eebbk.gbofsafetyknowledge.adapter;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;

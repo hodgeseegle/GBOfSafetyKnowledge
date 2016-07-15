@@ -121,12 +121,6 @@ public class MyRadioGroup extends LinearLayout {
      * <p>
      * Sets the selection to the radio button whose identifier is passed in
      * parameter. Using -1 as the selection identifier clears the selection;
-     * such an operation is equivalent to invoking {@link #clearCheck()}.
-     * </p>
-     *
-     * @param id the unique id of the radio button to select in this group
-     * @see #getCheckedRadioButtonId()
-     * @see #clearCheck()
      */
     private void check(int id) {
         // don't even bother

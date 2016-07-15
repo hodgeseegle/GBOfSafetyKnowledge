@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,7 +49,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private static final int QUESTION_NUM = 6;
     //筛选题目结束
     public static final int SELECT_OVER = 0;
-    //筛选题目结束
+    //
     private static final int SLEEP = 1;
     private ViewPager mViewPager;
     private QuestionDAO mQuestionDAO;
@@ -64,16 +65,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private int mCurPageNum = 1;
     //指示器布局
     private LinearLayout mLayoutIndicator;
-    //答题结果One
-    private TextView mTxtResultOne;
-    //答题结果Two
-    private TextView mTxtResulTwo;
-    //建议内容
-    private TextView mTxtProposal_content;
-    //建议布局
-    private RelativeLayout mlayoutProposal;
-    //二维码布局
-    private RelativeLayout mlayoutqrCode;
     //播放声音mediaplayer
     private MediaPlayer mPlayer;
     //获得该应用的AssetManager
@@ -84,10 +75,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private MyLoadingView mMyLoadingView;
     //播放任务
     private PlaysyncTask mPlaysyncTask;
-    //总布局
-    private RelativeLayout mlayoutAnswer;
-    //标题背景
-    private LinearLayout mlayoutTitleBg;
+    private HorizontalListView horizontalListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,24 +96,12 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mQuestionsVOs = new ArrayList<>();
         mViewPager = (ViewPager) findViewById(R.id.ViewPager_Question);
         mViewPager.addOnPageChangeListener(new PageChange());
-        HorizontalListView horizontalListView = (HorizontalListView) findViewById(R.id.HorizontalListView_listview);
+        horizontalListView = (HorizontalListView) findViewById(R.id.HorizontalListView_listview);
         mHorizontalListViewAdapter = new HorizontalListViewAdapter(AnswerActivity.this, QUESTION_NUM);
         horizontalListView.setAdapter(mHorizontalListViewAdapter);
         mLayoutIndicator = (LinearLayout) findViewById(R.id.LinearLayout_indicator);
-        mTxtResultOne = (TextView) findViewById(R.id.TextView_resultOne);
-        mTxtResulTwo = (TextView) findViewById(R.id.TextView_resultTwo);
-        Typeface fontFace = Typeface.createFromAsset(getAssets(),
-                "fonts/FZSEJW.TTF");
-        mTxtResultOne.setTypeface(fontFace);
-        mTxtResulTwo.setTypeface(fontFace);
-        mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
-        mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
-        mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
         mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
-        mlayoutAnswer = (RelativeLayout) findViewById(R.id.layoutanswer_bg);
-        mlayoutTitleBg = (LinearLayout) findViewById(R.id.layouttitle_bg);
-        ImageView imgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
-        imgVideoPlay.setOnClickListener(new ClickListener());
+
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
         mMyHandler = new MyHandler(this);
@@ -279,6 +255,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 mPlaysyncTask = null;
             }
 
+            if (mPlayer != null) {
+                mPlayer.pause();
+            }
             mPlaysyncTask = new PlaysyncTask();
             mPlaysyncTask.execute(mQuestionsVOs.get(mCurPageNum - 1).getmVoiceID());
 
@@ -313,36 +292,47 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
 
-        mTxtResultOne.setVisibility(View.VISIBLE);
-        mTxtResulTwo.setVisibility(View.VISIBLE);
-        mlayoutProposal.setVisibility(View.VISIBLE);
-        mlayoutTitleBg.setVisibility(View.VISIBLE);
-        mlayoutqrCode.setVisibility(View.VISIBLE);
-        mlayoutAnswer.setBackgroundResource(R.mipmap.bg_proposal);
+        ViewStub layoutTitle = (ViewStub) findViewById(R.id.ViewStub_layout_title);
+        layoutTitle.inflate();
+        ViewStub layoutProposal = (ViewStub) findViewById(R.id.ViewStub_layout_proposal);
+        layoutProposal.inflate();
 
+        TextView proposalContent = (TextView) findViewById(R.id.TextView_proposal_content);
+        ImageView imgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
+        imgVideoPlay.setOnClickListener(new ClickListener());
+
+        TextView resultOne = (TextView) findViewById(R.id.TextView_resultOne);
+        TextView resulTwo = (TextView) findViewById(R.id.TextView_resultTwo);
+        Typeface fontFace = Typeface.createFromAsset(getAssets(),
+                "fonts/FZSEJW.TTF");
+        resultOne.setTypeface(fontFace);
+        resulTwo.setTypeface(fontFace);
+
+        RelativeLayout layoutAnswer = (RelativeLayout) findViewById(R.id.layoutanswer_bg);
+        layoutAnswer.setBackgroundResource(R.mipmap.bg_proposal);
         switch (corrctNum) {
             case 0:
             case 1:
             case 2:
-                mTxtResultOne.setText(getString(R.string.resultOne_oneortwo, corrctNum));
-                mTxtResulTwo.setText(getString(R.string.resultTwo_oneortwo));
-                mTxtProposal_content.setText(getString(R.string.proposal_oneortwo));
+                resultOne.setText(getString(R.string.resultOne_oneortwo, corrctNum));
+                resulTwo.setText(getString(R.string.resultTwo_oneortwo));
+                proposalContent.setText(getString(R.string.proposal_oneortwo));
                 break;
             case 3:
             case 4:
-                mTxtResultOne.setText(getString(R.string.resultOne_threeorfour, corrctNum));
-                mTxtResulTwo.setText(getString(R.string.resultTwo_threeorfour));
-                mTxtProposal_content.setText(getString(R.string.proposal_threeorfour));
+                resultOne.setText(getString(R.string.resultOne_threeorfour, corrctNum));
+                resulTwo.setText(getString(R.string.resultTwo_threeorfour));
+                proposalContent.setText(getString(R.string.proposal_threeorfour));
                 break;
             case 5:
-                mTxtResultOne.setText(getString(R.string.resultOne_five));
-                mTxtResulTwo.setText(getString(R.string.resultTwo_five));
-                mTxtProposal_content.setText(getString(R.string.proposal_five));
+                resultOne.setText(getString(R.string.resultOne_five));
+                resulTwo.setText(getString(R.string.resultTwo_five));
+                proposalContent.setText(getString(R.string.proposal_five));
                 break;
             case 6:
-                mTxtResultOne.setText(getString(R.string.resultOne_six));
-                mTxtResulTwo.setText(getString(R.string.resultTwo_six));
-                mTxtProposal_content.setText(getString(R.string.proposal_six));
+                resultOne.setText(getString(R.string.resultOne_six));
+                resulTwo.setText(getString(R.string.resultTwo_six));
+                proposalContent.setText(getString(R.string.proposal_six));
                 break;
         }
     }
@@ -425,12 +415,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
         mViewPager.setVisibility(View.GONE);
         mLayoutIndicator.setVisibility(View.GONE);
-        mTxtResultOne.setVisibility(View.GONE);
-        mTxtResulTwo.setVisibility(View.GONE);
-        mlayoutProposal.setVisibility(View.GONE);
-        mlayoutTitleBg.setVisibility(View.GONE);
-        mlayoutqrCode.setVisibility(View.GONE);
-
         mMyLoadingView.setVisibility(View.VISIBLE);
     }
 
