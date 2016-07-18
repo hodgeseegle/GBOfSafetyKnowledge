@@ -38,9 +38,9 @@
     <dimen name="option_margin_title_two">0dp</dimen>
     <dimen name="suonar_margin_layout_left">130dp</dimen>
     <dimen name="margin_option_sounar">2dp</dimen>
-    <dimen name="ct_50_dp">50dp</dimen>
-    <dimen name="ct_80_dp">80dp</dimen>
-    <dimen name="ct_600_dp">600dip</dimen>
+    <dimen name="ct_100_dp">50dp</dimen>
+    <dimen name="ct_180_dp">100dp</dimen>
+    <dimen name="ct_600_dp">400dip</dimen>
 
     <!--VideoPlayerActivity-->
     <dimen name="ct_48_dp">48dp</dimen>
@@ -48,5 +48,6 @@
     <dimen name="ct_4_dp">4dp</dimen>
     <dimen name="ct_5_dp">5dp</dimen>
     <dimen name="ct_2_dp">2dp</dimen>
+    <dimen name="ct_20_dp">20dp</dimen>
 
 </resources>

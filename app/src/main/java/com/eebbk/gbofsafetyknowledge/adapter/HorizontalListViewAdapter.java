@@ -1,23 +1,22 @@
 package com.eebbk.gbofsafetyknowledge.adapter;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import com.eebbk.gbofsafetyknowledge.R;
+import com.eebbk.gbofsafetyknowledge.beans.Indicator;
+
+import java.util.ArrayList;
 
 /**
  * decription ：HorizontalList的适配器
  * author ： zhua
  */
-import java.util.ArrayList;
-
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.eebbk.gbofsafetyknowledge.R;
-import com.eebbk.gbofsafetyknowledge.beans.Indicator;
 
 public class HorizontalListViewAdapter extends BaseAdapter {
     private final int mCount;
@@ -61,8 +60,12 @@ public class HorizontalListViewAdapter extends BaseAdapter {
         int isSelected = mListView.get(position).getIsSelected();
         int isQuestioned = mListView.get(position).getIsQuestioned();
         if (isSelected == 1) {
+            if (isQuestioned == 0) {
+                view.setImageResource(R.mipmap.indicator_selected);
+            } else if (isQuestioned == 1) {
+                view.setImageResource(R.mipmap.indicator_answered_selected);
+            }
 
-            view.setImageResource(R.mipmap.indicator_selected);
             mListView.get(position).getV().setSelected(true);
         } else {
             if (isQuestioned == 0) {

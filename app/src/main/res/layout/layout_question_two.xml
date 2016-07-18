@@ -20,7 +20,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/sounar"
+        android:src="@mipmap/suona_normal"
         android:layout_marginTop="@dimen/margin_title"
         android:layout_marginLeft="@dimen/suonar_margin_layout_left"
         android:id="@+id/ImageView_suonar_title"/>
@@ -145,5 +145,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/ct_50_dp"/>
+        android:layout_marginBottom="@dimen/ct_100_dp"/>
 </RelativeLayout>

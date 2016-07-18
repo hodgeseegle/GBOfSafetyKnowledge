@@ -170,8 +170,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         QuestionFragmentPagerAdapter questionFragmentPagerAdapter = new QuestionFragmentPagerAdapter(getSupportFragmentManager());
         questionFragmentPagerAdapter.setFragments(mFragments);
         mViewPager.setAdapter(questionFragmentPagerAdapter);
+        mViewPager.setCurrentItem(0);
 
-        mPlaysyncTask = new PlaysyncTask();
+        mPlaysyncTask = new PlaysyncTask(0);
         mPlaysyncTask.execute(mQuestionsVOs.get(mCurPageNum - 1).getmVoiceID());
     }
 
@@ -245,46 +246,16 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 }
             }
         });
-
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(AnswerActivity.this);
-        if (flag == 1) {
-            builder.setMessage("确认要退出吗？");
-            builder.setTitle("提示");
-            builder.setIcon(R.mipmap.ic_launcher);
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    finish();
-                }
-            });
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-        } else if (flag == 2) {
-            builder.setMessage("确认提交吗？");
-            builder.setTitle("提示");
-            builder.setIcon(R.mipmap.ic_launcher);
-            builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    commit();
-                }
-            });
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-        }
-        builder.create().show();*/
-
     }
+
+    private MediaPlayer.OnCompletionListener mOnCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+
+            ((QuestionFragment)mFragments.get(mViewPager.getCurrentItem())).setSounarNormalBg();
+        }
+    };
+
 
     /**
      * 提交
@@ -329,7 +300,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             voiceId = questionVO.getmVoiceID();
         }
 
-        mPlaysyncTask = new PlaysyncTask();
+        mPlaysyncTask = new PlaysyncTask(flag);
         mPlaysyncTask.execute(voiceId);
     }
 
@@ -354,7 +325,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 mPlaysyncTask = null;
             }
 
-            mPlaysyncTask = new PlaysyncTask();
+            mPlaysyncTask = new PlaysyncTask(0);
             mPlaysyncTask.execute(mQuestionsVOs.get(mCurPageNum - 1).getmVoiceID());
 
             mHorizontalListViewAdapter.setSelectIndex(position);
@@ -524,6 +495,12 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     }
 
     public class PlaysyncTask extends AsyncTask<String, Integer, String> {
+
+        private  int flag;
+        private  PlaysyncTask(int flag){
+            this.flag = flag;
+        }
+
         @Override
         protected String doInBackground(String... params) {
             AssetFileDescriptor fileDescriptor;
@@ -534,6 +511,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                         fileDescriptor.getStartOffset(),
                         fileDescriptor.getLength());
                 mPlayer.prepareAsync();
+                mPlayer.setOnCompletionListener(mOnCompletionListener);
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
@@ -546,6 +524,14 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            ((QuestionFragment)mFragments.get(mViewPager.getCurrentItem())).setSounarNormalBg();
+            ((QuestionFragment)mFragments.get(mViewPager.getCurrentItem())).setSounarBg(flag,true);
         }
     }
 

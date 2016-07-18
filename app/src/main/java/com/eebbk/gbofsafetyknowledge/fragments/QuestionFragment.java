@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
-import com.eebbk.gbofsafetyknowledge.controls.MarqueText;
+import com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView;
 import com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup;
 import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
 
@@ -44,6 +44,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private Typeface mFontFace;
     private QuestionVO mQuestionVO;
     private PlayAudio mPlayAudio;
+    private ImageView mSounarTitle;
+    private ImageView mSounarOptiona;
+    private ImageView mSounarOptionb;
+    private ImageView mSounarOptionc;
+    private ImageView mSounarOptiond;
 
     public QuestionFragment() {
     }
@@ -81,36 +86,32 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     //初始化组件
     private void initViewOne(View view, final QuestionVO questionVO) {
-        MarqueText optionA = (MarqueText) view.findViewById(R.id.TextView_optionA);
-        optionA.startScroll();
+        MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
         optionA.setOnClickListener(this);
         optionA.setOnTouchListener(new TouchListener());
-        MarqueText optionB = (MarqueText) view.findViewById(R.id.TextView_optionB);
-        optionB.startScroll();
+        MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
         optionB.setOnClickListener(this);
         optionB.setOnTouchListener(new TouchListener());
-        MarqueText optionC = (MarqueText) view.findViewById(R.id.TextView_optionC);
-        optionC.startScroll();
+        MarqueeTextView optionC = (MarqueeTextView) view.findViewById(R.id.TextView_optionC);
         optionC.setOnClickListener(this);
         optionC.setOnTouchListener(new TouchListener());
-        MarqueText optionD = (MarqueText) view.findViewById(R.id.TextView_optionD);
-        optionD.startScroll();
+        MarqueeTextView optionD = (MarqueeTextView) view.findViewById(R.id.TextView_optionD);
         optionD.setOnClickListener(this);
         optionD.setOnTouchListener(new TouchListener());
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         title.setTypeface(mFontFace);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
 
-        ImageView sounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
-        sounarTitle.setOnClickListener(this);
-        ImageView sounarOptiona = (ImageView) view.findViewById(R.id.ImageView_suonar_optiona);
-        sounarOptiona.setOnClickListener(this);
-        ImageView sounarOptionb = (ImageView) view.findViewById(R.id.ImageView_suonar_optionb);
-        sounarOptionb.setOnClickListener(this);
-        ImageView sounarOptionc = (ImageView) view.findViewById(R.id.ImageView_suonar_optionc);
-        sounarOptionc.setOnClickListener(this);
-        ImageView sounarOptiond = (ImageView) view.findViewById(R.id.ImageView_suonar_optiond);
-        sounarOptiond.setOnClickListener(this);
+        mSounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
+        mSounarTitle.setOnClickListener(this);
+        mSounarOptiona = (ImageView) view.findViewById(R.id.ImageView_suonar_optiona);
+        mSounarOptiona.setOnClickListener(this);
+        mSounarOptionb = (ImageView) view.findViewById(R.id.ImageView_suonar_optionb);
+        mSounarOptionb.setOnClickListener(this);
+        mSounarOptionc = (ImageView) view.findViewById(R.id.ImageView_suonar_optionc);
+        mSounarOptionc.setOnClickListener(this);
+        mSounarOptiond = (ImageView) view.findViewById(R.id.ImageView_suonar_optiond);
+        mSounarOptiond.setOnClickListener(this);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
         mRadioButton_A.setOnTouchListener(new TouchListener());
@@ -178,6 +179,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
         mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
+
+        mSounarTitle = (ImageView)view.findViewById(R.id.ImageView_suonar_title);
 
         mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
@@ -329,6 +332,67 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                     break;
             }
             return false;
+        }
+    }
+
+    /**
+     * 设置音频pic背景
+     */
+    public void setSounarBg(int whichSounar, boolean flag) {//0 title  1  optiona   2 optionb  3  optionc   4 optiond
+        switch (whichSounar) {
+            case 0:
+                if (flag) {
+                    mSounarTitle.setImageResource(R.mipmap.suona_click);
+                } else {
+                    mSounarTitle.setImageResource(R.mipmap.suona_normal);
+                }
+                break;
+            case 1:
+                if (flag) {
+                    mSounarOptiona.setImageResource(R.mipmap.suona_click);
+                } else {
+                    mSounarOptiona.setImageResource(R.mipmap.suona_normal);
+                }
+                break;
+            case 2:
+                if (flag) {
+                    mSounarOptionb.setImageResource(R.mipmap.suona_click);
+                } else {
+                    mSounarOptionb.setImageResource(R.mipmap.suona_normal);
+                }
+                break;
+            case 3:
+                if (flag) {
+                    mSounarOptionc.setImageResource(R.mipmap.suona_click);
+                } else {
+                    mSounarOptionc.setImageResource(R.mipmap.suona_normal);
+                }
+                break;
+            case 4:
+                if (flag) {
+                    mSounarOptiond.setImageResource(R.mipmap.suona_click);
+                } else {
+                    mSounarOptiond.setImageResource(R.mipmap.suona_normal);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 设置所有声音pic为最初的颜色
+     */
+    public void setSounarNormalBg(){
+        if(mSounarTitle != null){
+            mSounarTitle.setImageResource(R.mipmap.suona_normal);
+        }
+
+        if(mSounarOptiona != null){
+            mSounarOptiona.setImageResource(R.mipmap.suona_normal);
+            mSounarOptionb.setImageResource(R.mipmap.suona_normal);
+            mSounarOptionc.setImageResource(R.mipmap.suona_normal);
+            mSounarOptiond.setImageResource(R.mipmap.suona_normal);
         }
     }
 

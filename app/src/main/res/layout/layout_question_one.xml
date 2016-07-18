@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/suonar_margin_layout_left"
         android:layout_marginTop="@dimen/margin_title"
-        android:src="@drawable/sounar" />
+        android:src="@mipmap/suona_normal" />
 
     <TextView
         android:id="@+id/TextView_title"
@@ -45,12 +45,13 @@
                 android:id="@+id/ImageView_suonar_optiona"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sounar" />
+                android:src="@mipmap/suona_normal" />
 
             <RadioButton
                 android:id="@+id/RadioButton_A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
                 android:button="@null"
                 android:checked="false"
@@ -59,13 +60,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionA"
                 android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionA_one"
+                android:text="@string/optionD_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -82,12 +87,13 @@
                 android:id="@+id/ImageView_suonar_optionb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sounar" />
+                android:src="@mipmap/suona_normal" />
 
             <RadioButton
                 android:id="@+id/RadioButton_B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_b"
@@ -95,13 +101,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionB"
                 android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionB_one"
+                android:text="@string/optionD_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -118,12 +128,13 @@
                 android:id="@+id/ImageView_suonar_optionc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sounar" />
+                android:src="@mipmap/suona_normal" />
 
             <RadioButton
                 android:id="@+id/RadioButton_C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_c"
@@ -131,13 +142,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionC"
                 android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionC_one"
+                android:text="@string/optionD_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -154,12 +169,13 @@
                 android:id="@+id/ImageView_suonar_optiond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sounar" />
+                android:src="@mipmap/suona_normal" />
 
             <RadioButton
                 android:id="@+id/RadioButton_D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_d"
@@ -167,11 +183,15 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/ct_33sp" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
                 android:id="@+id/TextView_optionD"
                 android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionD_one"
                 android:textColor="@color/white"
@@ -185,6 +205,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/ct_50_dp"
-        android:layout_marginRight="@dimen/ct_80_dp" />
+        android:layout_marginBottom="@dimen/ct_100_dp"
+        android:layout_marginRight="@dimen/ct_180_dp" />
 </RelativeLayout>
