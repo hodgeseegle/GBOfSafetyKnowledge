@@ -42,7 +42,9 @@
             android:name=".activity.AnswerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowBackground="@color/transparent"
+            android:background="@color/transparent"/>
         <activity android:name=".activity.VideoPlayerActivity"></activity>
     </application>
 

@@ -1,6 +1,6 @@
 package com.eebbk.gbofsafetyknowledge.activity;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -32,7 +33,9 @@ import com.eebbk.gbofsafetyknowledge.controls.MyLoadingView;
 import com.eebbk.gbofsafetyknowledge.dao.QuestionDAO;
 import com.eebbk.gbofsafetyknowledge.fragments.QuestionFragment;
 import com.eebbk.gbofsafetyknowledge.utils.ToastUtils;
+import com.eebbk.gbofsafetyknowledge.utils.Util;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -42,10 +45,10 @@ import java.util.List;
  * description:答题界面
  * author:zhua
  */
-public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose {
+public class AnswerActivity extends FragmentActivity implements QuestionFragment.Chose, QuestionFragment.PlayAudio {
 
     private static final String TAG = "AnswerActivity";
-    
+
     //题目数
     private static final int QUESTION_NUM = 6;
     //筛选题目结束
@@ -92,6 +95,8 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private PlaysyncTask mPlaysyncTask;
     //播放按钮
     private ImageView mImgVideoPlay;
+    //特殊字体
+    private Typeface mFontFace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +123,9 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mLayoutIndicator = (LinearLayout) findViewById(R.id.LinearLayout_indicator);
         mTxtResultOne = (TextView) findViewById(R.id.TextView_resultOne);
         mTxtResulTwo = (TextView) findViewById(R.id.TextView_resultTwo);
-        Typeface fontFace = Typeface.createFromAsset(getAssets(),
+        mFontFace = Typeface.createFromAsset(getAssets(),
                 "fonts/FZSEJW.TTF");
-        mTxtResultOne.setTypeface(fontFace);
+        mTxtResultOne.setTypeface(mFontFace);
         mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
         mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
@@ -197,10 +202,51 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     /**
      * 弹出对话框
      */
-    private void showDlg(int flag) {//1  退出  2  提交
+    private void showDlg(final int flag) {//1  退出  2  提交
         mPlayer.stop();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AnswerActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout = inflater.inflate(R.layout.comment_back_dlg, null);
+
+        final Dialog dialog = new AlertDialog.Builder(AnswerActivity.this).create();
+        dialog.setCancelable(false);
+        dialog.show();
+        dialog.getWindow().setLayout(Util.dip2px(this, 500), Util.dip2px(this, 300));
+        dialog.getWindow().setContentView(layout);
+        TextView title = (TextView) layout.findViewById(R.id.title);
+        TextView cancel = (TextView) layout.findViewById(R.id.cancel);
+        TextView sure = (TextView) layout.findViewById(R.id.sure);
+        title.setTypeface(mFontFace);
+        cancel.setTypeface(mFontFace);
+        sure.setTypeface(mFontFace);
+        cancel.setText("取消");
+        sure.setText("确定");
+
+        if (flag == 1) {
+            title.setText("确认要退出吗？");
+        } else if (flag == 2) {
+            title.setText("确认提交吗？");
+        }
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dialog.dismiss();
+
+                if (flag == 1) {
+                    finish();
+                } else if (flag == 2) {
+                    commit();
+                }
+            }
+        });
+
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(AnswerActivity.this);
         if (flag == 1) {
             builder.setMessage("确认要退出吗？");
             builder.setTitle("提示");
@@ -236,7 +282,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
                 }
             });
         }
-        builder.create().show();
+        builder.create().show();*/
 
     }
 
@@ -263,6 +309,28 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         }
 
         showProposal(corrects.size());
+    }
+
+    @Override
+    public void playAudio(QuestionVO questionVO, int flag) {
+
+        if (mPlaysyncTask != null) {
+            mPlaysyncTask.cancel(true);
+            mPlaysyncTask = null;
+        }
+
+        String voiceId = null;
+        if (flag != 0) {
+            String optionsVoiceId = questionVO.getmExtend();
+            String[] strarray = optionsVoiceId.split("[,]");
+
+            voiceId = strarray[flag - 1];
+        } else {
+            voiceId = questionVO.getmVoiceID();
+        }
+
+        mPlaysyncTask = new PlaysyncTask();
+        mPlaysyncTask.execute(voiceId);
     }
 
     /**
@@ -461,7 +529,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             AssetFileDescriptor fileDescriptor;
             mPlayer.reset();
             try {
-                fileDescriptor = mAssetManager.openFd(params[0] + ".ogg");
+                fileDescriptor = mAssetManager.openFd("voice" + File.separator + params[0] + ".mp3");
                 mPlayer.setDataSource(fileDescriptor.getFileDescriptor(),
                         fileDescriptor.getStartOffset(),
                         fileDescriptor.getLength());

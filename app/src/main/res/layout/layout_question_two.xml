@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingEnd="@dimen/margin_layout_right"
-    android:paddingLeft="@dimen/margin_layout_left"
-    android:paddingRight="@dimen/margin_layout_right"
-    android:paddingStart="@dimen/margin_layout_left"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
 
     <TextView
@@ -14,16 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_title"
+        android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginRight="@dimen/margin_layout_right"
         android:singleLine="false"
         android:text="@string/title"
         android:textColor="@color/white"
         android:textSize="@dimen/ct_44sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sounar"
+        android:layout_marginTop="@dimen/margin_title"
+        android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+        android:id="@+id/ImageView_suonar_title"/>
 
     <com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup
         android:id="@+id/RadioGroup_radioBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/TextView_title"
+        android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginRight="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/option_margin_title_two"
         android:orientation="horizontal">
 
@@ -130,4 +138,12 @@
 
         </RelativeLayout>
     </com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup>
+
+    <ImageView
+        android:id="@+id/ImageView_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/ct_50_dp"/>
 </RelativeLayout>

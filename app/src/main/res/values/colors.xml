@@ -14,4 +14,8 @@
     <color name="main_color">#52ce90</color>
     <color name="title_touch_color">#115c66</color>
     <color name="transparent">#00000000</color>
+    <color name="dlg_cancel">#f05454</color>
+    <color name="dlg_sure">#97e018</color>
+
+    <color name="dlg_bg">#006769</color>
 </resources>

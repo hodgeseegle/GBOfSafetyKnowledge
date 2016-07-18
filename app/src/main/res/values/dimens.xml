@@ -42,5 +42,6 @@
     <dimen name="ct_4_dp">4dp</dimen>
     <dimen name="ct_5_dp">5dp</dimen>
     <dimen name="ct_2_dp">2dp</dimen>
+    <dimen name="ct_15_dp">15dp</dimen>
 
 </resources>

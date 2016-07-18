@@ -3,32 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin_layout_left"
-    android:paddingStart="@dimen/margin_layout_left"
-    android:paddingRight="@dimen/margin_layout_right"
-    android:paddingEnd="@dimen/margin_layout_right"
     tools:context="com.eebbk.gbofsafetyknowledge.activity.AnswerActivity">
+
+    <ImageView
+        android:id="@+id/ImageView_suonar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+        android:layout_marginTop="@dimen/margin_title"
+        android:src="@drawable/sounar" />
 
     <TextView
         android:id="@+id/TextView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginRight="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/margin_title"
         android:singleLine="false"
         android:text="@string/title"
         android:textColor="@color/white"
         android:textSize="@dimen/ct_44sp" />
 
-    <ImageView
-        android:id="@+id/ImageView_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup
         android:id="@+id/RadioGroup_radioBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/TextView_title"
+        android:layout_marginRight="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/option_margin_title"
         android:orientation="vertical">
 
@@ -36,28 +38,32 @@
             android:id="@+id/LinearLayout_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/suonar_margin_layout_left"
             android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ImageView_suonar_optiona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sounar" />
 
             <RadioButton
                 android:id="@+id/RadioButton_A"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_a"
-                android:drawableLeft="@drawable/radio_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:button="@null"
+                android:checked="false"
+                android:drawableLeft="@drawable/radio_a"
+                android:drawableStart="@drawable/radio_a"
                 android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"
-                android:checked="false" />
+                android:textSize="@dimen/ct_33sp" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
                 android:id="@+id/TextView_optionA"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionA_one"
                 android:textColor="@color/white"
@@ -68,28 +74,32 @@
             android:id="@+id/LinearLayout_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
-            <RadioButton
-                android:id="@+id/RadioButton_B"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_b"
-                android:drawableLeft="@drawable/radio_b"
+            <ImageView
+                android:id="@+id/ImageView_suonar_optionb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:src="@drawable/sounar" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
+            <RadioButton
+                android:id="@+id/RadioButton_B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_b"
+                android:drawableStart="@drawable/radio_b"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ct_33sp" />
+
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
                 android:id="@+id/TextView_optionB"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionB_one"
                 android:textColor="@color/white"
@@ -100,28 +110,32 @@
             android:id="@+id/LinearLayout_C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
-            <RadioButton
-                android:id="@+id/RadioButton_C"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_c"
-                android:drawableLeft="@drawable/radio_c"
+            <ImageView
+                android:id="@+id/ImageView_suonar_optionc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:src="@drawable/sounar" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
+            <RadioButton
+                android:id="@+id/RadioButton_C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_c"
+                android:drawableStart="@drawable/radio_c"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ct_33sp" />
+
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
                 android:id="@+id/TextView_optionC"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionC_one"
                 android:textColor="@color/white"
@@ -132,28 +146,32 @@
             android:id="@+id/LinearLayout_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
-            <RadioButton
-                android:id="@+id/RadioButton_D"
-                android:button="@null"
-                android:drawableStart="@drawable/radio_d"
-                android:drawableLeft="@drawable/radio_d"
+            <ImageView
+                android:id="@+id/ImageView_suonar_optiond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/ct_33sp"/>
+                android:src="@drawable/sounar" />
 
-            <com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView
+            <RadioButton
+                android:id="@+id/RadioButton_D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_d"
+                android:drawableStart="@drawable/radio_d"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ct_33sp" />
+
+            <com.eebbk.gbofsafetyknowledge.controls.MarqueText
                 android:id="@+id/TextView_optionD"
-                android:layout_width="855dip"
+                android:layout_width="@dimen/ct_600_dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="@string/optionD_one"
                 android:textColor="@color/white"
@@ -161,5 +179,12 @@
         </LinearLayout>
     </com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup>
 
-
+    <ImageView
+        android:id="@+id/ImageView_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/ct_50_dp"
+        android:layout_marginRight="@dimen/ct_80_dp" />
 </RelativeLayout>

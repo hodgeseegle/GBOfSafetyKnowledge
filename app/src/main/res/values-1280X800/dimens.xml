@@ -1,6 +1,7 @@
 <resources>
     <!--自定义字体大小-->
     <dimen name="ct_44sp">44sp</dimen>
+    <dimen name="ct_40sp">40sp</dimen>
     <dimen name="ct_33sp">33sp</dimen>
     <dimen name="ct_22sp">22sp</dimen>
     <dimen name="ct_12sp">12sp</dimen>
@@ -12,8 +13,10 @@
     <dimen name="padding_left_right">140dp</dimen>
     <dimen name="padding_top_bottom">91dp</dimen>
     <dimen name="margin_title">20dp</dimen>
-    <dimen name="margin_layout_left">50dp</dimen>
-    <dimen name="margin_layout_right">50dp</dimen>
+    <dimen name="margin_layout_left">190dp</dimen>
+    <dimen name="margin_option_sounar">2dp</dimen>
+    <dimen name="suonar_margin_layout_left">130dp</dimen>
+    <dimen name="margin_layout_right">190dp</dimen>
     <dimen name="table_hight">48dp</dimen>
     <dimen name="horizontal_hight">40dp</dimen>
     <dimen name="horizontal_width">792dp</dimen>
@@ -34,6 +37,10 @@
     <dimen name="progress_loading_start">55dp</dimen>
     <dimen name="progress_loading_text_margin_left">22dp</dimen>
     <dimen name="option_margin_title">30dp</dimen>
+
+    <dimen name="ct_50_dp">50dp</dimen>
+    <dimen name="ct_80_dp">80dp</dimen>
+    <dimen name="ct_600_dp">600dp</dimen>
 
 
     <!--VideoPlayerActivity-->

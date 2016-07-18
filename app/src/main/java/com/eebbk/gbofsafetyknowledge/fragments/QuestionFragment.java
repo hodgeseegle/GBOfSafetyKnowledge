@@ -17,9 +17,11 @@ import android.widget.TextView;
 
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
-import com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView;
+import com.eebbk.gbofsafetyknowledge.controls.MarqueText;
 import com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup;
 import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
+
+import java.io.File;
 
 /**
  * decription ：答题 fragment
@@ -40,6 +42,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private LinearLayout mLayout_C = null;
     private LinearLayout mLayout_D = null;
     private Typeface mFontFace;
+    private QuestionVO mQuestionVO;
+    private PlayAudio mPlayAudio;
 
     public QuestionFragment() {
     }
@@ -49,6 +53,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         super.onAttach(context);
 
         mChose = (Chose) context;
+        mPlayAudio = (PlayAudio) context;
     }
 
     @Override
@@ -56,41 +61,56 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         View view = null;
         Bundle data = getArguments();//获得从activity中传递过来的值
 
-        QuestionVO questionVO = (QuestionVO) data.getSerializable("QuestionVO");
-        if (questionVO == null) {
+        mQuestionVO = (QuestionVO) data.getSerializable("QuestionVO");
+        if (mQuestionVO == null) {
             return null;
         }
         mBitmapUtils = BitmapUtils.getInstance(getActivity().getApplicationContext());
         mFontFace = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/FZSEJW.TTF");
-        if (questionVO.getmQuestionFormat() == 2) {
+        if (mQuestionVO.getmQuestionFormat() == 2) {
             view = inflater.inflate(R.layout.layout_question_one, container, false);
-            initViewOne(view, questionVO);
-        } else if (questionVO.getmQuestionFormat() == 1) {
+            initViewOne(view, mQuestionVO);
+        } else if (mQuestionVO.getmQuestionFormat() == 1) {
             view = inflater.inflate(R.layout.layout_question_two, container, false);
-            initViewTwo(view, questionVO);
+            initViewTwo(view, mQuestionVO);
         }
 
         return view;
     }
 
     //初始化组件
-    private void initViewOne(View view, QuestionVO questionVO) {
-        MarqueeTextView optionA = (MarqueeTextView) view.findViewById(R.id.TextView_optionA);
+    private void initViewOne(View view, final QuestionVO questionVO) {
+        MarqueText optionA = (MarqueText) view.findViewById(R.id.TextView_optionA);
+        optionA.startScroll();
         optionA.setOnClickListener(this);
         optionA.setOnTouchListener(new TouchListener());
-        MarqueeTextView optionB = (MarqueeTextView) view.findViewById(R.id.TextView_optionB);
+        MarqueText optionB = (MarqueText) view.findViewById(R.id.TextView_optionB);
+        optionB.startScroll();
         optionB.setOnClickListener(this);
         optionB.setOnTouchListener(new TouchListener());
-        MarqueeTextView optionC = (MarqueeTextView) view.findViewById(R.id.TextView_optionC);
+        MarqueText optionC = (MarqueText) view.findViewById(R.id.TextView_optionC);
+        optionC.startScroll();
         optionC.setOnClickListener(this);
         optionC.setOnTouchListener(new TouchListener());
-        MarqueeTextView optionD = (MarqueeTextView) view.findViewById(R.id.TextView_optionD);
+        MarqueText optionD = (MarqueText) view.findViewById(R.id.TextView_optionD);
+        optionD.startScroll();
         optionD.setOnClickListener(this);
         optionD.setOnTouchListener(new TouchListener());
         TextView title = (TextView) view.findViewById(R.id.TextView_title);
         title.setTypeface(mFontFace);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
+
+        ImageView sounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
+        sounarTitle.setOnClickListener(this);
+        ImageView sounarOptiona = (ImageView) view.findViewById(R.id.ImageView_suonar_optiona);
+        sounarOptiona.setOnClickListener(this);
+        ImageView sounarOptionb = (ImageView) view.findViewById(R.id.ImageView_suonar_optionb);
+        sounarOptionb.setOnClickListener(this);
+        ImageView sounarOptionc = (ImageView) view.findViewById(R.id.ImageView_suonar_optionc);
+        sounarOptionc.setOnClickListener(this);
+        ImageView sounarOptiond = (ImageView) view.findViewById(R.id.ImageView_suonar_optiond);
+        sounarOptiond.setOnClickListener(this);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
         mRadioButton_A.setOnTouchListener(new TouchListener());
@@ -129,7 +149,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         optionD.setText(questionVO.getmOptionD());
 
         if (questionVO.getmPicID() != null) {
-            Bitmap bmp = mBitmapUtils.getDrawableBitmap(questionVO.getmPicID());
+            Bitmap bmp = mBitmapUtils.getDrawableBitmap("question_bg" + File.separator + questionVO.getmPicID() + ".png");
             if (bmp != null) {
                 img.setImageBitmap(bmp);
             }
@@ -149,6 +169,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         picC.setOnClickListener(this);
         ImageView picD = (ImageView) view.findViewById(R.id.ImageView_picD);
         picD.setOnClickListener(this);
+        ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
+        ImageView sounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
+        sounarTitle.setOnClickListener(this);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
         mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
@@ -190,6 +213,13 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         if (bmpD != null) {
             picD.setImageBitmap(bmpD);
         }
+
+        if (questionVO.getmPicID() != null) {
+            Bitmap bmp = mBitmapUtils.getDrawableBitmap("question_bg" + File.separator + questionVO.getmPicID() + ".png");
+            if (bmp != null) {
+                img.setImageBitmap(bmp);
+            }
+        }
     }
 
     @Override
@@ -210,6 +240,21 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
             case R.id.TextView_optionD:
             case R.id.ImageView_picD:
                 mRadioButton_D.setChecked(true);
+                break;
+            case R.id.ImageView_suonar_title:
+                mPlayAudio.playAudio(mQuestionVO, 0);
+                break;
+            case R.id.ImageView_suonar_optiona:
+                mPlayAudio.playAudio(mQuestionVO, 1);
+                break;
+            case R.id.ImageView_suonar_optionb:
+                mPlayAudio.playAudio(mQuestionVO, 2);
+                break;
+            case R.id.ImageView_suonar_optionc:
+                mPlayAudio.playAudio(mQuestionVO, 3);
+                break;
+            case R.id.ImageView_suonar_optiond:
+                mPlayAudio.playAudio(mQuestionVO, 4);
                 break;
             default:
                 break;
@@ -290,5 +335,10 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     //选择答案接口
     public interface Chose {
         void chose(String answer);
+    }
+
+    //音频回调
+    public interface PlayAudio {
+        void playAudio(QuestionVO questionVO, int flag);//0 title 1 optiona 2 optionb 3 optionc 4 optiond
     }
 }
