@@ -6,15 +6,22 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+
+import com.eebbk.gbofsafetyknowledge.R;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 
 /**
  * decription ：bitmap工具类
+ *
  * @author ： zhua
  */
 public class BitmapUtils {
 
+    private static final String TAG = "BitmapUtils";
     private final Context mContext;
     private static BitmapUtils mBitmapUtils = null;
 
@@ -59,7 +66,7 @@ public class BitmapUtils {
             try {
                 assetFile = assetManager.open(name);
                 Bitmap e = BitmapFactory.decodeStream(assetFile);
-                da = new BitmapDrawable(mContext.getResources(),e);
+                da = new BitmapDrawable(mContext.getResources(), e);
                 assetFile.close();
             } catch (IOException var5) {
                 var5.printStackTrace();
@@ -68,4 +75,27 @@ public class BitmapUtils {
 
         return da;
     }
+
+    /**
+     * 根据文件名获取mipmap下图片文件的id
+     *
+     * @param imgName
+     */
+    public int getImageResourceId(Context context,String imgName) {
+
+        Class mipmap = R.mipmap.class;
+        int resId = 0;
+        try {
+            Field field = mipmap.getField(imgName);
+            resId = field.getInt(imgName);
+        } catch (Exception e) {
+            Log.i(TAG, "getImageResourceId: " + e);
+        }
+
+        return resId;
+
+        /*return context.getResources().getIdentifier(imgName, "mipmap",
+                context.getPackageName());*/
+    }
+
 }

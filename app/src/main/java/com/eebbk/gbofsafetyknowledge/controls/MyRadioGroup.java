@@ -104,7 +104,7 @@ public class MyRadioGroup extends LinearLayout {
     /**
      * 查找radioButton控件
      */
-    private RadioButton findRadioButton(ViewGroup group) {
+    public RadioButton findRadioButton(ViewGroup group) {
         RadioButton resBtn = null;
         int len = group.getChildCount();
         for (int i = 0; i < len; i++) {
@@ -128,7 +128,7 @@ public class MyRadioGroup extends LinearLayout {
      * @see #getCheckedRadioButtonId()
      * @see #clearCheck()
      */
-    private void check(int id) {
+    public void check(int id) {
         // don't even bother
         if (id != -1 && (id == mCheckedId)) {
             return;
@@ -229,6 +229,7 @@ public class MyRadioGroup extends LinearLayout {
      * </p>
      * <p/>
      * <p>
+     * See {@link android.R.styleable#LinearLayout_Layout LinearLayout
      * Attributes} for a list of all child view attributes that this class
      * supports.
      * </p>
@@ -316,7 +317,7 @@ public class MyRadioGroup extends LinearLayout {
          * @param group     the group in which the checked radio button has changed
          * @param checkedId the unique identifier of the newly checked radio button
          */
-        void onCheckedChanged(MyRadioGroup group, int checkedId);
+        public void onCheckedChanged(MyRadioGroup group, int checkedId);
     }
 
     private class CheckedStateTracker implements

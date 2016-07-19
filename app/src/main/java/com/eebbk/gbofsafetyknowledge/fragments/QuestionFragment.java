@@ -1,7 +1,6 @@
 package com.eebbk.gbofsafetyknowledge.fragments;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,14 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
 import com.eebbk.gbofsafetyknowledge.R;
 import com.eebbk.gbofsafetyknowledge.beans.QuestionVO;
 import com.eebbk.gbofsafetyknowledge.controls.MarqueeTextView;
 import com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup;
 import com.eebbk.gbofsafetyknowledge.utils.BitmapUtils;
-
-import java.io.File;
 
 /**
  * decription ：答题 fragment
@@ -117,12 +113,16 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
         mRadioButton_A.setOnTouchListener(new TouchListener());
+        mRadioButton_A.setOnClickListener(this);
         mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
         mRadioButton_B.setOnTouchListener(new TouchListener());
+        mRadioButton_B.setOnClickListener(this);
         mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
         mRadioButton_C.setOnTouchListener(new TouchListener());
+        mRadioButton_C.setOnClickListener(this);
         mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
         mRadioButton_D.setOnTouchListener(new TouchListener());
+        mRadioButton_D.setOnClickListener(this);
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
         mLayout_A = (LinearLayout) view.findViewById(R.id.LinearLayout_A);
@@ -130,7 +130,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         mLayout_C = (LinearLayout) view.findViewById(R.id.LinearLayout_C);
         mLayout_D = (LinearLayout) view.findViewById(R.id.LinearLayout_D);
 
-        mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
+        /*mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(MyRadioGroup radioGroup, int i) {
                 if (i == R.id.RadioButton_A) {
@@ -143,7 +143,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                     mChose.chose("D");
                 }
             }
-        });
+        });*/
 
         title.setText(questionVO.getmTitle());
         optionA.setText(questionVO.getmOptionA());
@@ -152,9 +152,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         optionD.setText(questionVO.getmOptionD());
 
         if (questionVO.getmPicID() != null) {
-            Bitmap bmp = mBitmapUtils.getDrawableBitmap("question_bg" + File.separator + questionVO.getmPicID() + ".png");
-            if (bmp != null) {
-                img.setImageBitmap(bmp);
+            int resID = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmPicID());
+            if (resID != 0) {
+                img.setImageResource(resID);
             }
         }
     }
@@ -175,15 +175,19 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
+        mRadioButton_A.setOnClickListener(this);
         mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
+        mRadioButton_B.setOnClickListener(this);
         mRadioButton_C = (RadioButton) view.findViewById(R.id.RadioButton_C);
+        mRadioButton_C.setOnClickListener(this);
         mRadioButton_D = (RadioButton) view.findViewById(R.id.RadioButton_D);
+        mRadioButton_D.setOnClickListener(this);
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
-        mSounarTitle = (ImageView)view.findViewById(R.id.ImageView_suonar_title);
+        mSounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
         mSounarTitle.setOnClickListener(this);
 
-        mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
+       /* mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(MyRadioGroup radioGroup, int i) {
                 if (i == R.id.RadioButton_A) {
@@ -196,32 +200,49 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                     mChose.chose("D");
                 }
             }
-        });
+        });*/
 
         title.setText(questionVO.getmTitle());
-        Bitmap bmpA = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionA().toLowerCase() + ".png");
-        Bitmap bmpB = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionB().toLowerCase() + ".png");
-        Bitmap bmpC = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionC().toLowerCase() + ".png");
-        Bitmap bmpD = mBitmapUtils.getDrawableBitmap(questionVO.getmOptionD().toLowerCase() + ".png");
-        Log.i(TAG, "initViewTwo: " + questionVO.getmOptionD().toLowerCase() + ".png");
 
-        if (bmpA != null) {
-            picA.setImageBitmap(bmpA);
+        int resIDA = 0;
+        int resIDB = 0;
+        int resIDC = 0;
+        int resIDD = 0;
+        if (questionVO.getmOptionA() != null) {
+            resIDA = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmOptionA().toLowerCase());
         }
-        if (bmpB != null) {
-            picB.setImageBitmap(bmpB);
+
+        if (questionVO.getmOptionB() != null) {
+            resIDB = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmOptionB().toLowerCase());
         }
-        if (bmpC != null) {
-            picC.setImageBitmap(bmpC);
+
+        if (questionVO.getmOptionC() != null) {
+            resIDC = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmOptionC().toLowerCase());
         }
-        if (bmpD != null) {
-            picD.setImageBitmap(bmpD);
+
+        if (questionVO.getmOptionD() != null) {
+            resIDD = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmOptionD().toLowerCase());
+        }
+
+        Log.i(TAG, "initViewTwo: " + questionVO.getmOptionD().toLowerCase());
+
+        if (resIDA != 0) {
+            picA.setImageResource(resIDA);
+        }
+        if (resIDB != 0) {
+            picB.setImageResource(resIDB);
+        }
+        if (resIDC != 0) {
+            picC.setImageResource(resIDC);
+        }
+        if (resIDD != 0) {
+            picD.setImageResource(resIDD);
         }
 
         if (questionVO.getmPicID() != null) {
-            Bitmap bmp = mBitmapUtils.getDrawableBitmap("question_bg" + File.separator + questionVO.getmPicID() + ".png");
-            if (bmp != null) {
-                img.setImageBitmap(bmp);
+            int resID = mBitmapUtils.getImageResourceId(getActivity(),questionVO.getmPicID());
+            if (resID != 0) {
+                img.setImageResource(resID);
             }
         }
     }
@@ -231,19 +252,28 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.ImageView_picA:
             case R.id.TextView_optionA:
+            case R.id.RadioButton_A:
                 mRadioButton_A.setChecked(true);
+                mChose.chose("A");
+
                 break;
             case R.id.ImageView_picB:
             case R.id.TextView_optionB:
+            case R.id.RadioButton_B:
                 mRadioButton_B.setChecked(true);
+                mChose.chose("B");
                 break;
             case R.id.ImageView_picC:
             case R.id.TextView_optionC:
+            case R.id.RadioButton_C:
                 mRadioButton_C.setChecked(true);
+                mChose.chose("C");
                 break;
             case R.id.TextView_optionD:
             case R.id.ImageView_picD:
+            case R.id.RadioButton_D:
                 mRadioButton_D.setChecked(true);
+                mChose.chose("D");
                 break;
             case R.id.ImageView_suonar_title:
                 mPlayAudio.playAudio(mQuestionVO, 0);
@@ -278,25 +308,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(), R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(), R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(), R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(), R.color.title_touch_color));
                             }
                             break;
                     }
@@ -308,25 +338,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.transparent));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(), R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.transparent));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(), R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.transparent));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(), R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.transparent));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(), R.color.transparent));
                             }
                             break;
                     }
@@ -384,12 +414,12 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     /**
      * 设置所有声音pic为最初的颜色
      */
-    public void setSounarNormalBg(){
-        if(mSounarTitle != null){
+    public void setSounarNormalBg() {
+        if (mSounarTitle != null) {
             mSounarTitle.setImageResource(R.mipmap.suona_normal);
         }
 
-        if(mSounarOptiona != null){
+        if (mSounarOptiona != null) {
             mSounarOptiona.setImageResource(R.mipmap.suona_normal);
             mSounarOptionb.setImageResource(R.mipmap.suona_normal);
             mSounarOptionc.setImageResource(R.mipmap.suona_normal);

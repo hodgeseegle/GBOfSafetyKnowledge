@@ -396,11 +396,12 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
     @Override
     protected void onPause() {//暂停声音
-
-        if (mPlayer != null && mPlayer.isPlaying()) {
-            mPlayer.pause();
-        }
         super.onPause();
+
+        if(mPlaysyncTask != null){
+            mPlaysyncTask.cancel(true);
+            mPlaysyncTask = null;
+        }
     }
 
     /**
