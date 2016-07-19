@@ -45,11 +45,6 @@ public class QuestionFragmentPagerAdapter extends FragmentStatePagerAdapter {
         return fragments.get(position);
     }
 
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
-    }
-
     public void appendList(ArrayList<Fragment> fragment) {
         if (this.fragments != null) {
             FragmentTransaction ft = fm.beginTransaction();

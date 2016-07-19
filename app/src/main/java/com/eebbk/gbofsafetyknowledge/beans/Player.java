@@ -53,7 +53,7 @@ public class Player implements SurfaceHolder.Callback {
     private SoftReference<Context> mContext;
 
     public void setmContext(Context mContext) {
-        this.mContext = new SoftReference<Context>(mContext);
+        this.mContext = new SoftReference<>(mContext);
         mMediaPlayer = MediaPlayer.create(this.mContext.get(), R.raw.video);
     }
 

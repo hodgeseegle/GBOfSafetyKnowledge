@@ -71,7 +71,7 @@ public class MarqueText extends TextView implements Runnable {
     }
 
     // 开始滚动
-    public void startScroll() {
+    private void startScroll() {
         isStop = false;
         this.removeCallbacks(this);
         post(this);

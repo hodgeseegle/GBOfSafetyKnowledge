@@ -3,8 +3,10 @@ package com.eebbk.gbofsafetyknowledge.fragments;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -171,8 +173,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         ImageView picD = (ImageView) view.findViewById(R.id.ImageView_picD);
         picD.setOnClickListener(this);
         ImageView img = (ImageView) view.findViewById(R.id.ImageView_pic);
-        ImageView sounarTitle = (ImageView) view.findViewById(R.id.ImageView_suonar_title);
-        sounarTitle.setOnClickListener(this);
 
         mRadioButton_A = (RadioButton) view.findViewById(R.id.RadioButton_A);
         mRadioButton_B = (RadioButton) view.findViewById(R.id.RadioButton_B);
@@ -181,6 +181,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         mRadioGroup = (MyRadioGroup) view.findViewById(R.id.RadioGroup_radioBtn);
 
         mSounarTitle = (ImageView)view.findViewById(R.id.ImageView_suonar_title);
+        mSounarTitle.setOnClickListener(this);
 
         mRadioGroup.setOnCheckedChangeListener(new MyRadioGroup.OnCheckedChangeListener() {
             @Override
@@ -264,7 +265,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public class TouchListener implements View.OnTouchListener {
+    private class TouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -277,25 +278,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.title_touch_color));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.title_touch_color));
                             }
                             break;
                     }
@@ -307,25 +308,25 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                         case R.id.RadioButton_A:
                         case R.id.TextView_optionA:
                             if (mLayout_A != null) {
-                                mLayout_A.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_A.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_B:
                         case R.id.TextView_optionB:
                             if (mLayout_B != null) {
-                                mLayout_B.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_B.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_C:
                         case R.id.TextView_optionC:
                             if (mLayout_C != null) {
-                                mLayout_C.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_C.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                         case R.id.RadioButton_D:
                         case R.id.TextView_optionD:
                             if (mLayout_D != null) {
-                                mLayout_D.setBackgroundColor(getResources().getColor(R.color.transparent));
+                                mLayout_D.setBackgroundColor(getColor(getActivity(),R.color.transparent));
                             }
                             break;
                     }
@@ -404,5 +405,14 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     //音频回调
     public interface PlayAudio {
         void playAudio(QuestionVO questionVO, int flag);//0 title 1 optiona 2 optionb 3 optionc 4 optiond
+    }
+
+    public int getColor(Context context, int id) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 23) {
+            return ContextCompat.getColor(context, id);
+        } else {
+            return context.getResources().getColor(id);
+        }
     }
 }

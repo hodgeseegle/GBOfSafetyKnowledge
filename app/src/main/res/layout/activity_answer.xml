@@ -61,6 +61,7 @@
             android:id="@+id/RelativeLayout_proposal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@mipmap/proposal_bg"
             android:layout_below="@+id/TextView_resultTwo"
             android:layout_toLeftOf="@+id/RelativeLayout_qrCode"
             android:layout_toStartOf="@+id/RelativeLayout_qrCode">
@@ -70,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/proposal_margin_top"
-                android:background="@mipmap/proposal_bg"
                 android:padding="@dimen/proposal_pidding">
 
                 <TextView

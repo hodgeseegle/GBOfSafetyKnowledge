@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_title"
         android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginStart="@dimen/margin_layout_left"
         android:layout_marginRight="@dimen/margin_layout_right"
+        android:layout_marginEnd="@dimen/margin_layout_right"
         android:singleLine="false"
         android:text="@string/title"
         android:textColor="@color/white"
@@ -23,6 +25,7 @@
         android:src="@mipmap/suona_normal"
         android:layout_marginTop="@dimen/margin_title"
         android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+        android:layout_marginStart="@dimen/suonar_margin_layout_left"
         android:id="@+id/ImageView_suonar_title"/>
 
     <com.eebbk.gbofsafetyknowledge.controls.MyRadioGroup
@@ -31,7 +34,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/TextView_title"
         android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginStart="@dimen/margin_layout_left"
         android:layout_marginRight="@dimen/margin_layout_right"
+        android:layout_marginEnd="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/option_margin_title_two"
         android:orientation="horizontal">
 
@@ -145,5 +150,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/ct_100_dp"/>
 </RelativeLayout>

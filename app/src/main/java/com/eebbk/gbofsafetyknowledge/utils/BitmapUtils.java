@@ -55,7 +55,7 @@ public class BitmapUtils {
         BitmapDrawable da = null;
         AssetManager assetManager = mContext.getAssets();
         if (assetManager != null) {
-            InputStream assetFile = null;
+            InputStream assetFile;
             try {
                 assetFile = assetManager.open(name);
                 Bitmap e = BitmapFactory.decodeStream(assetFile);

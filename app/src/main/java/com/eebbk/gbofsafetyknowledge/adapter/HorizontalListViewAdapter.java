@@ -20,11 +20,9 @@ import java.util.ArrayList;
 
 public class HorizontalListViewAdapter extends BaseAdapter {
     private final int mCount;
-    private final Context mContext;
     private final ArrayList<Indicator> mListView = new ArrayList<>();
 
     public HorizontalListViewAdapter(Context context, int num) {
-        this.mContext = context;
         this.mCount = num;
         for (int i = 0; i < num; i++) {
 

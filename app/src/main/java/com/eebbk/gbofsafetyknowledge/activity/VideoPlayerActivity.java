@@ -72,7 +72,7 @@ public class VideoPlayerActivity extends Activity {
      * description:初始化
      */
     private void init() {
-        ((RelativeLayout) findViewById(R.id.RelativeLayout_player))
+        (findViewById(R.id.RelativeLayout_player))
                 .setDrawingCacheEnabled(false);
 
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
@@ -125,7 +125,7 @@ public class VideoPlayerActivity extends Activity {
     /**
      * 缓冲改变监听器
      */
-    private MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener = new MediaPlayer.OnBufferingUpdateListener() {
+    private final MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener = new MediaPlayer.OnBufferingUpdateListener() {
         @Override
         public void onBufferingUpdate(MediaPlayer mediaPlayer,
                                       int bufferingProgress) {
@@ -136,7 +136,7 @@ public class VideoPlayerActivity extends Activity {
     /**
      * 播放完毕监听
      */
-    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+    private final MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
             Log.i("OnCompletionListener","----------------------->OnCompletionListener");
@@ -174,7 +174,7 @@ public class VideoPlayerActivity extends Activity {
         }
     }
 
-    private SeekBar.OnSeekBarChangeListener barChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener barChangeListener = new SeekBar.OnSeekBarChangeListener() {
         int progress;
         int lastProgress;
 
@@ -194,7 +194,6 @@ public class VideoPlayerActivity extends Activity {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            int max = seekBar.getMax();
             this.progress = i * mPlayer.getDuration() / seekBar.getMax();
 
             String strTime = Util.formatTime(this.progress) + "/"

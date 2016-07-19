@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+        android:layout_marginStart="@dimen/suonar_margin_layout_left"
         android:layout_marginTop="@dimen/margin_title"
         android:src="@mipmap/suona_normal" />
 
@@ -18,7 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_layout_left"
+        android:layout_marginStart="@dimen/margin_layout_left"
         android:layout_marginRight="@dimen/margin_layout_right"
+        android:layout_marginEnd="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/margin_title"
         android:singleLine="false"
         android:text="@string/title"
@@ -31,6 +34,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/TextView_title"
         android:layout_marginRight="@dimen/margin_layout_right"
+        android:layout_marginEnd="@dimen/margin_layout_right"
         android:layout_marginTop="@dimen/option_margin_title"
         android:orientation="vertical">
 
@@ -39,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+            android:layout_marginStart="@dimen/suonar_margin_layout_left"
             android:gravity="center_vertical">
 
             <ImageView
@@ -51,8 +56,10 @@
                 android:id="@+id/RadioButton_A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:layout_marginStart="@dimen/margin_option_sounar"
+                android:layout_marginRight="@dimen/ct_20_dp"
+                android:layout_marginEnd="@dimen/ct_20_dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableLeft="@drawable/radio_a"
@@ -70,7 +77,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionD_one"
+                android:text="@string/optionA_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -80,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+            android:layout_marginStart="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
@@ -93,8 +101,10 @@
                 android:id="@+id/RadioButton_B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:layout_marginStart="@dimen/margin_option_sounar"
+                android:layout_marginRight="@dimen/ct_20_dp"
+                android:layout_marginEnd="@dimen/ct_20_dp"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_b"
                 android:drawableStart="@drawable/radio_b"
@@ -111,7 +121,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionD_one"
+                android:text="@string/optionB_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -121,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+            android:layout_marginStart="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
@@ -134,8 +145,10 @@
                 android:id="@+id/RadioButton_C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:layout_marginStart="@dimen/margin_option_sounar"
+                android:layout_marginRight="@dimen/ct_20_dp"
+                android:layout_marginEnd="@dimen/ct_20_dp"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_c"
                 android:drawableStart="@drawable/radio_c"
@@ -152,7 +165,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/optionD_one"
+                android:text="@string/optionC_one"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ct_33sp" />
         </LinearLayout>
@@ -162,6 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/suonar_margin_layout_left"
+            android:layout_marginStart="@dimen/suonar_margin_layout_left"
             android:layout_marginTop="@dimen/margin_title"
             android:gravity="center_vertical">
 
@@ -175,8 +189,10 @@
                 android:id="@+id/RadioButton_D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/ct_20_dp"
                 android:layout_marginLeft="@dimen/margin_option_sounar"
+                android:layout_marginStart="@dimen/margin_option_sounar"
+                android:layout_marginRight="@dimen/ct_20_dp"
+                android:layout_marginEnd="@dimen/ct_20_dp"
                 android:button="@null"
                 android:drawableLeft="@drawable/radio_d"
                 android:drawableStart="@drawable/radio_d"
@@ -205,6 +221,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/ct_100_dp"
-        android:layout_marginRight="@dimen/ct_180_dp" />
+        android:layout_marginRight="@dimen/ct_180_dp"
+        android:layout_marginEnd="@dimen/ct_180_dp" />
 </RelativeLayout>

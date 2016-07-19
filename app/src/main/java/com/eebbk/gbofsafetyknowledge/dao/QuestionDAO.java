@@ -27,7 +27,7 @@ import java.util.Random;
 public class QuestionDAO {
 
     private static final String TAG = "QuestionDAO";
-    private final String DB_NAME = "questions.db";
+    private static final String DB_NAME = "questions.db";
     private final Context mContext;
     private String mDatabasePath;
     private SQLiteDatabase mQuestionsDb;
@@ -123,7 +123,6 @@ public class QuestionDAO {
 
         openDatabase();
 
-        String str_grade = grade + "";
         List<QuestionVO> listQuestionVOFinally = new ArrayList<>();
         List<QuestionVO> listQuestionVOProduct = new ArrayList<>();
         List<QuestionVO> listQuestionVOPure = new ArrayList<>();

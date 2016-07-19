@@ -75,14 +75,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private TextView mTxtResulTwo;
     //建议内容
     private TextView mTxtProposal_content;
-    //建议
-    private TextView mTxtProposal;
     //建议布局
     private RelativeLayout mlayoutProposal;
     //二维码布局
     private RelativeLayout mlayoutqrCode;
-    //二维码图片
-    private ImageView mImgqrCode;
     //播放声音mediaplayer
     private MediaPlayer mPlayer;
     //获得该应用的AssetManager
@@ -93,8 +89,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     private MyLoadingView mMyLoadingView;
     //播放任务
     private PlaysyncTask mPlaysyncTask;
-    //播放按钮
-    private ImageView mImgVideoPlay;
     //特殊字体
     private Typeface mFontFace;
 
@@ -126,14 +120,12 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         mFontFace = Typeface.createFromAsset(getAssets(),
                 "fonts/FZSEJW.TTF");
         mTxtResultOne.setTypeface(mFontFace);
-        mTxtProposal = (TextView) findViewById(R.id.TextView_proposal);
         mTxtProposal_content = (TextView) findViewById(R.id.TextView_proposal_content);
         mlayoutProposal = (RelativeLayout) findViewById(R.id.RelativeLayout_proposal);
         mlayoutqrCode = (RelativeLayout) findViewById(R.id.RelativeLayout_qrCode);
-        mImgqrCode = (ImageView) findViewById(R.id.ImageView_qrCode);
         mMyLoadingView = (MyLoadingView) findViewById(R.id.MyLoadingView_LoadingView);
-        mImgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
-        mImgVideoPlay.setOnClickListener(new ClickListener());
+        ImageView imgVideoPlay = (ImageView) findViewById(R.id.ImageView_video);
+        imgVideoPlay.setOnClickListener(new ClickListener());
         mPlayer = new MediaPlayer();
         mAssetManager = getAssets();
         mMyHandler = new MyHandler(this);
@@ -248,7 +240,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         });
     }
 
-    private MediaPlayer.OnCompletionListener mOnCompletionListener = new MediaPlayer.OnCompletionListener() {
+    private final MediaPlayer.OnCompletionListener mOnCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
 
@@ -290,7 +282,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
             mPlaysyncTask = null;
         }
 
-        String voiceId = null;
+        String voiceId;
         if (flag != 0) {
             String optionsVoiceId = questionVO.getmExtend();
             String[] strarray = optionsVoiceId.split("[,]");
@@ -391,13 +383,6 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         }
     }
 
-    /**
-     * 播放声音
-     */
-    private void playSound(int curPageNum) {
-
-    }
-
     @Override
     protected void onDestroy() {
 
@@ -496,7 +481,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
 
     public class PlaysyncTask extends AsyncTask<String, Integer, String> {
 
-        private  int flag;
+        private  final int flag;
         private  PlaysyncTask(int flag){
             this.flag = flag;
         }
@@ -544,7 +529,7 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
         return super.onKeyDown(keyCode, event);
     }
 
-    public class ClickListener implements View.OnClickListener {
+    private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.ImageView_video) {
