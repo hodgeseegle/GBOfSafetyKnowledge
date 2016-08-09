@@ -398,6 +398,10 @@ public class AnswerActivity extends FragmentActivity implements QuestionFragment
     protected void onPause() {//暂停声音
         super.onPause();
 
+        if(mPlayer != null){
+            mPlayer.stop();
+        }
+
         if(mPlaysyncTask != null){
             mPlaysyncTask.cancel(true);
             mPlaysyncTask = null;
